@@ -98,7 +98,7 @@ export const PortfolioPage: React.FC<PortfolioPageProps> = ({ onSelectProject, o
           <div className="flex items-center gap-2">
             <button
               onClick={() => onOpenPdf('portfolio')}
-              className="flex items-center gap-2 px-4 py-2 rounded-full border border-black/15 dark:border-white/15 hover:border-black/40 dark:hover:border-white/40 text-xs tracking-wider uppercase font-light text-zinc-800 dark:text-zinc-200 transition-colors cursor-pointer"
+              className="flex items-center gap-2 px-4 py-2 rounded-md border border-black/15 dark:border-white/15 hover:border-black/40 dark:hover:border-white/40 text-xs tracking-wider uppercase font-light text-zinc-800 dark:text-zinc-200 transition-colors cursor-pointer"
             >
               <Briefcase className="w-3.5 h-3.5 text-zinc-400" />
               <span>View 20-Page PDF</span>
@@ -107,7 +107,7 @@ export const PortfolioPage: React.FC<PortfolioPageProps> = ({ onSelectProject, o
             <a
               href={PERSONAL_INFO.portfolioPdfPath}
               download
-              className="p-2 rounded-full border border-black/15 dark:border-white/15 text-zinc-600 dark:text-zinc-400 hover:text-black dark:hover:text-white transition-colors"
+              className="p-2 rounded-md border border-black/15 dark:border-white/15 text-zinc-600 dark:text-zinc-400 hover:text-black dark:hover:text-white transition-colors"
               title="Download Portfolio PDF"
             >
               <Download className="w-3.5 h-3.5" />
@@ -129,7 +129,7 @@ export const PortfolioPage: React.FC<PortfolioPageProps> = ({ onSelectProject, o
             Website showcases
           </h2>
           <p className="max-w-2xl text-xs sm:text-sm font-light leading-relaxed text-zinc-500 dark:text-zinc-400">
-            A closer look at five website concepts. Choose a page to preview it in the browser frame.
+            A closer look at five website concepts. Each preview slides through its pages automatically — hover to pause, or use the arrows and page tabs to browse.
           </p>
         </div>
 
@@ -153,7 +153,7 @@ export const PortfolioPage: React.FC<PortfolioPageProps> = ({ onSelectProject, o
             <button
               key={c.key}
               onClick={() => setSelectedCategory(c.key)}
-              className={`px-3.5 py-1.5 rounded-full text-xs tracking-wider uppercase transition-all cursor-pointer font-light ${
+              className={`px-3.5 py-1.5 rounded-md text-xs tracking-wider uppercase transition-all cursor-pointer font-light ${
                 selectedCategory === c.key
                   ? 'bg-zinc-950 dark:bg-white text-white dark:text-black font-normal'
                   : 'border border-black/10 dark:border-white/10 text-zinc-500 hover:text-black dark:hover:text-white'
@@ -172,14 +172,14 @@ export const PortfolioPage: React.FC<PortfolioPageProps> = ({ onSelectProject, o
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             placeholder="Search archive..."
-            className="w-full pl-9 pr-4 py-1.5 text-xs rounded-full border border-black/10 dark:border-white/10 bg-white dark:bg-zinc-900/60 text-zinc-900 dark:text-white placeholder-zinc-400 focus:outline-none focus:border-black dark:focus:border-white transition-colors font-light"
+            className="w-full pl-9 pr-4 py-1.5 text-xs rounded-md border border-black/10 dark:border-white/10 bg-white dark:bg-zinc-900/60 text-zinc-900 dark:text-white placeholder-zinc-400 focus:outline-none focus:border-black dark:focus:border-white transition-colors font-light"
           />
         </div>
       </motion.div>
 
       {/* Portfolio Grid with Staggered Entrance Animations */}
       {filteredProjects.length === 0 ? (
-        <div className="py-24 text-center space-y-3 rounded-3xl border border-dashed border-black/10 dark:border-white/10">
+        <div className="py-24 text-center space-y-3 rounded-xl border border-dashed border-black/10 dark:border-white/10">
           <p className="text-zinc-400 text-xs tracking-wider uppercase">
             No projects found matching &ldquo;{searchQuery}&rdquo;.
           </p>
@@ -213,7 +213,7 @@ export const PortfolioPage: React.FC<PortfolioPageProps> = ({ onSelectProject, o
                 }}
                 whileHover={{ y: -6 }}
                 onClick={() => onSelectProject(project)}
-                className="flex flex-col justify-between p-8 rounded-3xl bg-white dark:bg-[#101014] border border-black/[0.06] dark:border-white/[0.06] hover:border-black/30 dark:hover:border-white/30 transition-all cursor-pointer group soft-shadow"
+                className="flex flex-col justify-between p-8 rounded-xl bg-white dark:bg-[#101014] border border-black/[0.06] dark:border-white/[0.06] hover:border-black/30 dark:hover:border-white/30 transition-all cursor-pointer group soft-shadow"
               >
                 <div className="space-y-4">
                   <div className="flex items-center justify-between text-[10px] font-mono text-zinc-400">
@@ -242,7 +242,7 @@ export const PortfolioPage: React.FC<PortfolioPageProps> = ({ onSelectProject, o
                       {project.metrics.slice(0, 2).map((m, i) => (
                         <div
                           key={i}
-                          className="p-2 rounded-xl bg-zinc-50 dark:bg-zinc-900/50 border border-black/[0.04] dark:border-white/[0.04] text-[10px]"
+                          className="p-2 rounded-md bg-zinc-50 dark:bg-zinc-900/50 border border-black/[0.04] dark:border-white/[0.04] text-[10px]"
                         >
                           <span className="text-zinc-400 block uppercase font-mono">{m.label}</span>
                           <span className="font-medium text-zinc-900 dark:text-zinc-100">{m.value}</span>
@@ -257,7 +257,7 @@ export const PortfolioPage: React.FC<PortfolioPageProps> = ({ onSelectProject, o
                     {project.tools.slice(0, 2).map((t, i) => (
                       <span
                         key={i}
-                        className="text-[10px] px-2 py-0.5 rounded-full bg-zinc-100 dark:bg-zinc-800 text-zinc-500 font-light"
+                        className="text-[10px] px-2 py-0.5 rounded-md bg-zinc-100 dark:bg-zinc-800 text-zinc-500 font-light"
                       >
                         {t}
                       </span>

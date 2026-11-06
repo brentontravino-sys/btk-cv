@@ -26,7 +26,7 @@ export const Footer: React.FC<FooterProps> = ({ setActiveTab, onOpenPdf }) => {
           {/* Col 1: Monogram & Bio */}
           <div className="space-y-4">
             <div className="flex items-center gap-3">
-              <div className="flex items-center justify-center w-8 h-8 rounded-full bg-zinc-950 dark:bg-white text-white dark:text-black font-medium tracking-widest text-xs">
+              <div className="flex items-center justify-center w-8 h-8 rounded-md bg-zinc-950 dark:bg-white text-white dark:text-black font-medium tracking-widest text-xs">
                 BTK
               </div>
               <div>
@@ -152,7 +152,7 @@ export const Footer: React.FC<FooterProps> = ({ setActiveTab, onOpenPdf }) => {
             <div className="space-y-2 text-xs">
               <button
                 onClick={() => onOpenPdf('cv')}
-                className="w-full flex items-center justify-between p-2.5 rounded-xl border border-black/10 dark:border-white/10 hover:border-black/30 dark:hover:border-white/30 text-zinc-700 dark:text-zinc-300 transition-colors cursor-pointer"
+                className="w-full flex items-center justify-between p-2.5 rounded-md border border-black/10 dark:border-white/10 hover:border-black/30 dark:hover:border-white/30 text-zinc-700 dark:text-zinc-300 transition-colors cursor-pointer"
               >
                 <span>Curriculum Vitae (PDF)</span>
                 <ArrowUpRight className="w-3 h-3 text-zinc-400" />
@@ -160,7 +160,7 @@ export const Footer: React.FC<FooterProps> = ({ setActiveTab, onOpenPdf }) => {
 
               <button
                 onClick={() => onOpenPdf('portfolio')}
-                className="w-full flex items-center justify-between p-2.5 rounded-xl border border-black/10 dark:border-white/10 hover:border-black/30 dark:hover:border-white/30 text-zinc-700 dark:text-zinc-300 transition-colors cursor-pointer"
+                className="w-full flex items-center justify-between p-2.5 rounded-md border border-black/10 dark:border-white/10 hover:border-black/30 dark:hover:border-white/30 text-zinc-700 dark:text-zinc-300 transition-colors cursor-pointer"
               >
                 <span>20-Page Portfolio (PDF)</span>
                 <ArrowUpRight className="w-3 h-3 text-zinc-400" />

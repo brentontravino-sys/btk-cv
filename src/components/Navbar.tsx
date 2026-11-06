@@ -75,7 +75,7 @@ export const Navbar: React.FC<NavbarProps> = ({
               onClick={() => handleNavClick('home')}
               className="flex items-center gap-3 cursor-pointer group select-none"
             >
-              <div className="flex items-center justify-center w-10 h-10 rounded-full bg-black dark:bg-white text-white dark:text-black font-medium tracking-widest text-xs transition-transform duration-300 group-hover:scale-105 shadow-sm">
+              <div className="flex items-center justify-center w-10 h-10 rounded-md bg-black dark:bg-white text-white dark:text-black font-medium tracking-widest text-xs transition-transform duration-300 group-hover:scale-105 shadow-sm">
                 BTK
               </div>
 
@@ -117,7 +117,7 @@ export const Navbar: React.FC<NavbarProps> = ({
               <div className="hidden lg:flex items-center gap-2">
                 <button
                   onClick={() => onOpenPdf('cv')}
-                  className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-full border border-black/10 dark:border-white/10 hover:border-black/30 dark:hover:border-white/30 text-[11px] tracking-wider uppercase text-zinc-600 dark:text-zinc-400 hover:text-black dark:hover:text-white transition-all cursor-pointer bg-white/40 dark:bg-zinc-900/40 backdrop-blur-sm"
+                  className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-md border border-black/10 dark:border-white/10 hover:border-black/30 dark:hover:border-white/30 text-[11px] tracking-wider uppercase text-zinc-600 dark:text-zinc-400 hover:text-black dark:hover:text-white transition-all cursor-pointer bg-white/40 dark:bg-zinc-900/40 backdrop-blur-sm"
                   title="View original verified CV PDF"
                 >
                   <span>CV (PDF)</span>
@@ -126,7 +126,7 @@ export const Navbar: React.FC<NavbarProps> = ({
 
                 <button
                   onClick={() => onOpenPdf('portfolio')}
-                  className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-full border border-black/10 dark:border-white/10 hover:border-black/30 dark:hover:border-white/30 text-[11px] tracking-wider uppercase text-zinc-600 dark:text-zinc-400 hover:text-black dark:hover:text-white transition-all cursor-pointer bg-white/40 dark:bg-zinc-900/40 backdrop-blur-sm"
+                  className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-md border border-black/10 dark:border-white/10 hover:border-black/30 dark:hover:border-white/30 text-[11px] tracking-wider uppercase text-zinc-600 dark:text-zinc-400 hover:text-black dark:hover:text-white transition-all cursor-pointer bg-white/40 dark:bg-zinc-900/40 backdrop-blur-sm"
                   title="View original 20-page Portfolio PDF"
                 >
                   <span>Portfolio (PDF)</span>
@@ -138,7 +138,7 @@ export const Navbar: React.FC<NavbarProps> = ({
               <button
                 onClick={toggleDark}
                 aria-label="Toggle Dark and Light Mode"
-                className="p-2.5 rounded-full border border-black/10 dark:border-white/10 bg-white/80 dark:bg-zinc-900/80 text-zinc-700 dark:text-zinc-300 hover:text-black dark:hover:text-white transition-all cursor-pointer shadow-sm active:scale-95"
+                className="p-2.5 rounded-md border border-black/10 dark:border-white/10 bg-white/80 dark:bg-zinc-900/80 text-zinc-700 dark:text-zinc-300 hover:text-black dark:hover:text-white transition-all cursor-pointer shadow-sm active:scale-95"
                 title={isDark ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
               >
                 {isDark ? <Sun className="w-3.5 h-3.5" /> : <Moon className="w-3.5 h-3.5" />}
@@ -147,7 +147,7 @@ export const Navbar: React.FC<NavbarProps> = ({
               {/* Mobile Hamburger Menu */}
               <button
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                className="md:hidden p-2.5 rounded-full border border-black/10 dark:border-white/10 text-zinc-700 dark:text-zinc-300 bg-white/80 dark:bg-zinc-900/80"
+                className="md:hidden p-2.5 rounded-md border border-black/10 dark:border-white/10 text-zinc-700 dark:text-zinc-300 bg-white/80 dark:bg-zinc-900/80"
                 aria-label="Toggle Menu"
               >
                 {mobileMenuOpen ? <X className="w-4 h-4" /> : <Menu className="w-4 h-4" />}
@@ -202,7 +202,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                 <span>Theme</span>
                 <button
                   onClick={toggleDark}
-                  className="flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-black/10 dark:border-white/10 text-xs text-zinc-800 dark:text-zinc-200"
+                  className="flex items-center gap-1.5 px-3 py-1.5 rounded-md border border-black/10 dark:border-white/10 text-xs text-zinc-800 dark:text-zinc-200"
                 >
                   {isDark ? <Sun className="w-3.5 h-3.5" /> : <Moon className="w-3.5 h-3.5" />}
                   <span>{isDark ? 'Light Mode' : 'Dark Mode'}</span>

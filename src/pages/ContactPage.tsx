@@ -119,7 +119,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onOpenPdf }) => {
             <div className="flex flex-col gap-2">
               <button
                 onClick={() => onOpenPdf('cv')}
-                className="flex items-center justify-between p-3 rounded-2xl border border-black/10 dark:border-white/10 hover:border-black/30 dark:hover:border-white/30 text-xs font-light tracking-wider uppercase text-zinc-800 dark:text-zinc-200 cursor-pointer transition-colors"
+                className="flex items-center justify-between p-3 rounded-lg border border-black/10 dark:border-white/10 hover:border-black/30 dark:hover:border-white/30 text-xs font-light tracking-wider uppercase text-zinc-800 dark:text-zinc-200 cursor-pointer transition-colors"
               >
                 <span>Curriculum Vitae (PDF)</span>
                 <ArrowUpRight className="w-3.5 h-3.5 text-zinc-400" />
@@ -127,7 +127,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onOpenPdf }) => {
 
               <button
                 onClick={() => onOpenPdf('portfolio')}
-                className="flex items-center justify-between p-3 rounded-2xl border border-black/10 dark:border-white/10 hover:border-black/30 dark:hover:border-white/30 text-xs font-light tracking-wider uppercase text-zinc-800 dark:text-zinc-200 cursor-pointer transition-colors"
+                className="flex items-center justify-between p-3 rounded-lg border border-black/10 dark:border-white/10 hover:border-black/30 dark:hover:border-white/30 text-xs font-light tracking-wider uppercase text-zinc-800 dark:text-zinc-200 cursor-pointer transition-colors"
               >
                 <span>20-Page Portfolio (PDF)</span>
                 <ArrowUpRight className="w-3.5 h-3.5 text-zinc-400" />
@@ -143,14 +143,14 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onOpenPdf }) => {
           transition={{ duration: 0.7, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
           className="md:col-span-7"
         >
-          <div className="p-8 sm:p-12 rounded-3xl bg-white dark:bg-[#101014] border border-black/[0.06] dark:border-white/[0.06] soft-shadow space-y-6">
+          <div className="p-8 sm:p-12 rounded-xl bg-white dark:bg-[#101014] border border-black/[0.06] dark:border-white/[0.06] soft-shadow space-y-6">
             <h2 className="text-xl font-normal text-zinc-950 dark:text-white tracking-wide">
               Send a Message
             </h2>
 
             {submitted ? (
               <div className="py-12 text-center space-y-3 animate-in fade-in duration-300">
-                <div className="w-10 h-10 rounded-full bg-zinc-950 dark:bg-white text-white dark:text-black flex items-center justify-center mx-auto">
+                <div className="w-10 h-10 rounded-md bg-zinc-950 dark:bg-white text-white dark:text-black flex items-center justify-center mx-auto">
                   <CheckCircle className="w-5 h-5" />
                 </div>
                 <h3 className="text-base font-normal text-zinc-950 dark:text-white">
@@ -171,7 +171,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onOpenPdf }) => {
                       message: '',
                     });
                   }}
-                  className="mt-4 px-4 py-2 text-xs font-light tracking-wider uppercase rounded-full border border-black/20 dark:border-white/20 hover:border-black dark:hover:border-white transition-colors cursor-pointer"
+                  className="mt-4 px-4 py-2 text-xs font-light tracking-wider uppercase rounded-md border border-black/20 dark:border-white/20 hover:border-black dark:hover:border-white transition-colors cursor-pointer"
                 >
                   New Message
                 </button>
@@ -188,7 +188,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onOpenPdf }) => {
                     value={formState.name}
                     onChange={(e) => setFormState({ ...formState, name: e.target.value })}
                     placeholder="Jane Doe"
-                    className="w-full px-4 py-2.5 rounded-xl border border-black/10 dark:border-white/10 bg-zinc-50/50 dark:bg-zinc-900/50 text-xs text-zinc-900 dark:text-white placeholder-zinc-400 focus:outline-none focus:border-black dark:focus:border-white transition-colors font-light"
+                    className="w-full px-4 py-2.5 rounded-md border border-black/10 dark:border-white/10 bg-zinc-50/50 dark:bg-zinc-900/50 text-xs text-zinc-900 dark:text-white placeholder-zinc-400 focus:outline-none focus:border-black dark:focus:border-white transition-colors font-light"
                   />
                 </div>
 
@@ -202,7 +202,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onOpenPdf }) => {
                     value={formState.email}
                     onChange={(e) => setFormState({ ...formState, email: e.target.value })}
                     placeholder="jane@organization.com"
-                    className="w-full px-4 py-2.5 rounded-xl border border-black/10 dark:border-white/10 bg-zinc-50/50 dark:bg-zinc-900/50 text-xs text-zinc-900 dark:text-white placeholder-zinc-400 focus:outline-none focus:border-black dark:focus:border-white transition-colors font-light"
+                    className="w-full px-4 py-2.5 rounded-md border border-black/10 dark:border-white/10 bg-zinc-50/50 dark:bg-zinc-900/50 text-xs text-zinc-900 dark:text-white placeholder-zinc-400 focus:outline-none focus:border-black dark:focus:border-white transition-colors font-light"
                   />
                 </div>
 
@@ -213,7 +213,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onOpenPdf }) => {
                   <select
                     value={formState.service}
                     onChange={(e) => setFormState({ ...formState, service: e.target.value })}
-                    className="w-full px-4 py-2.5 rounded-xl border border-black/10 dark:border-white/10 bg-zinc-50/50 dark:bg-zinc-900/50 text-xs text-zinc-900 dark:text-white focus:outline-none focus:border-black dark:focus:border-white transition-colors font-light"
+                    className="w-full px-4 py-2.5 rounded-md border border-black/10 dark:border-white/10 bg-zinc-50/50 dark:bg-zinc-900/50 text-xs text-zinc-900 dark:text-white focus:outline-none focus:border-black dark:focus:border-white transition-colors font-light"
                   >
                     <option value="Google Ads & PPC Campaigns">Google Ads & PPC Campaigns</option>
                     <option value="Technical SEO & Site Health Audit">
@@ -241,14 +241,14 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onOpenPdf }) => {
                     value={formState.message}
                     onChange={(e) => setFormState({ ...formState, message: e.target.value })}
                     placeholder="Describe your project, objectives, or role requirements..."
-                    className="w-full px-4 py-2.5 rounded-xl border border-black/10 dark:border-white/10 bg-zinc-50/50 dark:bg-zinc-900/50 text-xs text-zinc-900 dark:text-white placeholder-zinc-400 focus:outline-none focus:border-black dark:focus:border-white transition-colors font-light resize-none"
+                    className="w-full px-4 py-2.5 rounded-md border border-black/10 dark:border-white/10 bg-zinc-50/50 dark:bg-zinc-900/50 text-xs text-zinc-900 dark:text-white placeholder-zinc-400 focus:outline-none focus:border-black dark:focus:border-white transition-colors font-light resize-none"
                   />
                 </div>
 
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="w-full py-3 rounded-full text-xs font-normal tracking-[0.2em] uppercase text-white dark:text-black bg-zinc-950 dark:bg-white hover:bg-zinc-800 dark:hover:bg-zinc-200 transition-all cursor-pointer disabled:opacity-50"
+                  className="w-full py-3 rounded-md text-xs font-normal tracking-[0.2em] uppercase text-white dark:text-black bg-zinc-950 dark:bg-white hover:bg-zinc-800 dark:hover:bg-zinc-200 transition-all cursor-pointer disabled:opacity-50"
                 >
                   {isSubmitting ? 'Transmitting...' : 'Send Message'}
                 </button>

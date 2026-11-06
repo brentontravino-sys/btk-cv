@@ -28,13 +28,13 @@ export const PDFModalViewer: React.FC<PDFModalViewerProps> = ({ type, onClose })
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-black/60 backdrop-blur-md animate-in fade-in duration-200">
       <div
-        className="relative w-full max-w-5xl h-[92vh] flex flex-col rounded-3xl bg-white dark:bg-[#101014] border border-black/10 dark:border-white/10 shadow-2xl overflow-hidden"
+        className="relative w-full max-w-5xl h-[92vh] flex flex-col rounded-xl bg-white dark:bg-[#101014] border border-black/10 dark:border-white/10 shadow-2xl overflow-hidden"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header Bar */}
         <div className="flex items-center justify-between px-6 py-4 border-b border-black/[0.06] dark:border-white/[0.06] bg-[#fbfbfd] dark:bg-[#08080a]">
           <div className="flex items-center gap-3">
-            <div className="w-8 h-8 rounded-full bg-zinc-100 dark:bg-zinc-800 flex items-center justify-center text-zinc-900 dark:text-zinc-100">
+            <div className="w-8 h-8 rounded-md bg-zinc-100 dark:bg-zinc-800 flex items-center justify-center text-zinc-900 dark:text-zinc-100">
               {isCv ? <FileText className="w-4 h-4" /> : <Briefcase className="w-4 h-4" />}
             </div>
             <div>
@@ -52,7 +52,7 @@ export const PDFModalViewer: React.FC<PDFModalViewerProps> = ({ type, onClose })
               href={filePath}
               target="_blank"
               rel="noopener noreferrer"
-              className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-black/10 dark:border-white/10 text-xs font-light tracking-wider uppercase text-zinc-700 dark:text-zinc-300 hover:border-black/30 dark:hover:border-white/30 transition-colors"
+              className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md border border-black/10 dark:border-white/10 text-xs font-light tracking-wider uppercase text-zinc-700 dark:text-zinc-300 hover:border-black/30 dark:hover:border-white/30 transition-colors"
             >
               <span>New Tab</span>
               <ArrowUpRight className="w-3 h-3 text-zinc-400" />
@@ -61,7 +61,7 @@ export const PDFModalViewer: React.FC<PDFModalViewerProps> = ({ type, onClose })
             <a
               href={filePath}
               download
-              className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-zinc-950 dark:bg-white text-white dark:text-black text-xs font-light tracking-wider uppercase transition-colors"
+              className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-md bg-zinc-950 dark:bg-white text-white dark:text-black text-xs font-light tracking-wider uppercase transition-colors"
             >
               <Download className="w-3 h-3" />
               <span>Download</span>
@@ -69,7 +69,7 @@ export const PDFModalViewer: React.FC<PDFModalViewerProps> = ({ type, onClose })
 
             <button
               onClick={onClose}
-              className="p-1.5 rounded-full border border-black/10 dark:border-white/10 text-zinc-400 hover:text-black dark:hover:text-white transition-colors cursor-pointer ml-1"
+              className="p-1.5 rounded-md border border-black/10 dark:border-white/10 text-zinc-400 hover:text-black dark:hover:text-white transition-colors cursor-pointer ml-1"
               aria-label="Close PDF viewer"
             >
               <X className="w-4 h-4" />

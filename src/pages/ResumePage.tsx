@@ -29,7 +29,7 @@ export const ResumePage: React.FC<ResumePageProps> = ({ onOpenPdf }) => {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-        className="flex flex-col sm:flex-row sm:items-center justify-between gap-6 p-8 rounded-3xl bg-white dark:bg-[#101014] border border-black/[0.06] dark:border-white/[0.06] soft-shadow"
+        className="flex flex-col sm:flex-row sm:items-center justify-between gap-6 p-8 rounded-xl bg-white dark:bg-[#101014] border border-black/[0.06] dark:border-white/[0.06] soft-shadow"
       >
         <div>
           <div className="flex items-center gap-3">
@@ -49,7 +49,7 @@ export const ResumePage: React.FC<ResumePageProps> = ({ onOpenPdf }) => {
         <div className="flex flex-wrap items-center gap-2.5">
           <button
             onClick={() => onOpenPdf('cv')}
-            className="flex items-center gap-1.5 px-4 py-2 rounded-full text-xs font-normal tracking-wider uppercase bg-zinc-950 dark:bg-white text-white dark:text-black hover:bg-zinc-800 dark:hover:bg-zinc-200 transition-colors cursor-pointer"
+            className="flex items-center gap-1.5 px-4 py-2 rounded-md text-xs font-normal tracking-wider uppercase bg-zinc-950 dark:bg-white text-white dark:text-black hover:bg-zinc-800 dark:hover:bg-zinc-200 transition-colors cursor-pointer"
           >
             <span>View Original PDF</span>
             <ArrowUpRight className="w-3.5 h-3.5" />
@@ -58,7 +58,7 @@ export const ResumePage: React.FC<ResumePageProps> = ({ onOpenPdf }) => {
           <a
             href={PERSONAL_INFO.cvPdfPath}
             download
-            className="flex items-center gap-1.5 px-4 py-2 rounded-full border border-black/15 dark:border-white/15 text-xs font-light tracking-wider uppercase text-zinc-700 dark:text-zinc-300 hover:border-black/40 dark:hover:border-white/40 transition-colors"
+            className="flex items-center gap-1.5 px-4 py-2 rounded-md border border-black/15 dark:border-white/15 text-xs font-light tracking-wider uppercase text-zinc-700 dark:text-zinc-300 hover:border-black/40 dark:hover:border-white/40 transition-colors"
           >
             <Download className="w-3.5 h-3.5 text-zinc-400" />
             <span>Download</span>
@@ -66,7 +66,7 @@ export const ResumePage: React.FC<ResumePageProps> = ({ onOpenPdf }) => {
 
           <button
             onClick={handlePrint}
-            className="p-2 rounded-full border border-black/15 dark:border-white/15 text-zinc-600 dark:text-zinc-400 hover:text-black dark:hover:text-white transition-colors cursor-pointer"
+            className="p-2 rounded-md border border-black/15 dark:border-white/15 text-zinc-600 dark:text-zinc-400 hover:text-black dark:hover:text-white transition-colors cursor-pointer"
             title="Print CV"
           >
             <Printer className="w-3.5 h-3.5" />
@@ -79,7 +79,7 @@ export const ResumePage: React.FC<ResumePageProps> = ({ onOpenPdf }) => {
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.7, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-        className="p-8 sm:p-16 rounded-3xl bg-white dark:bg-[#101014] border border-black/[0.06] dark:border-white/[0.06] soft-shadow space-y-16 print:p-0 print:border-none print:shadow-none"
+        className="p-8 sm:p-16 rounded-xl bg-white dark:bg-[#101014] border border-black/[0.06] dark:border-white/[0.06] soft-shadow space-y-16 print:p-0 print:border-none print:shadow-none"
       >
         {/* CV Top Info */}
         <div className="border-b border-black/[0.06] dark:border-white/[0.06] pb-10 space-y-4">

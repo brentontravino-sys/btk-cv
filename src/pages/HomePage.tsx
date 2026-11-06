@@ -91,7 +91,7 @@ export const HomePage: React.FC<HomePageProps> = ({
           transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
           className="text-xs sm:text-sm text-zinc-500 dark:text-zinc-400 font-light max-w-xl mx-auto leading-relaxed pt-2"
         >
-          Extracted from Brenton Kandhai&apos;s verified portfolio &mdash; bridging technical Google Ads algorithms, surgical SEO site health, and tangible industrial design.
+          I&rsquo;m Brenton Kandhai, a digital marketing and web solutions specialist with 15+ years of experience. I help businesses build stronger online presences through SEO, paid campaigns, e-commerce, and engaging digital content.
         </motion.p>
       </section>
 
@@ -175,9 +175,9 @@ export const HomePage: React.FC<HomePageProps> = ({
                   y: -6,
                   transition: { duration: 0.2 },
                 }}
-                className="p-8 rounded-2xl bg-white dark:bg-[#101014] border border-black/[0.06] dark:border-white/[0.06] space-y-4 soft-shadow hover:border-black/30 dark:hover:border-white/30 transition-all group"
+                className="p-8 rounded-lg bg-white dark:bg-[#101014] border border-black/[0.06] dark:border-white/[0.06] space-y-4 soft-shadow hover:border-black/30 dark:hover:border-white/30 transition-all group"
               >
-                <div className="w-10 h-10 rounded-full bg-zinc-100 dark:bg-zinc-800 flex items-center justify-center text-zinc-900 dark:text-zinc-100 group-hover:scale-105 transition-transform">
+                <div className="w-10 h-10 rounded-md bg-zinc-100 dark:bg-zinc-800 flex items-center justify-center text-zinc-900 dark:text-zinc-100 group-hover:scale-105 transition-transform">
                   <IconComponent className="w-4 h-4" />
                 </div>
                 <h3 className="font-normal text-base text-zinc-950 dark:text-white tracking-wide">
@@ -252,7 +252,7 @@ export const HomePage: React.FC<HomePageProps> = ({
                 y: -6,
                 transition: { duration: 0.2 },
               }}
-              className="p-8 rounded-2xl bg-white dark:bg-[#101014] border border-black/[0.06] dark:border-white/[0.06] space-y-4 soft-shadow hover:border-black/30 dark:hover:border-white/30 transition-all group"
+              className="p-8 rounded-lg bg-white dark:bg-[#101014] border border-black/[0.06] dark:border-white/[0.06] space-y-4 soft-shadow hover:border-black/30 dark:hover:border-white/30 transition-all group"
             >
               <div className="space-y-1">
                 <span className="text-[10px] font-mono tracking-widest text-zinc-400 uppercase block">
@@ -266,7 +266,7 @@ export const HomePage: React.FC<HomePageProps> = ({
                 {category.tools.map((tool, tIdx) => (
                   <span
                     key={tIdx}
-                    className="text-[10px] px-2 py-0.5 rounded-full bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 font-light"
+                    className="text-[10px] px-2 py-0.5 rounded-md bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 font-light"
                   >
                     {tool}
                   </span>
@@ -328,12 +328,12 @@ export const HomePage: React.FC<HomePageProps> = ({
               {/* Timeline Node Point */}
               <div className="absolute -left-6 sm:-left-10 top-6 w-3 h-3 rounded-full bg-white dark:bg-zinc-950 border-2 border-zinc-950 dark:border-white shadow-sm -translate-x-[5px]" />
 
-              <div className="p-8 rounded-3xl bg-white dark:bg-[#101014] border border-black/[0.06] dark:border-white/[0.06] space-y-4 soft-shadow hover:border-black/30 dark:hover:border-white/30 transition-all">
+              <div className="p-8 rounded-xl bg-white dark:bg-[#101014] border border-black/[0.06] dark:border-white/[0.06] space-y-4 soft-shadow hover:border-black/30 dark:hover:border-white/30 transition-all">
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
                   <h3 className="font-normal text-lg text-zinc-950 dark:text-white">
                     {exp.company}
                   </h3>
-                  <span className="font-mono text-xs px-2.5 py-1 rounded-full bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 self-start sm:self-auto">
+                  <span className="font-mono text-xs px-2.5 py-1 rounded-md bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 self-start sm:self-auto">
                     {exp.period}
                   </span>
                 </div>
@@ -363,7 +363,7 @@ export const HomePage: React.FC<HomePageProps> = ({
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true, margin: '-80px' }}
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-          className="p-10 sm:p-16 lg:p-20 rounded-3xl bg-zinc-950 text-white dark:bg-[#0c0c10] border border-white/[0.1] shadow-2xl relative overflow-hidden"
+          className="p-10 sm:p-16 lg:p-20 rounded-xl bg-zinc-950 text-white dark:bg-[#0c0c10] border border-white/[0.1] shadow-2xl relative overflow-hidden"
         >
           {/* Subtle Ambient Glow */}
           <div className="absolute top-0 right-0 w-96 h-96 bg-radial from-white/10 to-transparent blur-3xl pointer-events-none" />
@@ -387,7 +387,7 @@ export const HomePage: React.FC<HomePageProps> = ({
             <div className="flex flex-wrap items-center gap-3 pt-4">
               <button
                 onClick={() => setActiveTab('contact')}
-                className="flex items-center gap-2 px-6 py-3 rounded-full text-xs font-normal tracking-widest uppercase text-black bg-white hover:bg-zinc-200 transition-all cursor-pointer shadow-md active:scale-98"
+                className="flex items-center gap-2 px-6 py-3 rounded-md text-xs font-normal tracking-widest uppercase text-black bg-white hover:bg-zinc-200 transition-all cursor-pointer shadow-md active:scale-98"
               >
                 <span>Direct Contact Portal</span>
                 <ArrowRight className="w-3.5 h-3.5" />
@@ -395,7 +395,7 @@ export const HomePage: React.FC<HomePageProps> = ({
 
               <button
                 onClick={() => onOpenPdf('cv')}
-                className="flex items-center gap-2 px-5 py-3 rounded-full text-xs font-light tracking-wider uppercase border border-white/20 hover:border-white/50 text-white transition-all cursor-pointer"
+                className="flex items-center gap-2 px-5 py-3 rounded-md text-xs font-light tracking-wider uppercase border border-white/20 hover:border-white/50 text-white transition-all cursor-pointer"
               >
                 <FileText className="w-3.5 h-3.5 text-zinc-300" />
                 <span>Verified CV (PDF)</span>
@@ -403,7 +403,7 @@ export const HomePage: React.FC<HomePageProps> = ({
 
               <button
                 onClick={() => onOpenPdf('portfolio')}
-                className="flex items-center gap-2 px-5 py-3 rounded-full text-xs font-light tracking-wider uppercase border border-white/20 hover:border-white/50 text-white transition-all cursor-pointer"
+                className="flex items-center gap-2 px-5 py-3 rounded-md text-xs font-light tracking-wider uppercase border border-white/20 hover:border-white/50 text-white transition-all cursor-pointer"
               >
                 <Briefcase className="w-3.5 h-3.5 text-zinc-300" />
                 <span>20-Page Portfolio (PDF)</span>

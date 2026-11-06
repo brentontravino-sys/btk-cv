@@ -27,13 +27,13 @@ export const PortfolioModal: React.FC<PortfolioModalProps> = ({ project, onClose
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-black/60 backdrop-blur-sm animate-in fade-in duration-200">
       <div
-        className="relative w-full max-w-2xl max-h-[90vh] overflow-y-auto rounded-3xl bg-white dark:bg-[#101014] border border-black/10 dark:border-white/10 shadow-2xl p-8 sm:p-10 text-zinc-900 dark:text-zinc-100 space-y-8"
+        className="relative w-full max-w-2xl max-h-[90vh] overflow-y-auto rounded-xl bg-white dark:bg-[#101014] border border-black/10 dark:border-white/10 shadow-2xl p-8 sm:p-10 text-zinc-900 dark:text-zinc-100 space-y-8"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Close Button */}
         <button
           onClick={onClose}
-          className="absolute top-6 right-6 p-2 rounded-full border border-black/10 dark:border-white/10 text-zinc-400 hover:text-black dark:hover:text-white transition-colors cursor-pointer"
+          className="absolute top-6 right-6 p-2 rounded-md border border-black/10 dark:border-white/10 text-zinc-400 hover:text-black dark:hover:text-white transition-colors cursor-pointer"
           aria-label="Close modal"
         >
           <X className="w-4 h-4" />
@@ -62,7 +62,7 @@ export const PortfolioModal: React.FC<PortfolioModalProps> = ({ project, onClose
             {project.metrics.map((m, i) => (
               <div
                 key={i}
-                className="p-3.5 rounded-2xl bg-zinc-50 dark:bg-zinc-900/50 border border-black/[0.04] dark:border-white/[0.05]"
+                className="p-3.5 rounded-lg bg-zinc-50 dark:bg-zinc-900/50 border border-black/[0.04] dark:border-white/[0.05]"
               >
                 <div className="text-[10px] font-mono text-zinc-400 uppercase">
                   {m.label}
@@ -109,7 +109,7 @@ export const PortfolioModal: React.FC<PortfolioModalProps> = ({ project, onClose
             {project.tools.map((tool, i) => (
               <span
                 key={i}
-                className="px-2.5 py-1 rounded-full text-[11px] font-light bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-300"
+                className="px-2.5 py-1 rounded-md text-[11px] font-light bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-300"
               >
                 {tool}
               </span>
@@ -124,7 +124,7 @@ export const PortfolioModal: React.FC<PortfolioModalProps> = ({ project, onClose
               href={project.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-xs font-light tracking-wider uppercase text-white dark:text-black bg-zinc-950 dark:bg-white hover:bg-zinc-800 dark:hover:bg-zinc-200 transition-colors"
+              className="inline-flex items-center gap-1.5 px-4 py-2 rounded-md text-xs font-light tracking-wider uppercase text-white dark:text-black bg-zinc-950 dark:bg-white hover:bg-zinc-800 dark:hover:bg-zinc-200 transition-colors"
             >
               <span>Visit Web Presence</span>
               <ArrowUpRight className="w-3.5 h-3.5" />

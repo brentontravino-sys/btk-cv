@@ -59,7 +59,7 @@ export const ArcAdaptiveHero: React.FC<ArcAdaptiveHeroProps> = ({
           <div className="flex flex-wrap items-center gap-3 mt-8 pt-4">
             <button
               onClick={() => setActiveTab('portfolio')}
-              className="flex items-center gap-2 px-5 py-2.5 rounded-full text-xs font-normal tracking-[0.15em] uppercase text-zinc-950 bg-white hover:bg-zinc-200 transition-all cursor-pointer shadow-md active:scale-98"
+              className="flex items-center gap-2 px-5 py-2.5 rounded-md text-xs font-normal tracking-[0.15em] uppercase text-zinc-950 bg-white hover:bg-zinc-200 transition-all cursor-pointer shadow-md active:scale-98"
             >
               <span>Explore Works</span>
               <ArrowRight className="w-3.5 h-3.5" />
@@ -67,7 +67,7 @@ export const ArcAdaptiveHero: React.FC<ArcAdaptiveHeroProps> = ({
 
             <button
               onClick={() => onOpenPdf('cv')}
-              className="flex items-center gap-2 px-4 py-2.5 rounded-full text-xs font-light tracking-wider uppercase border border-black/20 dark:border-white/30 hover:border-black/40 dark:hover:border-white/60 bg-black/5 dark:bg-white/10 hover:bg-black/10 dark:hover:bg-white/20 text-zinc-900 dark:text-white transition-all cursor-pointer backdrop-blur-sm"
+              className="flex items-center gap-2 px-4 py-2.5 rounded-md text-xs font-light tracking-wider uppercase border border-black/20 dark:border-white/30 hover:border-black/40 dark:hover:border-white/60 bg-black/5 dark:bg-white/10 hover:bg-black/10 dark:hover:bg-white/20 text-zinc-900 dark:text-white transition-all cursor-pointer backdrop-blur-sm"
             >
               <FileText className="w-3.5 h-3.5 text-zinc-500 dark:text-zinc-200" />
               <span>Curriculum Vitae</span>
@@ -75,7 +75,7 @@ export const ArcAdaptiveHero: React.FC<ArcAdaptiveHeroProps> = ({
 
             <button
               onClick={() => onOpenPdf('portfolio')}
-              className="flex items-center gap-2 px-4 py-2.5 rounded-full text-xs font-light tracking-wider uppercase border border-black/20 dark:border-white/30 hover:border-black/40 dark:hover:border-white/60 bg-black/5 dark:bg-white/10 hover:bg-black/10 dark:hover:bg-white/20 text-zinc-900 dark:text-white transition-all cursor-pointer backdrop-blur-sm"
+              className="flex items-center gap-2 px-4 py-2.5 rounded-md text-xs font-light tracking-wider uppercase border border-black/20 dark:border-white/30 hover:border-black/40 dark:hover:border-white/60 bg-black/5 dark:bg-white/10 hover:bg-black/10 dark:hover:bg-white/20 text-zinc-900 dark:text-white transition-all cursor-pointer backdrop-blur-sm"
             >
               <Briefcase className="w-3.5 h-3.5 text-zinc-500 dark:text-zinc-200" />
               <span>Portfolio (PDF)</span>
