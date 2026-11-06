@@ -1,0 +1,117 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@layer base {
+  :root {
+    --bg-page: #fbfbfd;
+    --bg-surface: #ffffff;
+    --bg-subtle: #f4f4f7;
+    --text-main: #09090b;
+    --text-muted: #52525b;
+    --text-faint: #71717a;
+    --border-light: rgba(0, 0, 0, 0.07);
+    --border-card: rgba(0, 0, 0, 0.08);
+    --accent-blue: #0284c7;
+    --accent-ice: #0ea5e9;
+  }
+
+  .dark {
+    --bg-page: #08080a;
+    --bg-surface: #101014;
+    --bg-subtle: #18181c;
+    --text-main: #fafafa;
+    --text-muted: #a1a1aa;
+    --text-faint: #71717a;
+    --border-light: rgba(255, 255, 255, 0.08);
+    --border-card: rgba(255, 255, 255, 0.1);
+    --accent-blue: #38bdf8;
+    --accent-ice: #7dd3fc;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    font-family: 'Google Sans', 'Outfit', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    color-scheme: light;
+    background-color: var(--bg-page);
+    color: var(--text-main);
+  }
+
+  html.dark {
+    color-scheme: dark;
+  }
+
+  body {
+    font-family: 'Google Sans', sans-serif;
+    font-size: 15px;
+    background-color: var(--bg-page);
+    color: var(--text-main);
+    transition: background-color 0.4s ease, color 0.4s ease;
+    overflow-x: hidden;
+    letter-spacing: -0.01em;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Outfit', 'Google Sans', sans-serif;
+  }
+  
+  [class*="font-mono"], code, pre {
+    font-family: 'Google Sans', monospace;
+  }
+}
+
+/* Minimalist frosted glass cards */
+.frosted-glass {
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.dark .frosted-glass {
+  background: rgba(16, 16, 20, 0.75);
+  backdrop-filter: blur(16px);
+  -webkit-backpack-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* Minimalist floating card shadow */
+.soft-shadow {
+  box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.04), 0 1px 3px rgba(0, 0, 0, 0.02);
+}
+
+.dark .soft-shadow {
+  box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.5);
+}
+
+/* Micro-dot grid background for architectural depth */
+.zen-dot-grid {
+  background-image: radial-gradient(rgba(0, 0, 0, 0.08) 1px, transparent 1px);
+  background-size: 28px 28px;
+}
+
+.dark .zen-dot-grid {
+  background-image: radial-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+  background-size: 28px 28px;
+}
+
+/* Minimal sleek scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.15);
+  border-radius: 3px;
+}
+.dark ::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.15);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 0, 0, 0.3);
+}
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
