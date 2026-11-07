@@ -16,6 +16,7 @@ import {
   TrendingUp,
   Layers,
   Cpu,
+  Bot,
   CheckCircle2,
   Check,
   Award,
@@ -91,7 +92,7 @@ export const HomePage: React.FC<HomePageProps> = ({
           transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
           className="text-xs sm:text-sm text-zinc-500 dark:text-zinc-400 font-light max-w-xl mx-auto leading-relaxed pt-2"
         >
-          I&rsquo;m Brenton Kandhai, a digital marketing and web solutions specialist with 15+ years of experience. I help businesses build stronger online presences through SEO, paid campaigns, e-commerce, and engaging digital content.
+          I&rsquo;m Brenton Kandhai, a Full Stack Developer with 15+ years of experience engineering high-performance web applications, scalable e-commerce systems, and custom digital platforms &mdash; supported by secondary expertise in growth marketing, technical SEO, and UI/UX design.
         </motion.p>
       </section>
 
@@ -129,34 +130,39 @@ export const HomePage: React.FC<HomePageProps> = ({
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" style={{ perspective: 1000 }}>
           {[
             {
-              icon: BarChart3,
-              title: 'Digital Marketing & Paid Campaigns',
-              desc: 'Google Ads, YouTube and paid/organic social campaigns. Account setup, campaign budgets, A/B testing, competitor analysis, Looker Studio dashboards, and ROI optimization.',
-            },
-            {
-              icon: TrendingUp,
-              title: 'SEO & Web Performance',
-              desc: 'Technical audits, keyword research, indexing health, search visibility, Core Web Vitals, and speed optimization verified by Semrush Academy credentials.',
+              icon: Cpu,
+              title: 'Technical Architecture & Systems Engineering',
+              desc: 'High-scale event-driven workflow engines, distributed AI topologies, multi-tenant RBAC architectures, microservices, and real-time state synchronization.',
             },
             {
               icon: Globe,
-              title: 'Web & E-Commerce Development',
-              desc: 'WordPress, Shopify and WooCommerce development. Custom themes, product catalogs, payment gateways, custom API integrations, and server maintenance.',
+              title: 'Full Stack Web & Application Development',
+              desc: 'Architecting modern responsive front-end and back-end web applications. Custom React, Vite, Next.js, WordPress theme engineering, PHP, REST APIs, and scalable infrastructure.',
             },
             {
               icon: Layers,
-              title: 'Multimedia, UI/UX & 3D Layouts',
-              desc: 'Architectural 3D exhibition booth layout (Comic Con Africa, Decorex), signage modeling, brand identity, print collateral, and video motion graphics.',
+              title: 'E-Commerce & Digital Systems',
+              desc: 'Shopify, WooCommerce, and custom checkout funnels. Catalog synchronization, payment gateway integrations, security hardening, and Core Web Vitals speed optimization.',
             },
             {
-              icon: Cpu,
-              title: 'Fabrication & Large Format Print',
-              desc: 'Hands-on mastery of Roland VersaWorks, Mimaki printing, dye-sublimation sportswear, CNC routing, and precision laser cutting for commercial branding.',
+              icon: Bot,
+              title: 'CRM, AI Tools & Automation',
+              desc: 'Customer lifecycle workflows, HubSpot & Mailchimp CRM management, Zapier integrations, and generative AI prompt engineering (ChatGPT, Copilot Studio, Google Gemini, Midjourney).',
+            },
+            {
+              icon: TrendingUp,
+              title: 'SEO & Web Performance (Secondary)',
+              desc: 'Secondary specialization in technical audits, keyword research, indexing health, search visibility, Core Web Vitals, and speed optimization verified by Semrush Academy credentials.',
+            },
+            {
+              icon: BarChart3,
+              title: 'Digital Marketing & Paid Campaigns (Secondary)',
+              desc: 'Secondary specialization in Google Ads, YouTube, and paid social campaigns. Account setup, campaign budgets, A/B testing, Looker Studio dashboards, and ROI optimization.',
             },
             {
               icon: CheckCircle2,
-              title: 'Project Management & Commercial',
-              desc: 'Account coordination, digital team leadership, product demand forecasting, pricing structure, and customer technical support via enterprise ticketing.',
+              title: 'UI/UX, 3D Layouts & Creative Design (Secondary)',
+              desc: 'Secondary specialization in architectural 3D exhibition booth layout (Comic Con Africa, Decorex), interactive UI prototypes in Figma, brand identity, and motion graphics.',
             },
           ].map((item, idx) => {
             const IconComponent = item.icon;
@@ -214,28 +220,28 @@ export const HomePage: React.FC<HomePageProps> = ({
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {[
             {
-              category: 'Digital Marketing',
-              tools: ['Google Ads', 'YouTube Ads', 'Meta Ads', 'Looker Studio', 'Semrush', 'GA4'],
+              category: 'Full Stack & Web Engineering',
+              tools: ['React', 'Next.js', 'Vite', 'WordPress', 'Shopify', 'PHP & MySQL', 'Tailwind CSS'],
             },
             {
-              category: 'SEO & Analytics',
-              tools: ['Semrush Academy', 'Google Search Console', 'Core Web Vitals', 'Keyword Research', 'Technical Audits'],
+              category: 'Cloud, APIs & Architecture',
+              tools: ['REST APIs', 'Node.js', 'GitHub', 'Vercel', 'Supabase', 'AWS & Azure', 'Server Admin'],
             },
             {
-              category: 'Web Development',
-              tools: ['WordPress', 'Shopify', 'WooCommerce', 'React', 'Vite', 'Tailwind CSS'],
+              category: 'CRM, AI & Automation',
+              tools: ['HubSpot CRM', 'Zapier Automation', 'ChatGPT & Copilot', 'Google Gemini', 'Zendesk', 'Mailchimp'],
             },
             {
-              category: 'Design & Multimedia',
-              tools: ['Figma', 'Blender', 'Adobe Suite', 'Roland VersaWorks', 'Mimaki Printing'],
+              category: 'SEO & Analytics (Secondary)',
+              tools: ['Semrush Academy', 'Google Search Console', 'Core Web Vitals', 'GA4', 'Technical Audits'],
             },
             {
-              category: 'Fabrication',
-              tools: ['CNC Routing', 'Laser Cutting', 'Dye-Sublimation', 'Large Format Print'],
+              category: 'Digital Marketing (Secondary)',
+              tools: ['Google Ads', 'YouTube Ads', 'Meta Ads', 'Looker Studio', 'PPC Dashboards'],
             },
             {
-              category: 'Project Management',
-              tools: ['Jira', 'Trello', 'Enterprise Ticketing', 'Forecasting', 'Pricing Structure'],
+              category: 'UI/UX & Design Suite (Secondary)',
+              tools: ['Figma', 'Blender 3D', 'Adobe Creative Cloud', 'Exhibition CAD', 'Brand Identity'],
             },
           ].map((category, idx) => (
             <motion.div
@@ -381,7 +387,7 @@ export const HomePage: React.FC<HomePageProps> = ({
             </h2>
 
             <p className="text-xs sm:text-sm text-zinc-300 font-light leading-relaxed max-w-2xl">
-              Available for full-time executive engagements, contract digital strategy, technical SEO audits, and custom web architecture. Located in Johannesburg and collaborating worldwide.
+              Available for full-time engineering engagements, contract full stack development, technical web architecture, and custom applications. Located in Johannesburg and collaborating worldwide.
             </p>
 
             <div className="flex flex-wrap items-center gap-3 pt-4">
@@ -398,7 +404,7 @@ export const HomePage: React.FC<HomePageProps> = ({
                 className="flex items-center gap-2 px-5 py-3 rounded-md text-xs font-light tracking-wider uppercase border border-white/20 hover:border-white/50 text-white transition-all cursor-pointer"
               >
                 <FileText className="w-3.5 h-3.5 text-zinc-300" />
-                <span>Verified CV (PDF)</span>
+                <span>Verified CV</span>
               </button>
 
               <button
@@ -406,7 +412,7 @@ export const HomePage: React.FC<HomePageProps> = ({
                 className="flex items-center gap-2 px-5 py-3 rounded-md text-xs font-light tracking-wider uppercase border border-white/20 hover:border-white/50 text-white transition-all cursor-pointer"
               >
                 <Briefcase className="w-3.5 h-3.5 text-zinc-300" />
-                <span>20-Page Portfolio (PDF)</span>
+                <span>Portfolio</span>
               </button>
             </div>
           </div>

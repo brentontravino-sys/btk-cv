@@ -44,16 +44,14 @@ export const ArcAdaptiveHero: React.FC<ArcAdaptiveHeroProps> = ({
 
         {/* Layer 3: Text Content Directly Over Background */}
         <div className="relative z-20 px-6 sm:px-10 lg:px-12 pb-12 pt-12 sm:pt-24 flex flex-col justify-end min-h-full w-full max-w-2xl">
-          <div className="space-y-3">
             <h1 className="text-3xl sm:text-4xl lg:text-5xl tracking-tight text-zinc-950 dark:text-white leading-tight whitespace-nowrap" style={{ fontFamily: "'Outfit', sans-serif" }}>
-              <span className="font-bold">ADVANCED DIGITAL </span>
-              <span className="font-extralight">& WEB SOLUTIONS</span>
+              <span className="font-extralight">FULL STACK </span>
+              <span className="font-bold">DIGITAL SOLUTIONS</span>
             </h1>
 
             <p className="text-xs sm:text-sm font-light text-zinc-600 dark:text-zinc-200 leading-relaxed max-w-md">
-              15+ years developing e-commerce platforms, technical SEO systems, and digital experiences, alongside bespoke 3D exhibition and multimedia builds.
+              15+ years of experience engineering high-performance web applications, scalable e-commerce systems, and custom digital platforms, complemented by secondary expertise in growth marketing and design.
             </p>
-          </div>
 
           {/* Content Buttons */}
           <div className="flex flex-wrap items-center gap-3 mt-8 pt-4">
@@ -78,7 +76,7 @@ export const ArcAdaptiveHero: React.FC<ArcAdaptiveHeroProps> = ({
               className="flex items-center gap-2 px-4 py-2.5 rounded-md text-xs font-light tracking-wider uppercase border border-black/20 dark:border-white/30 hover:border-black/40 dark:hover:border-white/60 bg-black/5 dark:bg-white/10 hover:bg-black/10 dark:hover:bg-white/20 text-zinc-900 dark:text-white transition-all cursor-pointer backdrop-blur-sm"
             >
               <Briefcase className="w-3.5 h-3.5 text-zinc-500 dark:text-zinc-200" />
-              <span>Portfolio (PDF)</span>
+              <span>Portfolio</span>
             </button>
           </div>
         </div>

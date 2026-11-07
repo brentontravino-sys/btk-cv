@@ -4,6 +4,7 @@ import { ProjectItem } from '../types';
 import { PROJECTS, PERSONAL_INFO } from '../data/portfolioData';
 import { WEBSITE_SHOWCASES } from '../data/websiteShowcases';
 import { WebsiteShowcaseCard } from '../components/WebsiteShowcaseCard';
+import { TechnicalArchitectureShowcase } from '../components/TechnicalArchitectureShowcase';
 import {
   Search,
   ArrowRight,
@@ -24,29 +25,24 @@ export const PortfolioPage: React.FC<PortfolioPageProps> = ({ onSelectProject, o
   const categories = [
     { key: 'all', label: 'All Works', count: PROJECTS.length },
     {
+      key: 'architecture',
+      label: 'Technical Architecture',
+      count: PROJECTS.filter((p) => p.category === 'architecture').length,
+    },
+    {
       key: 'web',
-      label: 'Web & E-Commerce',
+      label: 'Full Stack & Web Apps',
       count: PROJECTS.filter((p) => p.category === 'web').length,
     },
     {
-      key: 'social',
-      label: 'Campaigns & Social',
-      count: PROJECTS.filter((p) => p.category === 'social').length,
-    },
-    {
-      key: 'ads',
-      label: 'Google Ads & PPC',
-      count: PROJECTS.filter((p) => p.category === 'ads').length,
-    },
-    {
-      key: 'seo',
-      label: 'SEO & Audits',
-      count: PROJECTS.filter((p) => p.category === 'seo').length,
-    },
-    {
       key: 'creative',
-      label: '3D, Signage & Events',
+      label: 'Design & Publishing (Secondary)',
       count: PROJECTS.filter((p) => p.category === 'creative').length,
+    },
+    {
+      key: 'social',
+      label: 'Campaigns & Social (Secondary)',
+      count: PROJECTS.filter((p) => p.category === 'social').length,
     },
   ];
 
@@ -89,8 +85,7 @@ export const PortfolioPage: React.FC<PortfolioPageProps> = ({ onSelectProject, o
               Selected Projects
             </h1>
             <p className="mt-3 text-xs sm:text-sm font-light text-zinc-500 dark:text-zinc-400 max-w-xl leading-relaxed">
-              Curated portfolio spanning national consumer technology brands, industrial robotics,
-              dealership lead acquisition, and architectural expo stand designs.
+              Curated portfolio of full stack web applications, high-traffic consumer brand portals, e-commerce architectures, and secondary marketing campaigns &amp; 3D designs.
             </p>
           </div>
 
@@ -101,20 +96,23 @@ export const PortfolioPage: React.FC<PortfolioPageProps> = ({ onSelectProject, o
               className="flex items-center gap-2 px-4 py-2 rounded-md border border-black/15 dark:border-white/15 hover:border-black/40 dark:hover:border-white/40 text-xs tracking-wider uppercase font-light text-zinc-800 dark:text-zinc-200 transition-colors cursor-pointer"
             >
               <Briefcase className="w-3.5 h-3.5 text-zinc-400" />
-              <span>View 20-Page PDF</span>
+              <span>View Portfolio</span>
             </button>
 
             <a
               href={PERSONAL_INFO.portfolioPdfPath}
               download
               className="p-2 rounded-md border border-black/15 dark:border-white/15 text-zinc-600 dark:text-zinc-400 hover:text-black dark:hover:text-white transition-colors"
-              title="Download Portfolio PDF"
+              title="Download Portfolio"
             >
               <Download className="w-3.5 h-3.5" />
             </a>
           </div>
         </div>
       </motion.div>
+
+      {/* Featured Primary Discipline: Technical Architecture & Systems Engineering */}
+      <TechnicalArchitectureShowcase onSelectProject={onSelectProject} />
 
       <section aria-labelledby="website-showcases-heading" className="space-y-8">
         <div className="space-y-2">
@@ -137,6 +135,161 @@ export const PortfolioPage: React.FC<PortfolioPageProps> = ({ onSelectProject, o
           {WEBSITE_SHOWCASES.map((showcase) => (
             <WebsiteShowcaseCard key={showcase.name} showcase={showcase} />
           ))}
+        </div>
+      </section>
+
+      {/* Brand, Graphic Design & Digital Publishing Showcase (User Assets) */}
+      <section aria-labelledby="design-showcases-heading" className="space-y-8">
+        <div className="space-y-2">
+          <div className="flex items-center gap-2 text-[10px] tracking-[0.25em] uppercase font-light text-zinc-400">
+            <span className="w-1.5 h-1.5 rounded-full bg-zinc-950 dark:bg-white" />
+            <span>Design, Campaigns &amp; Publishing (Secondary)</span>
+          </div>
+          <h2
+            id="design-showcases-heading"
+            className="text-2xl sm:text-3xl font-extralight tracking-tight text-zinc-950 dark:text-white"
+          >
+            Brand identity, campaigns &amp; digital covers
+          </h2>
+          <p className="max-w-2xl text-xs sm:text-sm font-light leading-relaxed text-zinc-500 dark:text-zinc-400">
+            High-impact visual communication suites: medical brand technology, university mobile innovation stories, and 11 commercial publication covers.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {/* Card 1: Chronos Medical */}
+          {(() => {
+            const chronos = PROJECTS.find((p) => p.id === 'chronos-medical');
+            if (!chronos) return null;
+            return (
+              <div
+                onClick={() => onSelectProject(chronos)}
+                className="group cursor-pointer rounded-xl bg-white dark:bg-[#101014] border border-black/[0.06] dark:border-white/[0.06] hover:border-black/30 dark:hover:border-white/30 transition-all p-5 space-y-4 soft-shadow flex flex-col justify-between"
+              >
+                <div className="space-y-3">
+                  <div className="relative h-48 rounded-lg overflow-hidden bg-zinc-950 border border-black/[0.06] dark:border-white/[0.08] flex items-center justify-center">
+                    <img
+                      src="/works/graphic design/Chronos_IG_Brand_1080.png"
+                      alt="Chronos Medical Surgical Innovation"
+                      referrerPolicy="no-referrer"
+                      className="max-h-full max-w-full object-contain group-hover:scale-105 transition-transform duration-300"
+                    />
+                    <div className="absolute top-2.5 right-2.5 px-2 py-0.5 rounded bg-black/75 backdrop-blur-sm text-[10px] font-mono text-white">
+                      3 Master Assets
+                    </div>
+                  </div>
+                  <div>
+                    <span className="text-[10px] uppercase font-mono text-zinc-400 block">Surgical MedTech &bull; Branding</span>
+                    <h3 className="text-base font-normal text-zinc-950 dark:text-white group-hover:underline">
+                      Chronos Medical &bull; DuraFrame Campaign
+                    </h3>
+                    <p className="text-xs font-light text-zinc-500 dark:text-zinc-400 mt-1 line-clamp-2">
+                      Precision titanium implant branding, DuraFrame feature highlights, and interactive Instagram Story sequence.
+                    </p>
+                  </div>
+                </div>
+                <div className="flex items-center justify-between text-xs font-light text-zinc-400 pt-2 border-t border-black/[0.04] dark:border-white/[0.06]">
+                  <span>Figma &bull; Illustrator</span>
+                  <span className="text-zinc-950 dark:text-white flex items-center gap-1 group-hover:translate-x-1 transition-transform">
+                    Explore Asset Suite <ArrowRight className="w-3 h-3" />
+                  </span>
+                </div>
+              </div>
+            );
+          })()}
+
+          {/* Card 2: Wits University Stories */}
+          {(() => {
+            const wits = PROJECTS.find((p) => p.id === 'wits-research-showcase');
+            if (!wits) return null;
+            return (
+              <div
+                onClick={() => onSelectProject(wits)}
+                className="group cursor-pointer rounded-xl bg-white dark:bg-[#101014] border border-black/[0.06] dark:border-white/[0.06] hover:border-black/30 dark:hover:border-white/30 transition-all p-5 space-y-4 soft-shadow flex flex-col justify-between"
+              >
+                <div className="space-y-3">
+                  <div className="relative h-48 rounded-lg overflow-hidden bg-[#001e3d] border border-black/[0.06] dark:border-white/[0.08] flex items-center justify-center">
+                    <img
+                      src="/works/graphic design/wits-story-01.png"
+                      alt="Wits Research Showcase Open Day 2025"
+                      referrerPolicy="no-referrer"
+                      className="max-h-full max-w-full object-contain group-hover:scale-105 transition-transform duration-300"
+                    />
+                    <div className="absolute top-2.5 right-2.5 px-2 py-0.5 rounded bg-black/75 backdrop-blur-sm text-[10px] font-mono text-white">
+                      5-Part Story Series
+                    </div>
+                  </div>
+                  <div>
+                    <span className="text-[10px] uppercase font-mono text-zinc-400 block">Higher Ed &bull; Mobile Campaign</span>
+                    <h3 className="text-base font-normal text-zinc-950 dark:text-white group-hover:underline">
+                      Wits University &bull; Open Day 2025
+                    </h3>
+                    <p className="text-xs font-light text-zinc-500 dark:text-zinc-400 mt-1 line-clamp-2">
+                      Corporate partner acquisition stories, &ldquo;Century of Firsts&rdquo; milestone infographics, and Innovation Centre CTAs.
+                    </p>
+                  </div>
+                </div>
+                <div className="flex items-center justify-between text-xs font-light text-zinc-400 pt-2 border-t border-black/[0.04] dark:border-white/[0.06]">
+                  <span>Photoshop &bull; Mobile UI</span>
+                  <span className="text-zinc-950 dark:text-white flex items-center gap-1 group-hover:translate-x-1 transition-transform">
+                    Explore Story Cards <ArrowRight className="w-3 h-3" />
+                  </span>
+                </div>
+              </div>
+            );
+          })()}
+
+          {/* Card 3: 11 Commercial E-Books */}
+          {(() => {
+            const ebooks = PROJECTS.find((p) => p.id === 'ebooks-digital-publishing');
+            if (!ebooks) return null;
+            return (
+              <div
+                onClick={() => onSelectProject(ebooks)}
+                className="group cursor-pointer rounded-xl bg-white dark:bg-[#101014] border border-black/[0.06] dark:border-white/[0.06] hover:border-black/30 dark:hover:border-white/30 transition-all p-5 space-y-4 soft-shadow flex flex-col justify-between"
+              >
+                <div className="space-y-3">
+                  <div className="relative h-48 rounded-lg overflow-hidden bg-zinc-950 border border-black/[0.06] dark:border-white/[0.08] flex items-center justify-center p-2">
+                    <div className="grid grid-cols-3 gap-1.5 w-full h-full">
+                      <img
+                        src="/works/ebooks/Practical AI Tools - For Everyday Work - Cover.jpg"
+                        alt="AI Tools"
+                        className="w-full h-full object-cover rounded"
+                      />
+                      <img
+                        src="/works/ebooks/Digital Marketing - Playbook Insights - Cover.jpg"
+                        alt="Marketing Playbook"
+                        className="w-full h-full object-cover rounded"
+                      />
+                      <img
+                        src="/works/ebooks/Cybersecurity - Mini-Course - Cover.jpg"
+                        alt="Cybersecurity"
+                        className="w-full h-full object-cover rounded"
+                      />
+                    </div>
+                    <div className="absolute top-2.5 right-2.5 px-2 py-0.5 rounded bg-black/85 backdrop-blur-sm text-[10px] font-mono text-white">
+                      11 Book Covers
+                    </div>
+                  </div>
+                  <div>
+                    <span className="text-[10px] uppercase font-mono text-zinc-400 block">Editorial &bull; Digital Publishing</span>
+                    <h3 className="text-base font-normal text-zinc-950 dark:text-white group-hover:underline">
+                      Commercial E-Book &amp; Guide Collection
+                    </h3>
+                    <p className="text-xs font-light text-zinc-500 dark:text-zinc-400 mt-1 line-clamp-2">
+                      11 commercial cover designs spanning AI Tools, Cybersecurity, Marketing Playbooks, Fitness, and Lifestyle.
+                    </p>
+                  </div>
+                </div>
+                <div className="flex items-center justify-between text-xs font-light text-zinc-400 pt-2 border-t border-black/[0.04] dark:border-white/[0.06]">
+                  <span>InDesign &bull; Cover Art</span>
+                  <span className="text-zinc-950 dark:text-white flex items-center gap-1 group-hover:translate-x-1 transition-transform">
+                    View All 11 Covers <ArrowRight className="w-3 h-3" />
+                  </span>
+                </div>
+              </div>
+            );
+          })()}
         </div>
       </section>
 
@@ -213,9 +366,21 @@ export const PortfolioPage: React.FC<PortfolioPageProps> = ({ onSelectProject, o
                 }}
                 whileHover={{ y: -6 }}
                 onClick={() => onSelectProject(project)}
-                className="flex flex-col justify-between p-8 rounded-xl bg-white dark:bg-[#101014] border border-black/[0.06] dark:border-white/[0.06] hover:border-black/30 dark:hover:border-white/30 transition-all cursor-pointer group soft-shadow"
+                className="flex flex-col justify-between p-6 sm:p-7 rounded-xl bg-white dark:bg-[#101014] border border-black/[0.06] dark:border-white/[0.06] hover:border-black/30 dark:hover:border-white/30 transition-all cursor-pointer group soft-shadow"
               >
                 <div className="space-y-4">
+                  {/* Thumbnail Banner (if present) */}
+                  {project.image && (
+                    <div className="h-40 rounded-lg overflow-hidden bg-zinc-100 dark:bg-zinc-900/80 border border-black/[0.04] dark:border-white/[0.06] flex items-center justify-center">
+                      <img
+                        src={project.image}
+                        alt={project.title}
+                        referrerPolicy="no-referrer"
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                      />
+                    </div>
+                  )}
+
                   <div className="flex items-center justify-between text-[10px] font-mono text-zinc-400">
                     <span className="uppercase">{project.categoryLabel}</span>
                     {project.displayUrl && (
@@ -227,7 +392,7 @@ export const PortfolioPage: React.FC<PortfolioPageProps> = ({ onSelectProject, o
                   </div>
 
                   <div>
-                    <h3 className="text-lg font-normal text-zinc-950 dark:text-white group-hover:underline underline-offset-4 transition-all">
+                    <h3 className="text-base sm:text-lg font-normal text-zinc-950 dark:text-white group-hover:underline underline-offset-4 transition-all">
                       {project.title}
                     </h3>
                     <p className="text-xs font-light text-zinc-400 mt-1">{project.client}</p>

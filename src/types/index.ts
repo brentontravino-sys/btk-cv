@@ -4,7 +4,7 @@ export interface ProjectItem {
   id: string;
   title: string;
   client: string;
-  category: 'web' | 'social' | 'ads' | 'seo' | 'creative';
+  category: 'web' | 'architecture' | 'creative' | 'social' | 'ads' | 'seo';
   categoryLabel: string;
   tagline: string;
   description: string;
@@ -15,6 +15,8 @@ export interface ProjectItem {
   metrics?: { label: string; value: string }[];
   featured?: boolean;
   highlightText?: string;
+  image?: string;
+  gallery?: string[];
 }
 
 export interface ExperienceItem {

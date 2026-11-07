@@ -18,7 +18,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onOpenPdf }) => {
   const [formState, setFormState] = useState({
     name: '',
     email: '',
-    service: 'Google Ads & PPC Campaigns',
+    service: 'Full Stack Web & Application Development',
     message: '',
   });
 
@@ -55,8 +55,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onOpenPdf }) => {
             Initiate Conversation
           </h1>
           <p className="mt-3 text-xs sm:text-sm font-light text-zinc-500 dark:text-zinc-400 max-w-xl leading-relaxed">
-            Direct channel for high-ROI digital campaigns, technical web infrastructure, or career
-            roles. Based in Johannesburg, South Africa and available worldwide.
+            Direct channel for full stack engineering projects, scalable web applications, technical architecture, or career roles. Based in Johannesburg, South Africa and available worldwide.
           </p>
         </div>
       </motion.div>
@@ -121,7 +120,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onOpenPdf }) => {
                 onClick={() => onOpenPdf('cv')}
                 className="flex items-center justify-between p-3 rounded-lg border border-black/10 dark:border-white/10 hover:border-black/30 dark:hover:border-white/30 text-xs font-light tracking-wider uppercase text-zinc-800 dark:text-zinc-200 cursor-pointer transition-colors"
               >
-                <span>Curriculum Vitae (PDF)</span>
+                <span>Curriculum Vitae</span>
                 <ArrowUpRight className="w-3.5 h-3.5 text-zinc-400" />
               </button>
 
@@ -129,7 +128,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onOpenPdf }) => {
                 onClick={() => onOpenPdf('portfolio')}
                 className="flex items-center justify-between p-3 rounded-lg border border-black/10 dark:border-white/10 hover:border-black/30 dark:hover:border-white/30 text-xs font-light tracking-wider uppercase text-zinc-800 dark:text-zinc-200 cursor-pointer transition-colors"
               >
-                <span>20-Page Portfolio (PDF)</span>
+                <span>Portfolio</span>
                 <ArrowUpRight className="w-3.5 h-3.5 text-zinc-400" />
               </button>
             </div>
@@ -167,7 +166,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onOpenPdf }) => {
                     setFormState({
                       name: '',
                       email: '',
-                      service: 'Google Ads & PPC Campaigns',
+                      service: 'Full Stack Web & Application Development',
                       message: '',
                     });
                   }}
@@ -215,18 +214,26 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onOpenPdf }) => {
                     onChange={(e) => setFormState({ ...formState, service: e.target.value })}
                     className="w-full px-4 py-2.5 rounded-md border border-black/10 dark:border-white/10 bg-zinc-50/50 dark:bg-zinc-900/50 text-xs text-zinc-900 dark:text-white focus:outline-none focus:border-black dark:focus:border-white transition-colors font-light"
                   >
-                    <option value="Google Ads & PPC Campaigns">Google Ads & PPC Campaigns</option>
-                    <option value="Technical SEO & Site Health Audit">
-                      Technical SEO & Site Health Audit
+                    <option value="Full Stack Web & Application Development">
+                      Full Stack Web & Application Development
                     </option>
-                    <option value="WordPress / Shopify Web Solutions">
-                      WordPress / Shopify Web Solutions
+                    <option value="E-Commerce Architecture (Shopify & WooCommerce)">
+                      E-Commerce Architecture (Shopify & WooCommerce)
                     </option>
-                    <option value="3D Architectural Signage & Booth Layout">
-                      3D Architectural Signage & Booth Layout
+                    <option value="CRM, AI Tools & Automation Workflows">
+                      CRM, AI Tools & Automation Workflows
                     </option>
-                    <option value="Full-Time / Contract Role Opportunity">
-                      Full-Time / Contract Role Opportunity
+                    <option value="Technical SEO & Performance Audit (Secondary)">
+                      Technical SEO & Performance Audit (Secondary)
+                    </option>
+                    <option value="Digital Marketing & Paid Campaigns (Secondary)">
+                      Digital Marketing & Paid Campaigns (Secondary)
+                    </option>
+                    <option value="UI/UX Prototyping & Multimedia Design (Secondary)">
+                      UI/UX Prototyping & Multimedia Design (Secondary)
+                    </option>
+                    <option value="Full-Time / Contract Engineering Role">
+                      Full-Time / Contract Engineering Role
                     </option>
                   </select>
                 </div>

@@ -34,13 +34,13 @@ export const Footer: React.FC<FooterProps> = ({ setActiveTab, onOpenPdf }) => {
                   {PERSONAL_INFO.name}
                 </h3>
                 <p className="text-[10px] tracking-widest uppercase text-zinc-400">
-                  Digital Marketing &amp; Web
+                  Full Stack Developer
                 </p>
               </div>
             </div>
 
             <p className="text-xs leading-relaxed text-zinc-400 font-light">
-              15+ years developing e-commerce platforms, technical SEO systems, and digital experiences, alongside bespoke 3D exhibition and multimedia builds.
+              15+ years of experience engineering high-performance web applications, scalable e-commerce systems, and robust digital platforms with secondary specializations in marketing and design.
             </p>
           </div>
 
@@ -154,7 +154,7 @@ export const Footer: React.FC<FooterProps> = ({ setActiveTab, onOpenPdf }) => {
                 onClick={() => onOpenPdf('cv')}
                 className="w-full flex items-center justify-between p-2.5 rounded-md border border-black/10 dark:border-white/10 hover:border-black/30 dark:hover:border-white/30 text-zinc-700 dark:text-zinc-300 transition-colors cursor-pointer"
               >
-                <span>Curriculum Vitae (PDF)</span>
+                <span>Curriculum Vitae</span>
                 <ArrowUpRight className="w-3 h-3 text-zinc-400" />
               </button>
 
@@ -162,7 +162,7 @@ export const Footer: React.FC<FooterProps> = ({ setActiveTab, onOpenPdf }) => {
                 onClick={() => onOpenPdf('portfolio')}
                 className="w-full flex items-center justify-between p-2.5 rounded-md border border-black/10 dark:border-white/10 hover:border-black/30 dark:hover:border-white/30 text-zinc-700 dark:text-zinc-300 transition-colors cursor-pointer"
               >
-                <span>20-Page Portfolio (PDF)</span>
+                <span>Portfolio</span>
                 <ArrowUpRight className="w-3 h-3 text-zinc-400" />
               </button>
             </div>

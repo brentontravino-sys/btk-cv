@@ -9,6 +9,7 @@ import { SkillsPage } from './pages/SkillsPage';
 import { ContactPage } from './pages/ContactPage';
 import { PortfolioModal } from './components/PortfolioModal';
 import { PDFModalViewer } from './components/PDFModalViewer';
+import { BackToTopButton } from './components/BackToTopButton';
 import { AnimatePresence, motion } from 'motion/react';
 
 export default function App() {
@@ -48,7 +49,12 @@ export default function App() {
       />
 
       {/* Main Multipage Content Area with Smooth Motion Transitions */}
-      <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 pt-0">
+      <main
+        className={
+          'flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 ' +
+          (activeTab === 'home' ? 'pt-0' : 'pt-[60px]')
+        }
+      >
         <AnimatePresence mode="wait">
           {activeTab === 'home' && (
             <motion.div
@@ -137,6 +143,9 @@ export default function App() {
         type={activePdfModal}
         onClose={() => setActivePdfModal(null)}
       />
+
+      {/* Floating Minimalist Back-To-Top Button with Scroll Progress Tracker */}
+      <BackToTopButton />
     </div>
   );
 }

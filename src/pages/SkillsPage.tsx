@@ -8,6 +8,7 @@ import {
   Palette,
   Box,
   Cpu,
+  Bot,
   Check,
   Search,
 } from 'lucide-react';
@@ -32,6 +33,8 @@ export const SkillsPage: React.FC<SkillsPageProps> = () => {
         return <Box className="w-4 h-4 text-zinc-600 dark:text-zinc-400" />;
       case 'Cpu':
         return <Cpu className="w-4 h-4 text-zinc-600 dark:text-zinc-400" />;
+      case 'Bot':
+        return <Bot className="w-4 h-4 text-zinc-600 dark:text-zinc-400" />;
       default:
         return <Layers className="w-4 h-4 text-zinc-600 dark:text-zinc-400" />;
     }
@@ -69,8 +72,7 @@ export const SkillsPage: React.FC<SkillsPageProps> = () => {
               Software &amp; Expertise
             </h1>
             <p className="mt-3 text-xs sm:text-sm font-light text-zinc-500 dark:text-zinc-400 max-w-xl leading-relaxed">
-              Curated overview of 10+ years across performance marketing suites, full-stack CMS &amp;
-              modern frameworks, 3D CAD modeling, and industrial fabrication machinery.
+              Curated overview of 15+ years of experience across full stack web engineering, modern JavaScript frameworks, CMS architectures, APIs, and secondary expertise in performance marketing suites and UI/UX design.
             </p>
           </div>
 

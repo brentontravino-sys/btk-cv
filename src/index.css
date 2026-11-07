@@ -115,3 +115,41 @@
 .dark ::-webkit-scrollbar-thumb:hover {
   background: rgba(255, 255, 255, 0.3);
 }
+
+/* Print & PDF Generation rules */
+@media print {
+  @page {
+    size: A4 portrait;
+    margin: 14mm 12mm;
+  }
+
+  body, html {
+    background: #ffffff !important;
+    color: #09090b !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  /* Hide navigation, fixed buttons, close controls, and interactive toolbars in print */
+  header,
+  nav,
+  footer,
+  .print-hide,
+  button,
+  .fixed,
+  .back-to-top {
+    display: none !important;
+  }
+
+  .print-page {
+    break-after: page;
+    page-break-after: always;
+    padding-bottom: 2rem;
+  }
+
+  .print-avoid-break {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+}
+

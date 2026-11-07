@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
-import { X, Download, ArrowUpRight, FileText, Briefcase } from 'lucide-react';
+import { X, Download, ArrowUpRight, FileText, Briefcase, Printer } from 'lucide-react';
 import { PERSONAL_INFO } from '../data/portfolioData';
+import { DigitalPortfolioDocument } from './DigitalPortfolioDocument';
 
 interface PDFModalViewerProps {
   type: 'cv' | 'portfolio' | null;
@@ -17,6 +18,16 @@ export const PDFModalViewer: React.FC<PDFModalViewerProps> = ({ type, onClose })
   }, [onClose]);
 
   if (!type) return null;
+
+  // When portfolio is requested, render the modern interactive & printable portfolio document with dual-view
+  if (type === 'portfolio') {
+    return (
+      <DigitalPortfolioDocument
+        onClose={onClose}
+        originalPdfUrl={PERSONAL_INFO.portfolioPdfPath}
+      />
+    );
+  }
 
   const isCv = type === 'cv';
   const filePath = isCv ? PERSONAL_INFO.cvPdfPath : PERSONAL_INFO.portfolioPdfPath;

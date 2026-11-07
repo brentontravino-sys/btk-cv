@@ -118,18 +118,18 @@ export const Navbar: React.FC<NavbarProps> = ({
                 <button
                   onClick={() => onOpenPdf('cv')}
                   className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-md border border-black/10 dark:border-white/10 hover:border-black/30 dark:hover:border-white/30 text-[11px] tracking-wider uppercase text-zinc-600 dark:text-zinc-400 hover:text-black dark:hover:text-white transition-all cursor-pointer bg-white/40 dark:bg-zinc-900/40 backdrop-blur-sm"
-                  title="View original verified CV PDF"
+                  title="View original verified CV"
                 >
-                  <span>CV (PDF)</span>
+                  <span>CV</span>
                   <ArrowUpRight className="w-3 h-3 text-zinc-400" />
                 </button>
 
                 <button
                   onClick={() => onOpenPdf('portfolio')}
                   className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-md border border-black/10 dark:border-white/10 hover:border-black/30 dark:hover:border-white/30 text-[11px] tracking-wider uppercase text-zinc-600 dark:text-zinc-400 hover:text-black dark:hover:text-white transition-all cursor-pointer bg-white/40 dark:bg-zinc-900/40 backdrop-blur-sm"
-                  title="View original 20-page Portfolio PDF"
+                  title="View original Portfolio"
                 >
-                  <span>Portfolio (PDF)</span>
+                  <span>Portfolio</span>
                   <ArrowUpRight className="w-3 h-3 text-zinc-400" />
                 </button>
               </div>
@@ -183,7 +183,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                 }}
                 className="flex items-center justify-between py-2 text-xs tracking-wider uppercase text-zinc-600 dark:text-zinc-400"
               >
-                <span>Curriculum Vitae (PDF)</span>
+                <span>Curriculum Vitae</span>
                 <ArrowUpRight className="w-3.5 h-3.5 text-zinc-400" />
               </button>
 
@@ -194,7 +194,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                 }}
                 className="flex items-center justify-between py-2 text-xs tracking-wider uppercase text-zinc-600 dark:text-zinc-400"
               >
-                <span>Portfolio Document (PDF)</span>
+                <span>Portfolio Document</span>
                 <ArrowUpRight className="w-3.5 h-3.5 text-zinc-400" />
               </button>
 

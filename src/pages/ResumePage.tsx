@@ -42,7 +42,7 @@ export const ResumePage: React.FC<ResumePageProps> = ({ onOpenPdf }) => {
             Curriculum Vitae
           </h1>
           <p className="text-xs text-zinc-400 font-light mt-1">
-            Brenton T. Kandhai &bull; Verified 10+ Years Experience
+            Brenton T. Kandhai &bull; Verified 15+ Years Experience
           </p>
         </div>
 
@@ -51,7 +51,7 @@ export const ResumePage: React.FC<ResumePageProps> = ({ onOpenPdf }) => {
             onClick={() => onOpenPdf('cv')}
             className="flex items-center gap-1.5 px-4 py-2 rounded-md text-xs font-normal tracking-wider uppercase bg-zinc-950 dark:bg-white text-white dark:text-black hover:bg-zinc-800 dark:hover:bg-zinc-200 transition-colors cursor-pointer"
           >
-            <span>View Original PDF</span>
+            <span>View Original</span>
             <ArrowUpRight className="w-3.5 h-3.5" />
           </button>
 
@@ -132,15 +132,11 @@ export const ResumePage: React.FC<ResumePageProps> = ({ onOpenPdf }) => {
             PROFESSIONAL PROFILE
           </h3>
           <p className="text-sm font-light leading-relaxed text-zinc-700 dark:text-zinc-300 max-w-3xl">
-            Digital marketing and web solutions professional with{' '}
+            Full stack developer with{' '}
             <strong className="font-normal text-zinc-950 dark:text-white">
-              10+ years of experience
+              15+ years of experience
             </strong>{' '}
-            across digital campaigns, SEO, website and e-commerce development, and multimedia
-            design. Combines analytical and technical skills with creative production to support
-            brands, improve online presence and deliver practical digital projects. Experienced in
-            Google Ads and social campaigns, technical SEO, WordPress and Shopify websites,
-            performance reporting, account coordination and customer technical support.
+            engineering high-performance web applications, scalable e-commerce systems, and custom digital platforms. Blends robust front-end and back-end development with secondary specializations in digital marketing, technical SEO, and UI/UX design to deliver end-to-end digital solutions that convert. Experienced in React, modern JavaScript/TypeScript, WordPress and Shopify architectures, custom API integrations, Core Web Vitals speed tuning, and automated CRM workflows.
           </p>
         </div>
 
@@ -151,29 +147,32 @@ export const ResumePage: React.FC<ResumePageProps> = ({ onOpenPdf }) => {
           </h3>
           <div className="space-y-3 text-xs sm:text-sm font-light text-zinc-600 dark:text-zinc-400 leading-relaxed max-w-3xl">
             <p>
-              <strong className="font-normal text-zinc-950 dark:text-white">Digital marketing:</strong>{' '}
-              Google Ads, YouTube and paid / organic social campaigns; account setup, campaign
-              budgets, A/B testing, competitor analysis, dashboards and ROI reporting.
+              <strong className="font-normal text-zinc-950 dark:text-white">Full stack web &amp; e-commerce:</strong>{' '}
+              Custom web applications, React, TypeScript, PHP/MySQL, modern CSS/Tailwind, WordPress and Shopify theme development, WooCommerce architectures, checkout funnels, and REST API integrations.
             </p>
             <p>
-              <strong className="font-normal text-zinc-950 dark:text-white">SEO &amp; web performance:</strong>{' '}
-              technical audits, keyword research, indexing, site health, search visibility, Core
-              Web Vitals and performance optimization.
+              <strong className="font-normal text-zinc-950 dark:text-white">Backend, performance &amp; security:</strong>{' '}
+              Server maintenance, database optimization, Core Web Vitals speed tuning, caching systems, uptime upkeep, and headless CMS integrations.
             </p>
             <p>
-              <strong className="font-normal text-zinc-950 dark:text-white">Web &amp; e-commerce:</strong>{' '}
-              WordPress, Shopify and WooCommerce; website maintenance, custom themes, plugins,
-              functionality and API integrations.
+              <strong className="font-normal text-zinc-950 dark:text-white">CRM, AI tools &amp; automation:</strong>{' '}
+              HubSpot &amp; Mailchimp customer journeys, Zapier workflow integrations, and generative AI prompt engineering (ChatGPT, Copilot Studio, Google Gemini).
             </p>
             <p>
-              <strong className="font-normal text-zinc-950 dark:text-white">Creative production:</strong>{' '}
-              UI / UX, 3D layouts, brand identity, advertising, digital and print content,
-              photography, video and motion design.
+              <strong className="font-normal text-zinc-950 dark:text-white">Digital marketing (Secondary):</strong>{' '}
+              Google Ads, YouTube and paid / organic social campaigns; account setup, campaign budgets, A/B testing, competitor analysis, Looker Studio dashboards and ROI reporting.
+            </p>
+            <p>
+              <strong className="font-normal text-zinc-950 dark:text-white">SEO &amp; web performance (Secondary):</strong>{' '}
+              Technical audits, keyword research, indexing, site health, search visibility, and Semrush Academy certified optimization.
+            </p>
+            <p>
+              <strong className="font-normal text-zinc-950 dark:text-white">UI/UX &amp; creative production (Secondary):</strong>{' '}
+              UI / UX prototyping in Figma, 3D exhibition booth layouts (Comic Con Africa, Decorex), brand identity, digital collateral, video and motion design.
             </p>
             <p>
               <strong className="font-normal text-zinc-950 dark:text-white">Management &amp; commercial:</strong>{' '}
-              account and project management, digital team coordination, product research and
-              management, pricing, forecasting and demand planning.
+              Account and project management, digital engineering team coordination, product forecasting, and tier-3 technical ticketing support.
             </p>
           </div>
         </div>
