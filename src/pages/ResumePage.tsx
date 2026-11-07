@@ -51,18 +51,9 @@ export const ResumePage: React.FC<ResumePageProps> = ({ onOpenPdf }) => {
             onClick={() => onOpenPdf('cv')}
             className="flex items-center gap-1.5 px-4 py-2 rounded-md text-xs font-normal tracking-wider uppercase bg-zinc-950 dark:bg-white text-white dark:text-black hover:bg-zinc-800 dark:hover:bg-zinc-200 transition-colors cursor-pointer"
           >
-            <span>View Original</span>
+            <span>View CV Document</span>
             <ArrowUpRight className="w-3.5 h-3.5" />
           </button>
-
-          <a
-            href={PERSONAL_INFO.cvPdfPath}
-            download
-            className="flex items-center gap-1.5 px-4 py-2 rounded-md border border-black/15 dark:border-white/15 text-xs font-light tracking-wider uppercase text-zinc-700 dark:text-zinc-300 hover:border-black/40 dark:hover:border-white/40 transition-colors"
-          >
-            <Download className="w-3.5 h-3.5 text-zinc-400" />
-            <span>Download</span>
-          </a>
 
           <button
             onClick={handlePrint}

@@ -11,7 +11,6 @@ export const PERSONAL_INFO = {
   email: 'brenton.travino@gmail.com',
   summary:
     'Full stack developer with 15+ years of experience engineering high-performance web applications, scalable e-commerce systems, and custom digital platforms. Blends robust front-end and back-end development with secondary specializations in digital marketing, technical SEO, and UI/UX design to deliver end-to-end digital solutions that convert.',
-  cvPdfPath: '/Brenton_Kandhai_CV.pdf',
   experienceYears: '15+',
   projectsCompleted: '40+',
   campaignCount: '20+',
