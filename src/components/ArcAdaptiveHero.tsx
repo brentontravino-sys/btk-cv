@@ -31,19 +31,23 @@ export const ArcAdaptiveHero: React.FC<ArcAdaptiveHeroProps> = ({
           <img
             src="/assets/aistudio/majesty-mountains_63853a16.jpg"
             alt="Majesty Snow Mountains"
-            className="h-full w-screen object-cover object-center opacity-50 filter contrast-[1.05] brightness-[1.02] dark:brightness-[0.88] dark:contrast-[1.15]"
+            className="h-full w-screen object-cover object-center opacity-50 filter contrast-[1.05] brightness-[1.02] dark:brightness-[0.7] dark:contrast-[1.15]"
           />
         </div>
 
         {/* Layer 2: Ethereal Rolling Mist */}
         <div
-          className="absolute inset-0 pointer-events-none mix-blend-screen opacity-30 dark:opacity-20"
+          className="absolute inset-0 pointer-events-none mix-blend-screen opacity-30 dark:opacity-10"
         >
           <div className="w-full h-full bg-gradient-to-r from-transparent via-white/20 to-transparent blur-3xl transform -rotate-1" />
         </div>
 
-        {/* Layer 3: Text Content Directly Over Background */}
-        <div className="relative z-20 px-6 sm:px-10 lg:px-12 pb-12 pt-12 sm:pt-24 flex flex-col justify-end min-h-full w-full max-w-2xl">
+        {/* Layer 2b: Dark Mode Scrim — deepens the backdrop so nav items stay legible */}
+        <div className="absolute inset-0 pointer-events-none hidden dark:block bg-black/20" />
+
+        {/* Layer 3: Text Content Directly Over Background — aligned to the page content grid */}
+        <div className="relative z-20 mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8 pb-12 pt-12 sm:pt-24 flex flex-col justify-end min-h-full">
+          <div className="w-full max-w-2xl">
             <h1 className="text-3xl sm:text-4xl lg:text-5xl tracking-tight text-zinc-950 dark:text-white leading-tight whitespace-nowrap" style={{ fontFamily: "'Outfit', sans-serif" }}>
               <span className="font-extralight">FULL STACK </span>
               <span className="font-bold">DIGITAL SOLUTIONS</span>
@@ -78,6 +82,7 @@ export const ArcAdaptiveHero: React.FC<ArcAdaptiveHeroProps> = ({
               <Briefcase className="w-3.5 h-3.5 text-zinc-500 dark:text-zinc-200" />
               <span>Portfolio</span>
             </button>
+          </div>
           </div>
         </div>
       </div>
