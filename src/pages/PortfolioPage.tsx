@@ -99,14 +99,13 @@ export const PortfolioPage: React.FC<PortfolioPageProps> = ({ onSelectProject, o
               <span>View Portfolio</span>
             </button>
 
-            <a
-              href={PERSONAL_INFO.portfolioPdfPath}
-              download
-              className="p-2 rounded-md border border-black/15 dark:border-white/15 text-zinc-600 dark:text-zinc-400 hover:text-black dark:hover:text-white transition-colors"
-              title="Download Portfolio"
+            <button
+              onClick={() => onOpenPdf('portfolio')}
+              className="p-2 rounded-md border border-black/15 dark:border-white/15 text-zinc-600 dark:text-zinc-400 hover:text-black dark:hover:text-white transition-colors cursor-pointer"
+              title="Portfolio Document"
             >
               <Download className="w-3.5 h-3.5" />
-            </a>
+            </button>
           </div>
         </div>
       </motion.div>

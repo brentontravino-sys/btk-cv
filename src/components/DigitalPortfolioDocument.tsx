@@ -1,6 +1,5 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {
-  Download,
   Printer,
   X,
   ExternalLink,
@@ -17,19 +16,15 @@ import {
   BarChart3,
   BookOpen,
 } from 'lucide-react';
-import { PERSONAL_INFO, PROJECTS, EXPERIENCES, EDUCATION_AND_CERTS } from '../data/portfolioData';
+import { PROJECTS, EXPERIENCES, EDUCATION_AND_CERTS } from '../data/portfolioData';
 
 interface DigitalPortfolioDocumentProps {
   onClose: () => void;
-  originalPdfUrl: string;
 }
 
 export const DigitalPortfolioDocument: React.FC<DigitalPortfolioDocumentProps> = ({
   onClose,
-  originalPdfUrl,
 }) => {
-  const [viewMode, setViewMode] = useState<'modern' | 'original'>('modern');
-
   const handlePrint = () => {
     window.print();
   };
@@ -66,30 +61,6 @@ export const DigitalPortfolioDocument: React.FC<DigitalPortfolioDocumentProps> =
           </div>
         </div>
 
-        {/* View Switcher Tabs */}
-        <div className="flex items-center gap-1 p-1 bg-zinc-100 dark:bg-zinc-800 rounded-lg">
-          <button
-            onClick={() => setViewMode('modern')}
-            className={`px-3 py-1.5 text-xs font-light tracking-wider uppercase rounded-md transition-colors cursor-pointer ${
-              viewMode === 'modern'
-                ? 'bg-white dark:bg-zinc-900 text-zinc-950 dark:text-white shadow-sm font-normal'
-                : 'text-zinc-500 hover:text-zinc-950 dark:hover:text-white'
-            }`}
-          >
-            New Modern UI Document
-          </button>
-          <button
-            onClick={() => setViewMode('original')}
-            className={`px-3 py-1.5 text-xs font-light tracking-wider uppercase rounded-md transition-colors cursor-pointer ${
-              viewMode === 'original'
-                ? 'bg-white dark:bg-zinc-900 text-zinc-950 dark:text-white shadow-sm font-normal'
-                : 'text-zinc-500 hover:text-zinc-950 dark:hover:text-white'
-            }`}
-          >
-            Original 20-Page PDF
-          </button>
-        </div>
-
         {/* Action Buttons */}
         <div className="flex items-center gap-2">
           <button
@@ -100,15 +71,6 @@ export const DigitalPortfolioDocument: React.FC<DigitalPortfolioDocumentProps> =
             <Printer className="w-3.5 h-3.5" />
             <span>Print / Save</span>
           </button>
-
-          <a
-            href={PERSONAL_INFO.portfolioPdfPath}
-            download="Brenton_Kandhai_Portfolio.pdf"
-            className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-md bg-zinc-950 dark:bg-white text-white dark:text-black text-xs font-light tracking-wider uppercase hover:bg-zinc-800 dark:hover:bg-zinc-200 transition-colors"
-          >
-            <Download className="w-3.5 h-3.5" />
-            <span>Download</span>
-          </a>
 
           <button
             onClick={onClose}
@@ -122,17 +84,7 @@ export const DigitalPortfolioDocument: React.FC<DigitalPortfolioDocumentProps> =
 
       {/* Main Container */}
       <div className="print-scroll flex-1 overflow-y-auto bg-zinc-100 dark:bg-[#070709] p-3 sm:p-8 print:p-0 print:bg-white">
-        {viewMode === 'original' ? (
-          /* Embedded Iframe for the original PDF */
-          <div className="w-full max-w-5xl h-full mx-auto bg-white dark:bg-zinc-900 rounded-xl overflow-hidden shadow-2xl border border-black/10 dark:border-white/10">
-            <iframe
-              src={`${originalPdfUrl}#view=FitH`}
-              className="w-full h-full border-0 min-h-[85vh]"
-              title="Brenton Kandhai - Original PDF Portfolio"
-            />
-          </div>
-        ) : (
-          /* Modern Site-Designed Portfolio Document */
+          {/* Modern Site-Designed Portfolio Document */}
           <div className="max-w-4xl mx-auto space-y-12 print:space-y-0 text-zinc-900 dark:text-zinc-100">
             {/* ==================== PAGE 1: COVER & PROFILE ==================== */}
             <article className="print-page bg-white dark:bg-[#101014] p-8 sm:p-16 rounded-2xl border border-black/[0.08] dark:border-white/[0.08] shadow-xl space-y-12">
@@ -648,7 +600,6 @@ export const DigitalPortfolioDocument: React.FC<DigitalPortfolioDocumentProps> =
               </div>
             </article>
           </div>
-        )}
       </div>
     </div>
   );

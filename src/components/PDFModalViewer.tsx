@@ -19,18 +19,13 @@ export const PDFModalViewer: React.FC<PDFModalViewerProps> = ({ type, onClose })
 
   if (!type) return null;
 
-  // When portfolio is requested, render the modern interactive & printable portfolio document with dual-view
+  // When portfolio is requested, render the modern interactive & printable portfolio document
   if (type === 'portfolio') {
-    return (
-      <DigitalPortfolioDocument
-        onClose={onClose}
-        originalPdfUrl={PERSONAL_INFO.portfolioPdfPath}
-      />
-    );
+    return <DigitalPortfolioDocument onClose={onClose} />;
   }
 
   const isCv = type === 'cv';
-  const filePath = isCv ? PERSONAL_INFO.cvPdfPath : PERSONAL_INFO.portfolioPdfPath;
+  const filePath = PERSONAL_INFO.cvPdfPath;
   const title = isCv
     ? 'Brenton T. Kandhai - Professional CV'
     : 'Brenton T. Kandhai - Multimedia Design & Marketing Portfolio';
