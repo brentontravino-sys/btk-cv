@@ -543,20 +543,45 @@ export const DigitalPortfolioDocument: React.FC<DigitalPortfolioDocumentProps> =
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                <div className="p-6 rounded-xl bg-zinc-50 dark:bg-zinc-900/50 border border-black/[0.06] dark:border-white/[0.06] space-y-2">
-                  <span className="text-[10px] font-mono text-zinc-400 uppercase">Kyalami Convention Centre &bull; 50,000+ Visitors</span>
-                  <h4 className="text-base font-normal text-zinc-950 dark:text-white">Skyworth @ Comic Con Africa</h4>
-                  <p className="text-xs font-light text-zinc-600 dark:text-zinc-400 leading-relaxed">
-                    Spearheaded 3D booth structure modeling in AutoCAD, architectural pylon signage, high-density digital gaming displays, and real-time social event broadcasting.
-                  </p>
+                <div className="rounded-xl bg-zinc-50 dark:bg-zinc-900/50 border border-black/[0.06] dark:border-white/[0.06] overflow-hidden">
+                  <div className="grid grid-cols-3 gap-0">
+                    {[
+                      '/works/graphic design/scomic con-sk1.jpg',
+                      '/works/graphic design/scomic con-sk2.jpg',
+                      '/works/graphic design/scomic con-sk3.jpg',
+                    ].map((src) => (
+                      <img
+                        key={src}
+                        src={src}
+                        alt="Skyworth @ Comic Con Africa booth build"
+                        className="w-full h-28 object-cover"
+                      />
+                    ))}
+                  </div>
+                  <div className="p-6 space-y-2">
+                    <span className="text-[10px] font-mono text-zinc-400 uppercase">Kyalami Convention Centre &bull; 50,000+ Visitors</span>
+                    <h4 className="text-base font-normal text-zinc-950 dark:text-white">Skyworth @ Comic Con Africa</h4>
+                    <p className="text-xs font-light text-zinc-600 dark:text-zinc-400 leading-relaxed">
+                      Spearheaded 3D booth structure modeling in AutoCAD, architectural pylon signage, high-density digital gaming displays, and real-time social event broadcasting.
+                    </p>
+                  </div>
                 </div>
 
-                <div className="p-6 rounded-xl bg-zinc-50 dark:bg-zinc-900/50 border border-black/[0.06] dark:border-white/[0.06] space-y-2">
-                  <span className="text-[10px] font-mono text-zinc-400 uppercase">Gallagher Convention Centre &bull; Luxury Interior Expo</span>
-                  <h4 className="text-base font-normal text-zinc-950 dark:text-white">Skyworth @ Decorex SA Expo</h4>
-                  <p className="text-xs font-light text-zinc-600 dark:text-zinc-400 leading-relaxed">
-                    Designed illuminated curved brand arches, 3D exhibition booth layouts, large-format graphics, and the high-conversion &ldquo;Win a 49-inch TV&rdquo; visitor campaign.
-                  </p>
+                <div className="rounded-xl bg-zinc-50 dark:bg-zinc-900/50 border border-black/[0.06] dark:border-white/[0.06] overflow-hidden">
+                  <div className="w-full">
+                    <img
+                      src="/works/graphic design/decorex-sk4.jpg"
+                      alt="Skyworth @ Decorex SA Expo booth design"
+                      className="w-full h-28 object-cover"
+                    />
+                  </div>
+                  <div className="p-6 space-y-2">
+                    <span className="text-[10px] font-mono text-zinc-400 uppercase">Gallagher Convention Centre &bull; Luxury Interior Expo</span>
+                    <h4 className="text-base font-normal text-zinc-950 dark:text-white">Skyworth @ Decorex SA Expo</h4>
+                    <p className="text-xs font-light text-zinc-600 dark:text-zinc-400 leading-relaxed">
+                      Designed illuminated curved brand arches, 3D exhibition booth layouts, large-format graphics, and the high-conversion &ldquo;Win a 49-inch TV&rdquo; visitor campaign.
+                    </p>
+                  </div>
                 </div>
               </div>
             </article>
