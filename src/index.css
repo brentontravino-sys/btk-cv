@@ -147,7 +147,45 @@
     padding-bottom: 2rem;
   }
 
+  .print-doc .print-page:last-child,
+  .print-doc article:last-child {
+    break-after: auto !important;
+    page-break-after: auto !important;
+  }
+
   .print-avoid-break {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  /* Un-hide the portfolio document modal and flatten it into flowing A4 pages when exporting */
+  .print-doc {
+    display: block !important;
+    position: static !important;
+    inset: auto !important;
+    overflow: visible !important;
+    background: #ffffff !important;
+    backdrop-filter: none !important;
+  }
+
+  .print-doc .print-scroll {
+    height: auto !important;
+    overflow: visible !important;
+    background: #ffffff !important;
+  }
+
+  .print-doc article {
+    background: #ffffff !important;
+    border-radius: 0 !important;
+    border-color: #d4d4d8 !important;
+    box-shadow: none !important;
+  }
+
+  .print-doc article * {
+    color: #09090b !important;
+  }
+
+  .print-doc img {
     break-inside: avoid;
     page-break-inside: avoid;
   }

@@ -51,7 +51,7 @@ export default function App() {
       {/* Main Multipage Content Area with Smooth Motion Transitions */}
       <main
         className={
-          'flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 ' +
+          'flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 print:px-0 ' +
           (activeTab === 'home' ? 'pt-0' : 'pt-[60px]')
         }
       >

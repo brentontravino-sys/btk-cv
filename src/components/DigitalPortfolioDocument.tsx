@@ -49,7 +49,7 @@ export const DigitalPortfolioDocument: React.FC<DigitalPortfolioDocumentProps> =
   ];
 
   return (
-    <div className="fixed inset-0 z-50 flex flex-col bg-zinc-950/80 backdrop-blur-md overflow-hidden animate-in fade-in duration-200">
+    <div className="print-doc fixed inset-0 z-50 flex flex-col bg-zinc-950/80 backdrop-blur-md overflow-hidden animate-in fade-in duration-200">
       {/* Top Floating Control Bar (Hidden on print) */}
       <div className="print-hide shrink-0 flex items-center justify-between px-4 sm:px-8 py-3.5 bg-white dark:bg-[#0d0d11] border-b border-black/[0.08] dark:border-white/[0.08] shadow-md z-30">
         <div className="flex items-center gap-3">
@@ -121,7 +121,7 @@ export const DigitalPortfolioDocument: React.FC<DigitalPortfolioDocumentProps> =
       </div>
 
       {/* Main Container */}
-      <div className="flex-1 overflow-y-auto bg-zinc-100 dark:bg-[#070709] p-3 sm:p-8 print:p-0 print:bg-white">
+      <div className="print-scroll flex-1 overflow-y-auto bg-zinc-100 dark:bg-[#070709] p-3 sm:p-8 print:p-0 print:bg-white">
         {viewMode === 'original' ? (
           /* Embedded Iframe for the original PDF */
           <div className="w-full max-w-5xl h-full mx-auto bg-white dark:bg-zinc-900 rounded-xl overflow-hidden shadow-2xl border border-black/10 dark:border-white/10">
