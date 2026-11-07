@@ -45,7 +45,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onOpenPdf }) => {
       >
         <div className="flex items-center gap-3">
           <span className="w-1.5 h-1.5 rounded-full bg-zinc-950 dark:bg-white" />
-          <span className="text-[11.3px] tracking-[0.25em] uppercase font-light text-zinc-500 dark:text-zinc-400">
+          <span className="text-[12.4px] tracking-[0.25em] uppercase font-light text-zinc-500 dark:text-zinc-400">
             CONTACT &bull; INQUIRIES
           </span>
         </div>
@@ -69,7 +69,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onOpenPdf }) => {
           className="md:col-span-5 space-y-10"
         >
           <div className="space-y-2">
-            <span className="text-[10.3px] tracking-[0.25em] uppercase font-light text-zinc-400">
+            <span className="text-[12.4px] tracking-[0.25em] uppercase font-light text-zinc-400">
               DIRECT REACH
             </span>
             <div className="space-y-4 pt-2">
@@ -112,7 +112,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onOpenPdf }) => {
 
           {/* PDF Triggers */}
           <div className="space-y-3 pt-6 border-t border-black/[0.06] dark:border-white/[0.06]">
-            <span className="text-[10.3px] tracking-[0.25em] uppercase font-light text-zinc-400">
+            <span className="text-[12.4px] tracking-[0.25em] uppercase font-light text-zinc-400">
               DOCUMENTS
             </span>
             <div className="flex flex-col gap-2">
@@ -178,7 +178,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onOpenPdf }) => {
             ) : (
               <form onSubmit={handleSubmit} className="space-y-5">
                 <div className="space-y-1.5">
-                  <label className="text-[10.3px] tracking-[0.2em] uppercase font-light text-zinc-400">
+                  <label className="text-[12.4px] tracking-[0.2em] uppercase font-light text-zinc-400">
                     Your Name
                   </label>
                   <input
@@ -192,7 +192,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onOpenPdf }) => {
                 </div>
 
                 <div className="space-y-1.5">
-                  <label className="text-[10.3px] tracking-[0.2em] uppercase font-light text-zinc-400">
+                  <label className="text-[12.4px] tracking-[0.2em] uppercase font-light text-zinc-400">
                     Email Address
                   </label>
                   <input
@@ -206,7 +206,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onOpenPdf }) => {
                 </div>
 
                 <div className="space-y-1.5">
-                  <label className="text-[10.3px] tracking-[0.2em] uppercase font-light text-zinc-400">
+                  <label className="text-[12.4px] tracking-[0.2em] uppercase font-light text-zinc-400">
                     Inquiry Scope
                   </label>
                   <select
@@ -239,7 +239,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onOpenPdf }) => {
                 </div>
 
                 <div className="space-y-1.5">
-                  <label className="text-[10.3px] tracking-[0.2em] uppercase font-light text-zinc-400">
+                  <label className="text-[12.4px] tracking-[0.2em] uppercase font-light text-zinc-400">
                     Message Details
                   </label>
                   <textarea

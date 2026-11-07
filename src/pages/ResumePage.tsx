@@ -34,7 +34,7 @@ export const ResumePage: React.FC<ResumePageProps> = ({ onOpenPdf }) => {
         <div>
           <div className="flex items-center gap-3">
             <span className="w-1.5 h-1.5 rounded-full bg-zinc-950 dark:bg-white" />
-            <span className="text-[11.3px] tracking-[0.25em] uppercase font-light text-zinc-500 dark:text-zinc-400">
+            <span className="text-[12.4px] tracking-[0.25em] uppercase font-light text-zinc-500 dark:text-zinc-400">
               CURRICULUM VITAE &bull; OFFICIAL
             </span>
           </div>
@@ -84,7 +84,7 @@ export const ResumePage: React.FC<ResumePageProps> = ({ onOpenPdf }) => {
               </p>
             </div>
 
-            <div className="text-[11.3px] font-mono tracking-widest uppercase text-zinc-400">
+            <div className="text-[12.4px] font-mono tracking-widest uppercase text-zinc-400">
               BTK &bull; JOHANNESBURG
             </div>
           </div>
@@ -119,7 +119,7 @@ export const ResumePage: React.FC<ResumePageProps> = ({ onOpenPdf }) => {
 
         {/* Professional Profile */}
         <div className="space-y-4">
-          <h3 className="text-[10.3px] tracking-[0.25em] uppercase font-light text-zinc-400">
+          <h3 className="text-[12.4px] tracking-[0.25em] uppercase font-light text-zinc-400">
             PROFESSIONAL PROFILE
           </h3>
           <p className="text-sm font-light leading-relaxed text-zinc-700 dark:text-zinc-300 max-w-3xl">
@@ -133,7 +133,7 @@ export const ResumePage: React.FC<ResumePageProps> = ({ onOpenPdf }) => {
 
         {/* Key Capabilities */}
         <div className="space-y-4">
-          <h3 className="text-[10.3px] tracking-[0.25em] uppercase font-light text-zinc-400">
+          <h3 className="text-[12.4px] tracking-[0.25em] uppercase font-light text-zinc-400">
             KEY CAPABILITIES
           </h3>
           <div className="space-y-3 text-xs sm:text-sm font-light text-zinc-600 dark:text-zinc-400 leading-relaxed max-w-3xl">
@@ -170,7 +170,7 @@ export const ResumePage: React.FC<ResumePageProps> = ({ onOpenPdf }) => {
 
         {/* Professional Experience */}
         <div className="space-y-8">
-          <h3 className="text-[10.3px] tracking-[0.25em] uppercase font-light text-zinc-400">
+          <h3 className="text-[12.4px] tracking-[0.25em] uppercase font-light text-zinc-400">
             PROFESSIONAL EXPERIENCE
           </h3>
 
@@ -203,7 +203,7 @@ export const ResumePage: React.FC<ResumePageProps> = ({ onOpenPdf }) => {
 
         {/* Education & Certifications */}
         <div className="space-y-6 pt-6 border-t border-black/[0.06] dark:border-white/[0.06]">
-          <h3 className="text-[10.3px] tracking-[0.25em] uppercase font-light text-zinc-400">
+          <h3 className="text-[12.4px] tracking-[0.25em] uppercase font-light text-zinc-400">
             EDUCATION &amp; CERTIFICATIONS
           </h3>
 

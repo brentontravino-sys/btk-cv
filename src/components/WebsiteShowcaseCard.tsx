@@ -140,7 +140,7 @@ export const WebsiteShowcaseCard: React.FC<WebsiteShowcaseCardProps> = ({ showca
 
       <div className="space-y-4 p-5 sm:p-6">
         <div>
-          <p className="text-[10.3px] font-mono uppercase tracking-[0.18em] text-zinc-400">
+          <p className="text-[12.4px] font-mono uppercase tracking-[0.18em] text-zinc-400">
             {showcase.category}
           </p>
           <h3 className="mt-1 text-lg font-normal tracking-tight text-zinc-950 dark:text-white">
@@ -156,7 +156,7 @@ export const WebsiteShowcaseCard: React.FC<WebsiteShowcaseCardProps> = ({ showca
               onClick={() => goTo(index)}
               aria-pressed={activeScreen === index}
               aria-label={`Show ${showcase.name} ${item.label} page`}
-              className={`rounded-md px-3 py-1 text-[10.3px] tracking-wide transition-colors cursor-pointer ${
+              className={`rounded-md px-3 py-1 text-[12.4px] tracking-wide transition-colors cursor-pointer ${
                 activeScreen === index
                   ? 'bg-zinc-950 text-white dark:bg-white dark:text-black'
                   : 'border border-black/10 text-zinc-500 hover:text-zinc-950 dark:border-white/10 dark:text-zinc-400 dark:hover:text-white'

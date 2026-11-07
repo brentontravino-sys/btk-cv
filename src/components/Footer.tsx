@@ -33,7 +33,7 @@ export const Footer: React.FC<FooterProps> = ({ setActiveTab, onOpenPdf }) => {
                 <h3 className="font-normal text-sm text-zinc-950 dark:text-white tracking-wide">
                   {PERSONAL_INFO.name}
                 </h3>
-                <p className="text-[10.3px] tracking-widest uppercase text-zinc-400">
+                <p className="text-[12.4px] tracking-widest uppercase text-zinc-400">
                   Full Stack Developer
                 </p>
               </div>
@@ -46,7 +46,7 @@ export const Footer: React.FC<FooterProps> = ({ setActiveTab, onOpenPdf }) => {
 
           {/* Col 2: Navigation */}
           <div className="space-y-3">
-            <span className="text-[10.3px] tracking-[0.25em] uppercase font-light text-zinc-400 block">
+            <span className="text-[12.4px] tracking-[0.25em] uppercase font-light text-zinc-400 block">
               SECTIONS
             </span>
             <ul className="space-y-2 text-xs">
@@ -110,7 +110,7 @@ export const Footer: React.FC<FooterProps> = ({ setActiveTab, onOpenPdf }) => {
 
           {/* Col 3: Contact */}
           <div className="space-y-3">
-            <span className="text-[10.3px] tracking-[0.25em] uppercase font-light text-zinc-400 block">
+            <span className="text-[12.4px] tracking-[0.25em] uppercase font-light text-zinc-400 block">
               LOCATION &amp; CONTACT
             </span>
             <ul className="space-y-2.5 text-xs">
@@ -146,7 +146,7 @@ export const Footer: React.FC<FooterProps> = ({ setActiveTab, onOpenPdf }) => {
 
           {/* Col 4: Verified PDF Assets */}
           <div className="space-y-3">
-            <span className="text-[10.3px] tracking-[0.25em] uppercase font-light text-zinc-400 block">
+            <span className="text-[12.4px] tracking-[0.25em] uppercase font-light text-zinc-400 block">
               ARCHIVES
             </span>
             <div className="space-y-2 text-xs">

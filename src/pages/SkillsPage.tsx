@@ -61,7 +61,7 @@ export const SkillsPage: React.FC<SkillsPageProps> = () => {
       >
         <div className="flex items-center gap-3">
           <span className="w-1.5 h-1.5 rounded-full bg-zinc-950 dark:bg-white" />
-          <span className="text-[11.3px] tracking-[0.25em] uppercase font-light text-zinc-500 dark:text-zinc-400">
+          <span className="text-[12.4px] tracking-[0.25em] uppercase font-light text-zinc-500 dark:text-zinc-400">
             TECHNICAL CAPABILITIES &bull; TOOLS MATRIX
           </span>
         </div>
@@ -153,7 +153,7 @@ export const SkillsPage: React.FC<SkillsPageProps> = () => {
                   </div>
                 </div>
 
-                <span className="text-[10.3px] font-mono uppercase tracking-widest text-zinc-400">
+                <span className="text-[12.4px] font-mono uppercase tracking-widest text-zinc-400">
                   {cat.skills.length} Platforms
                 </span>
               </div>
@@ -174,7 +174,7 @@ export const SkillsPage: React.FC<SkillsPageProps> = () => {
                     </div>
 
                     {skill.level && (
-                      <span className="text-[10.3px] font-mono px-2 py-0.5 rounded-md bg-black/5 dark:bg-white/5 text-zinc-500 dark:text-zinc-400 shrink-0 font-light">
+                      <span className="text-[12.4px] font-mono px-2 py-0.5 rounded-md bg-black/5 dark:bg-white/5 text-zinc-500 dark:text-zinc-400 shrink-0 font-light">
                         {skill.level}
                       </span>
                     )}

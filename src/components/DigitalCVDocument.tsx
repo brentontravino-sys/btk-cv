@@ -43,7 +43,7 @@ export const DigitalCVDocument: React.FC<DigitalCVDocumentProps> = ({ onClose })
             <h2 className="text-xs sm:text-sm font-normal text-zinc-950 dark:text-white leading-tight">
               Brenton T. Kandhai &bull; Curriculum Vitae
             </h2>
-            <p className="text-[10.3px] text-zinc-400 font-light">
+            <p className="text-[12.4px] text-zinc-400 font-light">
               Full Stack Developer &bull; 15+ Years Experience
             </p>
           </div>
@@ -89,7 +89,7 @@ export const DigitalCVDocument: React.FC<DigitalCVDocumentProps> = ({ onClose })
               </div>
             </div>
 
-            <div className="text-right text-[11.3px] font-mono text-zinc-400">
+            <div className="text-right text-[12.4px] font-mono text-zinc-400">
               <div>CURRICULUM VITAE</div>
               <div>OFFICIAL &bull; 2026</div>
             </div>
@@ -97,7 +97,7 @@ export const DigitalCVDocument: React.FC<DigitalCVDocumentProps> = ({ onClose })
 
           {/* Profile Summary */}
           <div className="space-y-4 py-4">
-            <div className="inline-flex items-center gap-2 text-[10.3px] tracking-[0.25em] uppercase font-light text-zinc-400">
+            <div className="inline-flex items-center gap-2 text-[12.4px] tracking-[0.25em] uppercase font-light text-zinc-400">
               <span className="w-1.5 h-1.5 rounded-full bg-zinc-950 dark:bg-white" />
               <span>PROFESSIONAL PROFILE</span>
             </div>
@@ -112,26 +112,26 @@ export const DigitalCVDocument: React.FC<DigitalCVDocumentProps> = ({ onClose })
           {/* KPI Strip */}
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 pt-4 border-t border-b border-black/[0.06] dark:border-white/[0.06] py-6">
             <div>
-              <span className="text-[10.3px] uppercase font-mono text-zinc-400 block">Experience</span>
+              <span className="text-[12.4px] uppercase font-mono text-zinc-400 block">Experience</span>
               <span className="text-2xl sm:text-3xl font-light text-zinc-950 dark:text-white">15+ Yrs</span>
             </div>
             <div>
-              <span className="text-[10.3px] uppercase font-mono text-zinc-400 block">Live Platforms</span>
+              <span className="text-[12.4px] uppercase font-mono text-zinc-400 block">Live Platforms</span>
               <span className="text-2xl sm:text-3xl font-light text-zinc-950 dark:text-white">30+ Delivered</span>
             </div>
             <div>
-              <span className="text-[10.3px] uppercase font-mono text-zinc-400 block">Projects</span>
+              <span className="text-[12.4px] uppercase font-mono text-zinc-400 block">Projects</span>
               <span className="text-2xl sm:text-3xl font-light text-zinc-950 dark:text-white">40+ Completed</span>
             </div>
             <div>
-              <span className="text-[10.3px] uppercase font-mono text-zinc-400 block">Campaigns</span>
+              <span className="text-[12.4px] uppercase font-mono text-zinc-400 block">Campaigns</span>
               <span className="text-2xl sm:text-3xl font-light text-zinc-950 dark:text-white">20+ Managed</span>
             </div>
           </div>
 
           {/* Core Competencies */}
           <div className="space-y-3">
-            <span className="text-[10.3px] tracking-[0.25em] uppercase font-light text-zinc-400">
+            <span className="text-[12.4px] tracking-[0.25em] uppercase font-light text-zinc-400">
               Core Competencies
             </span>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-2 text-sm font-light">
@@ -162,7 +162,7 @@ export const DigitalCVDocument: React.FC<DigitalCVDocumentProps> = ({ onClose })
         {/* ==================== PAGE 2: PROFESSIONAL EXPERIENCE ==================== */}
         <article className="print-page bg-white dark:bg-[#101014] p-8 sm:p-16 rounded-2xl border border-black/[0.08] dark:border-white/[0.08] shadow-xl space-y-8">
           <div className="border-b border-black/[0.08] dark:border-white/[0.08] pb-4">
-            <span className="text-[10.3px] tracking-[0.25em] uppercase font-light text-zinc-400">
+            <span className="text-[12.4px] tracking-[0.25em] uppercase font-light text-zinc-400">
               EXPERIENCE &bull; 01
             </span>
             <h3 className="text-2xl sm:text-3xl font-extralight tracking-tight text-zinc-950 dark:text-white mt-1">
@@ -190,7 +190,7 @@ export const DigitalCVDocument: React.FC<DigitalCVDocumentProps> = ({ onClose })
                 </ul>
                 <div className="flex flex-wrap gap-1.5">
                   {exp.tags.map((t) => (
-                    <span key={t} className="px-2 py-0.5 rounded-full border border-black/[0.06] dark:border-white/[0.08] text-[9.3px] font-mono uppercase tracking-wider text-zinc-500 dark:text-zinc-400">
+                    <span key={t} className="px-2 py-0.5 rounded-full border border-black/[0.06] dark:border-white/[0.08] text-[10.2px] font-mono uppercase tracking-wider text-zinc-500 dark:text-zinc-400">
                       {t}
                     </span>
                   ))}
@@ -206,7 +206,7 @@ export const DigitalCVDocument: React.FC<DigitalCVDocumentProps> = ({ onClose })
         {/* ==================== PAGE 3: TECHNICAL SKILLS ==================== */}
         <article className="print-page bg-white dark:bg-[#101014] p-8 sm:p-16 rounded-2xl border border-black/[0.08] dark:border-white/[0.08] shadow-xl space-y-8">
           <div className="border-b border-black/[0.08] dark:border-white/[0.08] pb-4">
-            <span className="text-[10.3px] tracking-[0.25em] uppercase font-light text-zinc-400">
+            <span className="text-[12.4px] tracking-[0.25em] uppercase font-light text-zinc-400">
               CAPABILITIES &bull; 02
             </span>
             <h3 className="text-2xl sm:text-3xl font-extralight tracking-tight text-zinc-950 dark:text-white mt-1">
@@ -223,9 +223,9 @@ export const DigitalCVDocument: React.FC<DigitalCVDocumentProps> = ({ onClose })
                 </div>
                 <div className="space-y-1.5">
                   {cat.skills.map((s) => (
-                    <div key={s.name} className="flex items-center justify-between gap-2 text-[11.3px]">
+                    <div key={s.name} className="flex items-center justify-between gap-2 text-[12.4px]">
                       <span className="font-light text-zinc-700 dark:text-zinc-300">{s.name}</span>
-                      <span className="font-mono text-[9.3px] uppercase tracking-wider text-zinc-400 shrink-0">{s.level}</span>
+                      <span className="font-mono text-[10.2px] uppercase tracking-wider text-zinc-400 shrink-0">{s.level}</span>
                     </div>
                   ))}
                 </div>
@@ -237,7 +237,7 @@ export const DigitalCVDocument: React.FC<DigitalCVDocumentProps> = ({ onClose })
         {/* ==================== PAGE 4: EDUCATION & CERTIFICATIONS ==================== */}
         <article className="print-page bg-white dark:bg-[#101014] p-8 sm:p-16 rounded-2xl border border-black/[0.08] dark:border-white/[0.08] shadow-xl space-y-8">
           <div className="border-b border-black/[0.08] dark:border-white/[0.08] pb-4">
-            <span className="text-[10.3px] tracking-[0.25em] uppercase font-light text-zinc-400">
+            <span className="text-[12.4px] tracking-[0.25em] uppercase font-light text-zinc-400">
               CREDENTIALS &bull; 03
             </span>
             <h3 className="text-2xl sm:text-3xl font-extralight tracking-tight text-zinc-950 dark:text-white mt-1">
@@ -256,8 +256,8 @@ export const DigitalCVDocument: React.FC<DigitalCVDocumentProps> = ({ onClose })
                   </div>
                 </div>
                 <div className="text-right shrink-0">
-                  <div className="font-mono text-[10.3px] uppercase tracking-wider text-zinc-400">{cert.issuer}</div>
-                  <div className="font-mono text-[10.3px] text-zinc-900 dark:text-white">{cert.year}</div>
+                  <div className="font-mono text-[12.4px] uppercase tracking-wider text-zinc-400">{cert.issuer}</div>
+                  <div className="font-mono text-[12.4px] text-zinc-900 dark:text-white">{cert.year}</div>
                 </div>
               </div>
             ))}
@@ -268,7 +268,7 @@ export const DigitalCVDocument: React.FC<DigitalCVDocumentProps> = ({ onClose })
             <div>
               <strong className="font-normal text-zinc-950 dark:text-white">Available:</strong> Full-time &bull; Contract &bull; Remote / On-site (Johannesburg, SA)
             </div>
-            <div className="font-mono text-[10.3px] text-zinc-400">
+            <div className="font-mono text-[12.4px] text-zinc-400">
               DOCUMENT CERTIFIED &bull; BRENTON T. KANDHAI
             </div>
           </div>
