@@ -148,7 +148,7 @@ export const TechnicalArchitectureShowcase: React.FC<TechnicalArchitectureShowca
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 border-b border-black/[0.06] dark:border-white/[0.08] pb-6">
         <div className="space-y-2">
-          <div className="flex items-center gap-2 text-[10px] tracking-[0.25em] uppercase font-light text-zinc-400">
+          <div className="flex items-center gap-2 text-[10.3px] tracking-[0.25em] uppercase font-light text-zinc-400">
             <span className="w-1.5 h-1.5 rounded-full bg-zinc-950 dark:bg-white" />
             <span>PRIMARY DISCIPLINE &bull; SYSTEMS ENGINEERING</span>
           </div>
@@ -187,7 +187,7 @@ export const TechnicalArchitectureShowcase: React.FC<TechnicalArchitectureShowca
         <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6 pb-6 border-b border-black/[0.06] dark:border-white/[0.06]">
           <div className="space-y-2">
             <div className="flex flex-wrap items-center gap-2">
-              <span className="text-[10px] font-mono tracking-wider uppercase px-2 py-0.5 rounded bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-300">
+              <span className="text-[10.3px] font-mono tracking-wider uppercase px-2 py-0.5 rounded bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-300">
                 {currentSystem.badge}
               </span>
               <span className="text-zinc-400 text-xs">&bull;</span>
@@ -221,7 +221,7 @@ export const TechnicalArchitectureShowcase: React.FC<TechnicalArchitectureShowca
         <div className="space-y-2">
           <div className="flex items-center justify-between text-xs text-zinc-400 font-light">
             <span>Select System View / Architecture Module:</span>
-            <span className="font-mono text-[10px]">
+            <span className="font-mono text-[10.3px]">
               {currentScreenIdx + 1} of {currentSystem.screens.length}
             </span>
           </div>
@@ -251,7 +251,7 @@ export const TechnicalArchitectureShowcase: React.FC<TechnicalArchitectureShowca
               <span className="w-2.5 h-2.5 rounded-full bg-red-500/80 inline-block" />
               <span className="w-2.5 h-2.5 rounded-full bg-yellow-500/80 inline-block" />
               <span className="w-2.5 h-2.5 rounded-full bg-green-500/80 inline-block" />
-              <span className="ml-3 font-mono text-[11px] text-zinc-400 hidden sm:inline">
+              <span className="ml-3 font-mono text-[11.3px] text-zinc-400 hidden sm:inline">
                 {currentSystem.id === 'flow-ops-nexus' && 'https://flow-optimal-nexus-pro.base44.app'}
                 {currentSystem.id === 'btv-bos-platform' && 'https://btv-bos.base44.app'}
                 {currentSystem.id === 'ai-bos-architecture' && 'topology://ai-bos.distributed.cluster'}
@@ -260,7 +260,7 @@ export const TechnicalArchitectureShowcase: React.FC<TechnicalArchitectureShowca
             </div>
 
             <div className="flex items-center gap-3">
-              <span className="text-[10px] font-mono text-zinc-400">
+              <span className="text-[10.3px] font-mono text-zinc-400">
                 {currentScreen.label}
               </span>
               <button
@@ -299,7 +299,7 @@ export const TechnicalArchitectureShowcase: React.FC<TechnicalArchitectureShowca
             </p>
             <div className="flex items-center gap-2 shrink-0">
               {currentSystem.tools.slice(0, 3).map((t, idx) => (
-                <span key={idx} className="text-[10px] font-mono text-zinc-400">
+                <span key={idx} className="text-[10.3px] font-mono text-zinc-400">
                   #{t}
                 </span>
               ))}
@@ -314,12 +314,12 @@ export const TechnicalArchitectureShowcase: React.FC<TechnicalArchitectureShowca
               key={i}
               className="p-3.5 rounded-lg bg-zinc-50 dark:bg-zinc-900/50 border border-black/[0.04] dark:border-white/[0.04]"
             >
-              <span className="text-[10px] font-mono uppercase text-zinc-400 block">{m.label}</span>
+              <span className="text-[10.3px] font-mono uppercase text-zinc-400 block">{m.label}</span>
               <span className="text-sm font-medium text-zinc-950 dark:text-white mt-0.5 block">{m.value}</span>
             </div>
           ))}
           <div className="p-3.5 rounded-lg bg-zinc-50 dark:bg-zinc-900/50 border border-black/[0.04] dark:border-white/[0.04]">
-            <span className="text-[10px] font-mono uppercase text-zinc-400 block">Screens in Suite</span>
+            <span className="text-[10.3px] font-mono uppercase text-zinc-400 block">Screens in Suite</span>
             <span className="text-sm font-medium text-zinc-950 dark:text-white mt-0.5 block">{currentSystem.screens.length} Screens</span>
           </div>
         </div>

@@ -117,7 +117,7 @@ export const Navbar: React.FC<NavbarProps> = ({
               <div className="hidden lg:flex items-center gap-2">
                 <button
                   onClick={() => onOpenPdf('cv')}
-                  className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-md border border-black/10 dark:border-white/10 hover:border-black/30 dark:hover:border-white/30 text-[11px] tracking-wider uppercase text-zinc-600 dark:text-zinc-400 hover:text-black dark:hover:text-white transition-all cursor-pointer bg-white/40 dark:bg-zinc-900/40 backdrop-blur-sm"
+                  className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-md border border-black/10 dark:border-white/10 hover:border-black/30 dark:hover:border-white/30 text-[11.3px] tracking-wider uppercase text-zinc-600 dark:text-zinc-400 hover:text-black dark:hover:text-white transition-all cursor-pointer bg-white/40 dark:bg-zinc-900/40 backdrop-blur-sm"
                   title="View original verified CV"
                 >
                   <span>CV</span>
@@ -126,7 +126,7 @@ export const Navbar: React.FC<NavbarProps> = ({
 
                 <button
                   onClick={() => onOpenPdf('portfolio')}
-                  className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-md border border-black/10 dark:border-white/10 hover:border-black/30 dark:hover:border-white/30 text-[11px] tracking-wider uppercase text-zinc-600 dark:text-zinc-400 hover:text-black dark:hover:text-white transition-all cursor-pointer bg-white/40 dark:bg-zinc-900/40 backdrop-blur-sm"
+                  className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-md border border-black/10 dark:border-white/10 hover:border-black/30 dark:hover:border-white/30 text-[11.3px] tracking-wider uppercase text-zinc-600 dark:text-zinc-400 hover:text-black dark:hover:text-white transition-all cursor-pointer bg-white/40 dark:bg-zinc-900/40 backdrop-blur-sm"
                   title="View original Portfolio"
                 >
                   <span>Portfolio</span>

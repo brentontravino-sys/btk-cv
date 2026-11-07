@@ -35,6 +35,8 @@
     color-scheme: light;
     background-color: var(--bg-page);
     color: var(--text-main);
+    /* Global type scale: +3% on the 16px root, so every rem-based text utility grows with it */
+    font-size: 16.5px;
   }
 
   html.dark {
@@ -43,7 +45,7 @@
 
   body {
     font-family: 'Google Sans', sans-serif;
-    font-size: 15px;
+    font-size: 0.9375rem;
     background-color: var(--bg-page);
     color: var(--text-main);
     transition: background-color 0.4s ease, color 0.4s ease;

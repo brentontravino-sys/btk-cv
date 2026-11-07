@@ -74,7 +74,7 @@ export const PortfolioPage: React.FC<PortfolioPageProps> = ({ onSelectProject, o
       >
         <div className="flex items-center gap-3">
           <span className="w-1.5 h-1.5 rounded-full bg-zinc-950 dark:bg-white" />
-          <span className="text-[11px] tracking-[0.25em] uppercase font-light text-zinc-500 dark:text-zinc-400">
+          <span className="text-[11.3px] tracking-[0.25em] uppercase font-light text-zinc-500 dark:text-zinc-400">
             SELECTED WORKS &bull; CASE ARCHIVE
           </span>
         </div>
@@ -115,7 +115,7 @@ export const PortfolioPage: React.FC<PortfolioPageProps> = ({ onSelectProject, o
 
       <section aria-labelledby="website-showcases-heading" className="space-y-8">
         <div className="space-y-2">
-          <div className="flex items-center gap-2 text-[10px] tracking-[0.25em] uppercase font-light text-zinc-400">
+          <div className="flex items-center gap-2 text-[10.3px] tracking-[0.25em] uppercase font-light text-zinc-400">
             <span className="w-1.5 h-1.5 rounded-full bg-zinc-950 dark:bg-white" />
             <span>Website Design &bull; Selected Screens</span>
           </div>
@@ -140,7 +140,7 @@ export const PortfolioPage: React.FC<PortfolioPageProps> = ({ onSelectProject, o
       {/* Brand, Graphic Design & Digital Publishing Showcase (User Assets) */}
       <section aria-labelledby="design-showcases-heading" className="space-y-8">
         <div className="space-y-2">
-          <div className="flex items-center gap-2 text-[10px] tracking-[0.25em] uppercase font-light text-zinc-400">
+          <div className="flex items-center gap-2 text-[10.3px] tracking-[0.25em] uppercase font-light text-zinc-400">
             <span className="w-1.5 h-1.5 rounded-full bg-zinc-950 dark:bg-white" />
             <span>Design, Campaigns &amp; Publishing (Secondary)</span>
           </div>
@@ -173,12 +173,12 @@ export const PortfolioPage: React.FC<PortfolioPageProps> = ({ onSelectProject, o
                       referrerPolicy="no-referrer"
                       className="max-h-full max-w-full object-contain group-hover:scale-105 transition-transform duration-300"
                     />
-                    <div className="absolute top-2.5 right-2.5 px-2 py-0.5 rounded bg-black/75 backdrop-blur-sm text-[10px] font-mono text-white">
+                    <div className="absolute top-2.5 right-2.5 px-2 py-0.5 rounded bg-black/75 backdrop-blur-sm text-[10.3px] font-mono text-white">
                       3 Master Assets
                     </div>
                   </div>
                   <div>
-                    <span className="text-[10px] uppercase font-mono text-zinc-400 block">Surgical MedTech &bull; Branding</span>
+                    <span className="text-[10.3px] uppercase font-mono text-zinc-400 block">Surgical MedTech &bull; Branding</span>
                     <h3 className="text-base font-normal text-zinc-950 dark:text-white group-hover:underline">
                       Chronos Medical &bull; DuraFrame Campaign
                     </h3>
@@ -214,12 +214,12 @@ export const PortfolioPage: React.FC<PortfolioPageProps> = ({ onSelectProject, o
                       referrerPolicy="no-referrer"
                       className="max-h-full max-w-full object-contain group-hover:scale-105 transition-transform duration-300"
                     />
-                    <div className="absolute top-2.5 right-2.5 px-2 py-0.5 rounded bg-black/75 backdrop-blur-sm text-[10px] font-mono text-white">
+                    <div className="absolute top-2.5 right-2.5 px-2 py-0.5 rounded bg-black/75 backdrop-blur-sm text-[10.3px] font-mono text-white">
                       5-Part Story Series
                     </div>
                   </div>
                   <div>
-                    <span className="text-[10px] uppercase font-mono text-zinc-400 block">Higher Ed &bull; Mobile Campaign</span>
+                    <span className="text-[10.3px] uppercase font-mono text-zinc-400 block">Higher Ed &bull; Mobile Campaign</span>
                     <h3 className="text-base font-normal text-zinc-950 dark:text-white group-hover:underline">
                       Wits University &bull; Open Day 2025
                     </h3>
@@ -266,12 +266,12 @@ export const PortfolioPage: React.FC<PortfolioPageProps> = ({ onSelectProject, o
                         className="w-full h-full object-cover rounded"
                       />
                     </div>
-                    <div className="absolute top-2.5 right-2.5 px-2 py-0.5 rounded bg-black/85 backdrop-blur-sm text-[10px] font-mono text-white">
+                    <div className="absolute top-2.5 right-2.5 px-2 py-0.5 rounded bg-black/85 backdrop-blur-sm text-[10.3px] font-mono text-white">
                       11 Book Covers
                     </div>
                   </div>
                   <div>
-                    <span className="text-[10px] uppercase font-mono text-zinc-400 block">Editorial &bull; Digital Publishing</span>
+                    <span className="text-[10.3px] uppercase font-mono text-zinc-400 block">Editorial &bull; Digital Publishing</span>
                     <h3 className="text-base font-normal text-zinc-950 dark:text-white group-hover:underline">
                       Commercial E-Book &amp; Guide Collection
                     </h3>
@@ -380,7 +380,7 @@ export const PortfolioPage: React.FC<PortfolioPageProps> = ({ onSelectProject, o
                     </div>
                   )}
 
-                  <div className="flex items-center justify-between text-[10px] font-mono text-zinc-400">
+                  <div className="flex items-center justify-between text-[10.3px] font-mono text-zinc-400">
                     <span className="uppercase">{project.categoryLabel}</span>
                     {project.displayUrl && (
                       <span className="hover:text-black dark:hover:text-white flex items-center gap-1">
@@ -406,7 +406,7 @@ export const PortfolioPage: React.FC<PortfolioPageProps> = ({ onSelectProject, o
                       {project.metrics.slice(0, 2).map((m, i) => (
                         <div
                           key={i}
-                          className="p-2 rounded-md bg-zinc-50 dark:bg-zinc-900/50 border border-black/[0.04] dark:border-white/[0.04] text-[10px]"
+                          className="p-2 rounded-md bg-zinc-50 dark:bg-zinc-900/50 border border-black/[0.04] dark:border-white/[0.04] text-[10.3px]"
                         >
                           <span className="text-zinc-400 block uppercase font-mono">{m.label}</span>
                           <span className="font-medium text-zinc-900 dark:text-zinc-100">{m.value}</span>
@@ -421,7 +421,7 @@ export const PortfolioPage: React.FC<PortfolioPageProps> = ({ onSelectProject, o
                     {project.tools.slice(0, 2).map((t, i) => (
                       <span
                         key={i}
-                        className="text-[10px] px-2 py-0.5 rounded-md bg-zinc-100 dark:bg-zinc-800 text-zinc-500 font-light"
+                        className="text-[10.3px] px-2 py-0.5 rounded-md bg-zinc-100 dark:bg-zinc-800 text-zinc-500 font-light"
                       >
                         {t}
                       </span>

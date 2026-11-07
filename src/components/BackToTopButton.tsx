@@ -38,7 +38,7 @@ export const BackToTopButton: React.FC = () => {
                 animate={{ opacity: 1, x: 0 }}
                 exit={{ opacity: 0, x: 8 }}
                 transition={{ duration: 0.15 }}
-                className="hidden sm:flex items-center gap-1 px-2.5 py-1 rounded-md bg-zinc-950 text-white dark:bg-white dark:text-black text-[10px] font-mono tracking-wider shadow-md pointer-events-none select-none"
+                className="hidden sm:flex items-center gap-1 px-2.5 py-1 rounded-md bg-zinc-950 text-white dark:bg-white dark:text-black text-[10.3px] font-mono tracking-wider shadow-md pointer-events-none select-none"
               >
                 <span>TOP</span>
                 <span className="opacity-40">&bull;</span>

@@ -55,7 +55,7 @@ export const DigitalPortfolioDocument: React.FC<DigitalPortfolioDocumentProps> =
             <h2 className="text-xs sm:text-sm font-normal text-zinc-950 dark:text-white leading-tight">
               Brenton T. Kandhai &bull; Comprehensive Portfolio
             </h2>
-            <p className="text-[10px] text-zinc-400 font-light">
+            <p className="text-[10.3px] text-zinc-400 font-light">
               Full Stack Developer &bull; 15+ Years Experience
             </p>
           </div>
@@ -103,7 +103,7 @@ export const DigitalPortfolioDocument: React.FC<DigitalPortfolioDocumentProps> =
                   </div>
                 </div>
 
-                <div className="text-right text-[11px] font-mono text-zinc-400">
+                <div className="text-right text-[11.3px] font-mono text-zinc-400">
                   <div>OFFICIAL PORTFOLIO</div>
                   <div>2026 EDITION</div>
                 </div>
@@ -111,7 +111,7 @@ export const DigitalPortfolioDocument: React.FC<DigitalPortfolioDocumentProps> =
 
               {/* Cover Hero Statement */}
               <div className="space-y-4 py-6">
-                <div className="inline-flex items-center gap-2 text-[10px] tracking-[0.25em] uppercase font-light text-zinc-400">
+                <div className="inline-flex items-center gap-2 text-[10.3px] tracking-[0.25em] uppercase font-light text-zinc-400">
                   <span className="w-1.5 h-1.5 rounded-full bg-zinc-950 dark:bg-white" />
                   <span>EXECUTIVE OVERVIEW</span>
                 </div>
@@ -126,19 +126,19 @@ export const DigitalPortfolioDocument: React.FC<DigitalPortfolioDocumentProps> =
               {/* KPI Strip */}
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 pt-4 border-t border-b border-black/[0.06] dark:border-white/[0.06] py-6">
                 <div>
-                  <span className="text-[10px] uppercase font-mono text-zinc-400 block">Experience</span>
+                  <span className="text-[10.3px] uppercase font-mono text-zinc-400 block">Experience</span>
                   <span className="text-2xl sm:text-3xl font-light text-zinc-950 dark:text-white">15+ Yrs</span>
                 </div>
                 <div>
-                  <span className="text-[10px] uppercase font-mono text-zinc-400 block">Web Platforms</span>
+                  <span className="text-[10.3px] uppercase font-mono text-zinc-400 block">Web Platforms</span>
                   <span className="text-2xl sm:text-3xl font-light text-zinc-950 dark:text-white">35+ Live</span>
                 </div>
                 <div>
-                  <span className="text-[10px] uppercase font-mono text-zinc-400 block">Site Health</span>
+                  <span className="text-[10.3px] uppercase font-mono text-zinc-400 block">Site Health</span>
                   <span className="text-2xl sm:text-3xl font-light text-zinc-950 dark:text-white">90%+</span>
                 </div>
                 <div>
-                  <span className="text-[10px] uppercase font-mono text-zinc-400 block">National Brands</span>
+                  <span className="text-[10.3px] uppercase font-mono text-zinc-400 block">National Brands</span>
                   <span className="text-2xl sm:text-3xl font-light text-zinc-950 dark:text-white">Skyworth, Wits</span>
                 </div>
               </div>
@@ -154,7 +154,7 @@ export const DigitalPortfolioDocument: React.FC<DigitalPortfolioDocumentProps> =
             {/* ==================== PAGE 2: CORE DISCIPLINES & ARCHITECTURE ==================== */}
             <article className="print-page bg-white dark:bg-[#101014] p-8 sm:p-16 rounded-2xl border border-black/[0.08] dark:border-white/[0.08] shadow-xl space-y-10">
               <div className="border-b border-black/[0.08] dark:border-white/[0.08] pb-4">
-                <span className="text-[10px] tracking-[0.25em] uppercase font-light text-zinc-400">
+                <span className="text-[10.3px] tracking-[0.25em] uppercase font-light text-zinc-400">
                   DISCIPLINES &bull; 01
                 </span>
                 <h3 className="text-2xl sm:text-3xl font-extralight tracking-tight text-zinc-950 dark:text-white mt-1">
@@ -216,7 +216,7 @@ export const DigitalPortfolioDocument: React.FC<DigitalPortfolioDocumentProps> =
             {/* ==================== PAGE 2B: TECHNICAL ARCHITECTURE & SYSTEMS ENGINEERING ==================== */}
             <article className="print-page bg-white dark:bg-[#101014] p-8 sm:p-16 rounded-2xl border border-black/[0.08] dark:border-white/[0.08] shadow-xl space-y-10">
               <div className="border-b border-black/[0.08] dark:border-white/[0.08] pb-4">
-                <span className="text-[10px] tracking-[0.25em] uppercase font-light text-zinc-400">
+                <span className="text-[10.3px] tracking-[0.25em] uppercase font-light text-zinc-400">
                   SYSTEMS ENGINEERING &bull; 02
                 </span>
                 <h3 className="text-2xl sm:text-3xl font-extralight tracking-tight text-zinc-950 dark:text-white mt-1">
@@ -231,7 +231,7 @@ export const DigitalPortfolioDocument: React.FC<DigitalPortfolioDocumentProps> =
               <div className="p-6 rounded-xl bg-zinc-50 dark:bg-zinc-900/40 border border-black/[0.06] dark:border-white/[0.06] space-y-4">
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-black/[0.06] dark:border-white/[0.06] pb-3">
                   <div>
-                    <span className="text-[10px] font-mono uppercase text-zinc-400 block">Workflow Orchestration Engine</span>
+                    <span className="text-[10.3px] font-mono uppercase text-zinc-400 block">Workflow Orchestration Engine</span>
                     <h4 className="text-base font-normal text-zinc-950 dark:text-white">
                       Flow Ops (Optimal Nexus Pro)
                     </h4>
@@ -272,7 +272,7 @@ export const DigitalPortfolioDocument: React.FC<DigitalPortfolioDocumentProps> =
               <div className="p-6 rounded-xl bg-zinc-50 dark:bg-zinc-900/40 border border-black/[0.06] dark:border-white/[0.06] space-y-4">
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-black/[0.06] dark:border-white/[0.06] pb-3">
                   <div>
-                    <span className="text-[10px] font-mono uppercase text-zinc-400 block">Enterprise AI Operating System</span>
+                    <span className="text-[10.3px] font-mono uppercase text-zinc-400 block">Enterprise AI Operating System</span>
                     <h4 className="text-base font-normal text-zinc-950 dark:text-white">
                       BTV BOS - Complete Enterprise ERP
                     </h4>
@@ -312,7 +312,7 @@ export const DigitalPortfolioDocument: React.FC<DigitalPortfolioDocumentProps> =
               {/* System 3: AI BOS Blueprints & Atrium Hub */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="p-5 rounded-xl bg-zinc-50 dark:bg-zinc-900/40 border border-black/[0.06] dark:border-white/[0.06] space-y-3">
-                  <span className="text-[10px] font-mono uppercase text-zinc-400 block">Distributed AI Topology</span>
+                  <span className="text-[10.3px] font-mono uppercase text-zinc-400 block">Distributed AI Topology</span>
                   <h4 className="text-sm font-normal text-zinc-950 dark:text-white">AI BOS Architecture Blueprints</h4>
                   <div className="rounded-lg overflow-hidden border border-black/[0.08] dark:border-white/[0.08] bg-zinc-950 h-36">
                     <img
@@ -321,13 +321,13 @@ export const DigitalPortfolioDocument: React.FC<DigitalPortfolioDocumentProps> =
                       className="w-full h-full object-contain"
                     />
                   </div>
-                  <p className="text-[11px] font-light text-zinc-500 leading-relaxed">
+                  <p className="text-[11.3px] font-light text-zinc-500 leading-relaxed">
                     4-part architectural blueprint series detailing multi-agent coordination, vector caching, and zero-downtime microservices clusters.
                   </p>
                 </div>
 
                 <div className="p-5 rounded-xl bg-zinc-50 dark:bg-zinc-900/40 border border-black/[0.06] dark:border-white/[0.06] space-y-3">
-                  <span className="text-[10px] font-mono uppercase text-zinc-400 block">Collaborative Operations</span>
+                  <span className="text-[10.3px] font-mono uppercase text-zinc-400 block">Collaborative Operations</span>
                   <h4 className="text-sm font-normal text-zinc-950 dark:text-white">Atrium Operations &amp; Knowledge Hub</h4>
                   <div className="rounded-lg overflow-hidden border border-black/[0.08] dark:border-white/[0.08] bg-zinc-950 h-36">
                     <img
@@ -336,7 +336,7 @@ export const DigitalPortfolioDocument: React.FC<DigitalPortfolioDocumentProps> =
                       className="w-full h-full object-contain"
                     />
                   </div>
-                  <p className="text-[11px] font-light text-zinc-500 leading-relaxed">
+                  <p className="text-[11.3px] font-light text-zinc-500 leading-relaxed">
                     Real-time workspace canvas with fluid node-based content linking, collaborative permissions, and team active presence.
                   </p>
                 </div>
@@ -346,7 +346,7 @@ export const DigitalPortfolioDocument: React.FC<DigitalPortfolioDocumentProps> =
             {/* ==================== PAGE 3: BRAND IDENTITY & MEDTECH DESIGN ==================== */}
             <article className="print-page bg-white dark:bg-[#101014] p-8 sm:p-16 rounded-2xl border border-black/[0.08] dark:border-white/[0.08] shadow-xl space-y-8">
               <div className="border-b border-black/[0.08] dark:border-white/[0.08] pb-4">
-                <span className="text-[10px] tracking-[0.25em] uppercase font-light text-zinc-400">
+                <span className="text-[10.3px] tracking-[0.25em] uppercase font-light text-zinc-400">
                   DESIGN &amp; CAMPAIGNS &bull; 02
                 </span>
                 <h3 className="text-2xl sm:text-3xl font-extralight tracking-tight text-zinc-950 dark:text-white mt-1">
@@ -366,7 +366,7 @@ export const DigitalPortfolioDocument: React.FC<DigitalPortfolioDocumentProps> =
                       className="max-h-full max-w-full object-contain"
                     />
                   </div>
-                  <p className="text-[11px] font-mono text-zinc-400 text-center">01. Master Brand Identity (1080x1080)</p>
+                  <p className="text-[11.3px] font-mono text-zinc-400 text-center">01. Master Brand Identity (1080x1080)</p>
                 </div>
 
                 <div className="space-y-2">
@@ -377,7 +377,7 @@ export const DigitalPortfolioDocument: React.FC<DigitalPortfolioDocumentProps> =
                       className="max-h-full max-w-full object-contain"
                     />
                   </div>
-                  <p className="text-[11px] font-mono text-zinc-400 text-center">02. DuraFrame Titanium System (1080x1080)</p>
+                  <p className="text-[11.3px] font-mono text-zinc-400 text-center">02. DuraFrame Titanium System (1080x1080)</p>
                 </div>
 
                 <div className="space-y-2">
@@ -388,7 +388,7 @@ export const DigitalPortfolioDocument: React.FC<DigitalPortfolioDocumentProps> =
                       className="max-h-full max-w-full object-contain"
                     />
                   </div>
-                  <p className="text-[11px] font-mono text-zinc-400 text-center">03. Interactive Story (1080x1920)</p>
+                  <p className="text-[11.3px] font-mono text-zinc-400 text-center">03. Interactive Story (1080x1920)</p>
                 </div>
               </div>
 
@@ -400,7 +400,7 @@ export const DigitalPortfolioDocument: React.FC<DigitalPortfolioDocumentProps> =
             {/* ==================== PAGE 4: WITS UNIVERSITY OPEN DAY 2025 SHOWCASE ==================== */}
             <article className="print-page bg-white dark:bg-[#101014] p-8 sm:p-16 rounded-2xl border border-black/[0.08] dark:border-white/[0.08] shadow-xl space-y-8">
               <div className="border-b border-black/[0.08] dark:border-white/[0.08] pb-4">
-                <span className="text-[10px] tracking-[0.25em] uppercase font-light text-zinc-400">
+                <span className="text-[10.3px] tracking-[0.25em] uppercase font-light text-zinc-400">
                   MOBILE STORIES &bull; 03
                 </span>
                 <h3 className="text-2xl sm:text-3xl font-extralight tracking-tight text-zinc-950 dark:text-white mt-1">
@@ -427,7 +427,7 @@ export const DigitalPortfolioDocument: React.FC<DigitalPortfolioDocumentProps> =
                         className="w-full h-full object-cover"
                       />
                     </div>
-                    <p className="text-[10px] font-mono text-zinc-400 text-center truncate">{story.title}</p>
+                    <p className="text-[10.3px] font-mono text-zinc-400 text-center truncate">{story.title}</p>
                   </div>
                 ))}
               </div>
@@ -440,7 +440,7 @@ export const DigitalPortfolioDocument: React.FC<DigitalPortfolioDocumentProps> =
             {/* ==================== PAGE 5: DIGITAL PUBLISHING & E-BOOK COLLECTION ==================== */}
             <article className="print-page bg-white dark:bg-[#101014] p-8 sm:p-16 rounded-2xl border border-black/[0.08] dark:border-white/[0.08] shadow-xl space-y-8">
               <div className="border-b border-black/[0.08] dark:border-white/[0.08] pb-4">
-                <span className="text-[10px] tracking-[0.25em] uppercase font-light text-zinc-400">
+                <span className="text-[10.3px] tracking-[0.25em] uppercase font-light text-zinc-400">
                   DIGITAL PUBLISHING &bull; 04
                 </span>
                 <h3 className="text-2xl sm:text-3xl font-extralight tracking-tight text-zinc-950 dark:text-white mt-1">
@@ -462,7 +462,7 @@ export const DigitalPortfolioDocument: React.FC<DigitalPortfolioDocumentProps> =
                       />
                     </div>
                     <div>
-                      <span className="text-[9px] uppercase font-mono text-zinc-400 block">{book.tag}</span>
+                      <span className="text-[9.3px] uppercase font-mono text-zinc-400 block">{book.tag}</span>
                       <h4 className="text-xs font-normal text-zinc-950 dark:text-white leading-tight line-clamp-1">
                         {book.title}
                       </h4>
@@ -475,7 +475,7 @@ export const DigitalPortfolioDocument: React.FC<DigitalPortfolioDocumentProps> =
             {/* ==================== PAGE 6: FLAGSHIP WEB PLATFORMS & E-COMMERCE ==================== */}
             <article className="print-page bg-white dark:bg-[#101014] p-8 sm:p-16 rounded-2xl border border-black/[0.08] dark:border-white/[0.08] shadow-xl space-y-8">
               <div className="border-b border-black/[0.08] dark:border-white/[0.08] pb-4">
-                <span className="text-[10px] tracking-[0.25em] uppercase font-light text-zinc-400">
+                <span className="text-[10.3px] tracking-[0.25em] uppercase font-light text-zinc-400">
                   WEB PLATFORMS &bull; 05
                 </span>
                 <h3 className="text-2xl sm:text-3xl font-extralight tracking-tight text-zinc-950 dark:text-white mt-1">
@@ -515,7 +515,7 @@ export const DigitalPortfolioDocument: React.FC<DigitalPortfolioDocumentProps> =
                       />
                     </div>
                     <div className="flex-1 space-y-1.5 w-full">
-                      <div className="flex items-center justify-between text-[10px] font-mono text-zinc-400">
+                      <div className="flex items-center justify-between text-[10.3px] font-mono text-zinc-400">
                         <span className="uppercase">{proj.sector}</span>
                         <span className="text-zinc-900 dark:text-white font-normal">{proj.url}</span>
                       </div>
@@ -534,7 +534,7 @@ export const DigitalPortfolioDocument: React.FC<DigitalPortfolioDocumentProps> =
             {/* ==================== PAGE 7: 3D EXHIBITION, SIGNAGE & EVENTS ==================== */}
             <article className="print-page bg-white dark:bg-[#101014] p-8 sm:p-16 rounded-2xl border border-black/[0.08] dark:border-white/[0.08] shadow-xl space-y-8">
               <div className="border-b border-black/[0.08] dark:border-white/[0.08] pb-4">
-                <span className="text-[10px] tracking-[0.25em] uppercase font-light text-zinc-400">
+                <span className="text-[10.3px] tracking-[0.25em] uppercase font-light text-zinc-400">
                   EXHIBITIONS &bull; 06
                 </span>
                 <h3 className="text-2xl sm:text-3xl font-extralight tracking-tight text-zinc-950 dark:text-white mt-1">
@@ -559,7 +559,7 @@ export const DigitalPortfolioDocument: React.FC<DigitalPortfolioDocumentProps> =
                     ))}
                   </div>
                   <div className="p-6 space-y-2">
-                    <span className="text-[10px] font-mono text-zinc-400 uppercase">Kyalami Convention Centre &bull; 50,000+ Visitors</span>
+                    <span className="text-[10.3px] font-mono text-zinc-400 uppercase">Kyalami Convention Centre &bull; 50,000+ Visitors</span>
                     <h4 className="text-base font-normal text-zinc-950 dark:text-white">Skyworth @ Comic Con Africa</h4>
                     <p className="text-xs font-light text-zinc-600 dark:text-zinc-400 leading-relaxed">
                       Spearheaded 3D booth structure modeling in AutoCAD, architectural pylon signage, high-density digital gaming displays, and real-time social event broadcasting.
@@ -576,7 +576,7 @@ export const DigitalPortfolioDocument: React.FC<DigitalPortfolioDocumentProps> =
                     />
                   </div>
                   <div className="p-6 space-y-2">
-                    <span className="text-[10px] font-mono text-zinc-400 uppercase">Gallagher Convention Centre &bull; Luxury Interior Expo</span>
+                    <span className="text-[10.3px] font-mono text-zinc-400 uppercase">Gallagher Convention Centre &bull; Luxury Interior Expo</span>
                     <h4 className="text-base font-normal text-zinc-950 dark:text-white">Skyworth @ Decorex SA Expo</h4>
                     <p className="text-xs font-light text-zinc-600 dark:text-zinc-400 leading-relaxed">
                       Designed illuminated curved brand arches, 3D exhibition booth layouts, large-format graphics, and the high-conversion &ldquo;Win a 49-inch TV&rdquo; visitor campaign.
@@ -589,7 +589,7 @@ export const DigitalPortfolioDocument: React.FC<DigitalPortfolioDocumentProps> =
             {/* ==================== PAGE 8: PERFORMANCE MARKETING & VERIFIED HISTORY ==================== */}
             <article className="print-page bg-white dark:bg-[#101014] p-8 sm:p-16 rounded-2xl border border-black/[0.08] dark:border-white/[0.08] shadow-xl space-y-8">
               <div className="border-b border-black/[0.08] dark:border-white/[0.08] pb-4">
-                <span className="text-[10px] tracking-[0.25em] uppercase font-light text-zinc-400">
+                <span className="text-[10.3px] tracking-[0.25em] uppercase font-light text-zinc-400">
                   VERIFIED HISTORY &bull; 07
                 </span>
                 <h3 className="text-2xl sm:text-3xl font-extralight tracking-tight text-zinc-950 dark:text-white mt-1">
@@ -619,7 +619,7 @@ export const DigitalPortfolioDocument: React.FC<DigitalPortfolioDocumentProps> =
                 <div>
                   <strong className="font-normal text-zinc-950 dark:text-white">Verified Certifications:</strong> Semrush Academy SEO/SEM Specialist &bull; Google Digital Training &bull; Senior High Certificate
                 </div>
-                <div className="font-mono text-[10px] text-zinc-400">
+                <div className="font-mono text-[10.3px] text-zinc-400">
                   DOCUMENT CERTIFIED &bull; BRENTON T. KANDHAI
                 </div>
               </div>

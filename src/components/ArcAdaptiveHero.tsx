@@ -46,7 +46,7 @@ export const ArcAdaptiveHero: React.FC<ArcAdaptiveHeroProps> = ({
         <div className="absolute inset-0 pointer-events-none hidden dark:block bg-black/20" />
 
         {/* Layer 3: Text Content Directly Over Background — aligned to the page content grid */}
-        <div className="relative z-20 mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8 pb-12 pt-12 sm:pt-24 flex flex-col justify-end min-h-full">
+        <div className="relative z-20 mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8 pb-0 pt-12 sm:pt-24 flex flex-col justify-end min-h-full">
           <div className="w-full max-w-2xl">
             <h1 className="text-3xl sm:text-4xl lg:text-5xl tracking-tight text-zinc-950 dark:text-white leading-tight whitespace-nowrap" style={{ fontFamily: "'Outfit', sans-serif" }}>
               <span className="font-extralight">FULL STACK </span>

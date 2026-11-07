@@ -66,7 +66,7 @@ export const HomePage: React.FC<HomePageProps> = ({
           className="flex items-center justify-center gap-2"
         >
           <span className="w-1.5 h-1.5 rounded-full bg-zinc-950 dark:bg-white" />
-          <span className="text-[11px] tracking-[0.3em] uppercase font-light text-zinc-400">
+          <span className="text-[11.3px] tracking-[0.3em] uppercase font-light text-zinc-400">
             CREATIVE MANIFESTO &bull; 01
           </span>
         </motion.div>
@@ -105,7 +105,7 @@ export const HomePage: React.FC<HomePageProps> = ({
             viewport={{ once: true, margin: '-60px' }}
             transition={{ duration: 0.6 }}
           >
-            <span className="text-[10px] tracking-[0.25em] uppercase font-light text-zinc-400">
+            <span className="text-[10.3px] tracking-[0.25em] uppercase font-light text-zinc-400">
               DISCIPLINES &bull; 02
             </span>
             <h2 className="text-2xl sm:text-4xl font-extralight text-zinc-950 dark:text-white mt-1 tracking-tight">
@@ -207,7 +207,7 @@ export const HomePage: React.FC<HomePageProps> = ({
             viewport={{ once: true, margin: '-60px' }}
             transition={{ duration: 0.6 }}
           >
-            <span className="text-[10px] tracking-[0.25em] uppercase font-light text-zinc-400">
+            <span className="text-[10.3px] tracking-[0.25em] uppercase font-light text-zinc-400">
               STACK &bull; 03
             </span>
             <h2 className="text-2xl sm:text-4xl font-extralight text-zinc-950 dark:text-white mt-1 tracking-tight">
@@ -261,7 +261,7 @@ export const HomePage: React.FC<HomePageProps> = ({
               className="p-8 rounded-lg bg-white dark:bg-[#101014] border border-black/[0.06] dark:border-white/[0.06] space-y-4 soft-shadow hover:border-black/30 dark:hover:border-white/30 transition-all group"
             >
               <div className="space-y-1">
-                <span className="text-[10px] font-mono tracking-widest text-zinc-400 uppercase block">
+                <span className="text-[10.3px] font-mono tracking-widest text-zinc-400 uppercase block">
                   CATEGORY
                 </span>
                 <h3 className="text-lg font-normal text-zinc-950 dark:text-white">
@@ -272,7 +272,7 @@ export const HomePage: React.FC<HomePageProps> = ({
                 {category.tools.map((tool, tIdx) => (
                   <span
                     key={tIdx}
-                    className="text-[10px] px-2 py-0.5 rounded-md bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 font-light"
+                    className="text-[10.3px] px-2 py-0.5 rounded-md bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 font-light"
                   >
                     {tool}
                   </span>
@@ -292,7 +292,7 @@ export const HomePage: React.FC<HomePageProps> = ({
             viewport={{ once: true, margin: '-60px' }}
             transition={{ duration: 0.6 }}
           >
-            <span className="text-[10px] tracking-[0.25em] uppercase font-light text-zinc-400">
+            <span className="text-[10.3px] tracking-[0.25em] uppercase font-light text-zinc-400">
               HISTORY &bull; 04
             </span>
             <h2 className="text-2xl sm:text-4xl font-extralight text-zinc-950 dark:text-white mt-1 tracking-tight">
@@ -377,7 +377,7 @@ export const HomePage: React.FC<HomePageProps> = ({
           <div className="relative z-10 max-w-3xl space-y-6">
             <div className="flex items-center gap-3">
               <span className="w-1.5 h-1.5 rounded-full bg-white" />
-              <span className="text-[11px] tracking-[0.25em] uppercase font-light text-zinc-400">
+              <span className="text-[11.3px] tracking-[0.25em] uppercase font-light text-zinc-400">
                 INITIATE DIALOGUE &bull; 06
               </span>
             </div>

@@ -54,7 +54,7 @@ export const PortfolioModal: React.FC<PortfolioModalProps> = ({ project, onClose
 
         {/* Modal Header */}
         <div className="space-y-2.5 pr-8">
-          <div className="flex items-center gap-2 text-[10px] tracking-[0.25em] uppercase font-light text-zinc-400">
+          <div className="flex items-center gap-2 text-[10.3px] tracking-[0.25em] uppercase font-light text-zinc-400">
             <span>{project.categoryLabel}</span>
             <span>&bull;</span>
             <span>{project.client}</span>
@@ -80,7 +80,7 @@ export const PortfolioModal: React.FC<PortfolioModalProps> = ({ project, onClose
                 className="max-w-full max-h-full object-contain rounded transition-all duration-300"
               />
               {images.length > 1 && (
-                <div className="absolute bottom-3 right-3 px-2 py-1 rounded bg-black/70 backdrop-blur-sm text-[10px] font-mono text-white">
+                <div className="absolute bottom-3 right-3 px-2 py-1 rounded bg-black/70 backdrop-blur-sm text-[10.3px] font-mono text-white">
                   {activeImageIndex + 1} / {images.length}
                 </div>
               )}
@@ -120,7 +120,7 @@ export const PortfolioModal: React.FC<PortfolioModalProps> = ({ project, onClose
                 key={i}
                 className="p-3.5 rounded-lg bg-zinc-50 dark:bg-zinc-900/50 border border-black/[0.04] dark:border-white/[0.05]"
               >
-                <div className="text-[10px] font-mono text-zinc-400 uppercase">
+                <div className="text-[10.3px] font-mono text-zinc-400 uppercase">
                   {m.label}
                 </div>
                 <div className="text-sm font-normal text-zinc-950 dark:text-white mt-0.5">
@@ -133,7 +133,7 @@ export const PortfolioModal: React.FC<PortfolioModalProps> = ({ project, onClose
 
         {/* Overview Description */}
         <div className="space-y-2">
-          <span className="text-[10px] tracking-[0.2em] uppercase font-light text-zinc-400 block">
+          <span className="text-[10.3px] tracking-[0.2em] uppercase font-light text-zinc-400 block">
             BRIEF &amp; CONTEXT
           </span>
           <p className="text-xs sm:text-sm font-light leading-relaxed text-zinc-600 dark:text-zinc-400">
@@ -143,7 +143,7 @@ export const PortfolioModal: React.FC<PortfolioModalProps> = ({ project, onClose
 
         {/* Deliverables */}
         <div className="space-y-2.5">
-          <span className="text-[10px] tracking-[0.2em] uppercase font-light text-zinc-400 block">
+          <span className="text-[10.3px] tracking-[0.2em] uppercase font-light text-zinc-400 block">
             KEY SCOPE
           </span>
           <ul className="space-y-2 text-xs font-light text-zinc-600 dark:text-zinc-400">
@@ -158,14 +158,14 @@ export const PortfolioModal: React.FC<PortfolioModalProps> = ({ project, onClose
 
         {/* Tools */}
         <div className="space-y-2">
-          <span className="text-[10px] tracking-[0.2em] uppercase font-light text-zinc-400 block">
+          <span className="text-[10.3px] tracking-[0.2em] uppercase font-light text-zinc-400 block">
             STACK &amp; ENVIRONMENT
           </span>
           <div className="flex flex-wrap gap-1.5">
             {project.tools.map((tool, i) => (
               <span
                 key={i}
-                className="px-2.5 py-1 rounded-md text-[11px] font-light bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-300"
+                className="px-2.5 py-1 rounded-md text-[11.3px] font-light bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-300"
               >
                 {tool}
               </span>
@@ -186,7 +186,7 @@ export const PortfolioModal: React.FC<PortfolioModalProps> = ({ project, onClose
               <ArrowUpRight className="w-3.5 h-3.5" />
             </a>
           ) : (
-            <span className="text-[11px] text-zinc-400 font-light italic">
+            <span className="text-[11.3px] text-zinc-400 font-light italic">
               Archived in official BTK Portfolio document
             </span>
           )}
