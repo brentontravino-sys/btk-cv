@@ -13,7 +13,7 @@ import {
   BadgeCheck,
 } from 'lucide-react';
 import { PERSONAL_INFO, EXPERIENCES, SKILL_CATEGORIES, EDUCATION_AND_CERTS } from '../data/portfolioData';
-import { printDocument } from '../utils/pdfExport';
+import { printDocument } from '../utils/printDocument';
 
 interface DigitalCVDocumentProps {
   onClose: () => void;
