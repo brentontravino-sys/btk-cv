@@ -1,50 +1,167 @@
-import React from 'react';
+import React, { useState, useRef } from 'react';
 import {
   Printer,
+  Download,
   X,
   ExternalLink,
-  Check,
-  Briefcase,
-  FileText,
-  Layers,
-  Sparkles,
-  ArrowUpRight,
-  Eye,
   Globe,
   Palette,
   Bot,
   BarChart3,
-  BookOpen,
+  Cpu,
+  Info,
+  BadgeCheck,
+  Loader2,
 } from 'lucide-react';
-import { PROJECTS, EXPERIENCES, EDUCATION_AND_CERTS } from '../data/portfolioData';
+import { EXPERIENCES, EDUCATION_AND_CERTS, PERSONAL_INFO, PROJECTS, SKILL_CATEGORIES } from '../data/portfolioData';
+import { exportPortfolioAsPdf, printDocument } from '../utils/pdfExport';
 
 interface DigitalPortfolioDocumentProps {
   onClose: () => void;
+  initialAction?: 'download' | 'print';
 }
+
+const BULLET_SIGN = '\u2022';
+
+const ECOSYSTEM_BADGES = [
+  { title: 'WordPress', category: 'CMS & Themes', icon: '/assets/aistudio/wordpress_54e6825b.png' },
+  { title: 'Elementor Pro', category: 'Visual Builder', icon: '/assets/aistudio/elementor_6d0d99c7.png' },
+  { title: 'Adobe Creative Cloud', category: 'UI/UX & Design', icon: '/assets/aistudio/creative-cloud_d70d1165.png' },
+  { title: 'Artificial Intelligence', category: 'AI & Copilots', icon: '/assets/aistudio/AI_ea740ab1.png' },
+  { title: 'Google Analytics 4', category: 'GA4 Telemetry', icon: '/assets/aistudio/google-analytics_6c35204b.png' },
+  { title: 'Google Ads', category: 'PPC & Search', icon: '/assets/aistudio/Google_Analytics-w_c0679edf.png' },
+  { title: 'Search Console', category: 'SEO & Indexing', icon: '/assets/aistudio/google-search-console_9ddfde1a.png' },
+  { title: 'PageSpeed Insights', category: 'Core Web Vitals', icon: '/assets/aistudio/google-pagespeeds_c5f5ae6c.png' },
+  { title: 'Looker Studio', category: 'BI Dashboards', icon: '/assets/aistudio/looker-studio_2f20ce0f.png' },
+  { title: 'Meta Ads', category: 'IG / FB Social', icon: '/assets/aistudio/meta_7b1c433b.png' },
+  { title: 'Google Business', category: 'Local SEO Profile', icon: '/assets/aistudio/google-business_6068a31f.png' },
+  { title: 'Google Ecosystem', category: 'Tag Manager & Cloud', icon: '/assets/aistudio/Google_463bf0ff.png' },
+];
 
 export const DigitalPortfolioDocument: React.FC<DigitalPortfolioDocumentProps> = ({
   onClose,
+  initialAction,
 }) => {
-  const handlePrint = () => {
-    window.print();
+  const [showTip, setShowTip] = useState(false);
+  const [isDownloading, setIsDownloading] = useState(false);
+  const [downloadMsg, setDownloadMsg] = useState('');
+  const documentRef = useRef<HTMLDivElement>(null);
+
+  const handleDownload = async () => {
+    if (isDownloading) return;
+    try {
+      setIsDownloading(true);
+      setDownloadMsg('Preparing Portfolio document...');
+
+      const systems = PROJECTS.filter((p) => p.category === 'architecture');
+      const clients = PROJECTS.filter((p) => p.category !== 'architecture');
+
+      await exportPortfolioAsPdf(
+        {
+          name: PERSONAL_INFO.name,
+          title: PERSONAL_INFO.title,
+          location: PERSONAL_INFO.location,
+          phones: PERSONAL_INFO.phones,
+          email: PERSONAL_INFO.email,
+          headline:
+            'Engineering High-Performance Web Applications, Scalable Backend Systems & Modern Applications.',
+          summary:
+            '15+ years of verified expertise architecting enterprise web systems, custom full stack applications across Node.js, Python, C++, TypeScript, React, and PHP, scalable WooCommerce & Shopify e-commerce engines, and high-conversion UI/UX workflows. Complemented by secondary specializations in Google Ads, technical SEO audits, and 3D architectural brand activations.',
+          kpis: [
+            { label: 'EXPERIENCE', value: '15+ YRS' },
+            { label: 'WEB PLATFORMS', value: '35+ LIVE' },
+            { label: 'SITE HEALTH', value: '90%+ AVG' },
+            { label: 'CAMPAIGNS', value: '20+ MANAGED' },
+          ],
+          ecosystem: ECOSYSTEM_BADGES.map(({ title, category }) => ({ title, category })),
+          systems: systems.map((p) => ({
+            title: p.title,
+            summary: p.tagline,
+            scope: p.description,
+            tags: p.tools,
+          })),
+          clients: clients.map((p) => ({
+            name: p.title,
+            category: `${p.client} ${BULLET_SIGN} ${p.categoryLabel}`,
+            summary: p.description,
+          })),
+          experiences: EXPERIENCES.map(({ company, role, period, focus, responsibilities, tags }) => ({
+            company,
+            role,
+            period,
+            focus,
+            responsibilities,
+            tags,
+          })),
+          skillCategories: SKILL_CATEGORIES.map(({ title, skills }) => ({ title, skills })),
+          credentials: EDUCATION_AND_CERTS.map(({ title, details, issuer, year }) => ({
+            title,
+            details,
+            issuer,
+            year,
+          })),
+        },
+        'Brenton_Kandhai_Portfolio.pdf',
+        (progress) => {
+          if (progress.status === 'rendering') {
+            setDownloadMsg(`Rendering page ${progress.currentPage} of ${progress.totalPages}...`);
+          } else if (progress.status === 'saving') {
+            setDownloadMsg('Packaging PDF file...');
+          }
+        }
+      );
+    } catch (err) {
+      console.error('PDF generation failed:', err);
+      setDownloadMsg(`PDF failed: ${(err as Error)?.message ?? err}`);
+      // Fall back to print dialog
+      setTimeout(() => {
+        printDocument(documentRef.current, 'Brenton T. Kandhai \u2014 Selected Works Portfolio');
+      }, 500);
+    } finally {
+      setIsDownloading(false);
+      setDownloadMsg('');
+    }
   };
 
+  const handlePrint = () => {
+    const ok = printDocument(documentRef.current, 'Brenton T. Kandhai \u2014 Selected Works Portfolio');
+    if (!ok) {
+      // Printing is blocked (e.g. a sandboxed iframe): fall back to the PDF file.
+      setDownloadMsg('Print blocked, trying PDF download...');
+      setTimeout(() => handleDownload(), 300);
+    }
+  };
+
+  React.useEffect(() => {
+    if (initialAction === 'download') {
+      const timer = setTimeout(() => {
+        handleDownload();
+      }, 500);
+      return () => clearTimeout(timer);
+    } else if (initialAction === 'print') {
+      const timer = setTimeout(() => {
+        handlePrint();
+      }, 350);
+      return () => clearTimeout(timer);
+    }
+  }, [initialAction]);
+
   const ebookCovers = [
-    { title: 'Practical AI Tools For Everyday Work', path: '/works/ebooks/Practical AI Tools - For Everyday Work - Cover.jpg', tag: 'AI & Automation' },
+    { title: 'Practical AI Tools For Everyday Work', path: '/works/ebooks/Practical AI Tools - For Everyday Work - Cover.jpg', tag: 'AI & Tools' },
     { title: 'AI & Machine Learning Practical Course', path: '/works/ebooks/AI Machine - Learning Practical Course - Commercial Edition - Cover.jpg', tag: 'Data & ML' },
     { title: 'Cybersecurity Mini-Course Guide', path: '/works/ebooks/Cybersecurity - Mini-Course - Cover.jpg', tag: 'Security' },
     { title: 'Digital Marketing Playbook Insights 2026', path: '/works/ebooks/Digital Marketing - Playbook Insights - Cover.jpg', tag: 'Marketing & SEO' },
-    { title: 'Career Self Help & Leadership', path: '/works/ebooks/Career Self Help - eBook - Cover.jpg', tag: 'Personal Growth' },
+    { title: 'Career Self Help & Leadership', path: '/works/ebooks/Career Self Help - eBook - Cover.jpg', tag: 'Leadership' },
     { title: 'Budgeting for Beginners Financial Guide', path: '/works/ebooks/Budgeting for Beginners - Guide - Cover.jpg', tag: 'Finance' },
     { title: 'The Daily Workout Guide', path: '/works/ebooks/Daily Workout Guide - Cover.jpg', tag: 'Fitness' },
     { title: 'Healthy Smoothies & Health Drinks Guide', path: '/works/ebooks/Healthy Smoothies and Health Drinks - Guide - Cover.jpg', tag: 'Wellness' },
     { title: 'Botanical Wall Art Editorial Design', path: '/works/ebooks/Botanical Wall Art - Cover.jpg', tag: 'Visual Art' },
     { title: 'Backyard Vegetable Garden Guide', path: '/works/ebooks/Backyard Vegetable Garden - Premium eBook - Cover.jpg', tag: 'Lifestyle' },
-    { title: 'The Golden Round Golf Guide for Seniors', path: '/works/ebooks/The Golden Round Golf Guide for Seniors - Cover.jpg', tag: 'Sports & Leisure' },
+    { title: 'The Golden Round Golf Guide for Seniors', path: '/works/ebooks/The Golden Round Golf Guide for Seniors - Cover.jpg', tag: 'Sports' },
   ];
 
   return (
-    <div className="print-doc fixed inset-0 z-50 flex flex-col bg-zinc-950/80 backdrop-blur-md overflow-hidden animate-in fade-in duration-200">
+    <div className="print-doc fixed inset-0 z-50 flex flex-col bg-zinc-950/85 backdrop-blur-md overflow-hidden animate-in fade-in duration-200">
       {/* Top Floating Control Bar (Hidden on print) */}
       <div className="print-hide shrink-0 flex items-center justify-between px-4 sm:px-8 py-3.5 bg-white dark:bg-[#0d0d11] border-b border-black/[0.08] dark:border-white/[0.08] shadow-md z-30">
         <div className="flex items-center gap-3">
@@ -53,10 +170,10 @@ export const DigitalPortfolioDocument: React.FC<DigitalPortfolioDocumentProps> =
           </div>
           <div>
             <h2 className="text-xs sm:text-sm font-normal text-zinc-950 dark:text-white leading-tight">
-              Brenton T. Kandhai &bull; Comprehensive Portfolio
+              Brenton T. Kandhai &bull; Selected Works Portfolio
             </h2>
-            <p className="text-[12.4px] text-zinc-400 font-light">
-              Full Stack Developer &bull; 15+ Years Experience
+            <p className="text-[12px] text-zinc-400 font-light">
+              Full Stack Web Platforms, Technical Architecture &amp; Design
             </p>
           </div>
         </div>
@@ -64,12 +181,26 @@ export const DigitalPortfolioDocument: React.FC<DigitalPortfolioDocumentProps> =
         {/* Action Buttons */}
         <div className="flex items-center gap-2">
           <button
+            onClick={handleDownload}
+            disabled={isDownloading}
+            className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-md bg-zinc-950 dark:bg-white text-white dark:text-black text-xs font-normal tracking-wider uppercase hover:bg-zinc-800 dark:hover:bg-zinc-200 transition-colors cursor-pointer shadow-sm active:scale-95 disabled:opacity-60"
+            title="Download Portfolio as PDF"
+          >
+            {isDownloading ? (
+              <Loader2 className="w-3.5 h-3.5 animate-spin" />
+            ) : (
+              <Download className="w-3.5 h-3.5" />
+            )}
+            <span>{isDownloading ? (downloadMsg || 'Downloading...') : 'Download Portfolio'}</span>
+          </button>
+
+          <button
             onClick={handlePrint}
-            className="hidden sm:inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-md border border-black/15 dark:border-white/15 text-xs font-light tracking-wider uppercase text-zinc-700 dark:text-zinc-200 hover:border-black/40 dark:hover:border-white/40 transition-colors cursor-pointer"
-            title="Print or Save"
+            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md border border-black/15 dark:border-white/15 text-xs font-light tracking-wider uppercase text-zinc-700 dark:text-zinc-200 hover:border-black/40 dark:hover:border-white/40 transition-colors cursor-pointer"
+            title="Print Portfolio"
           >
             <Printer className="w-3.5 h-3.5" />
-            <span>Print / Save</span>
+            <span>Print</span>
           </button>
 
           <button
@@ -82,549 +213,543 @@ export const DigitalPortfolioDocument: React.FC<DigitalPortfolioDocumentProps> =
         </div>
       </div>
 
-      {/* Main Container */}
+      {/* Main Document Viewport */}
       <div className="print-scroll flex-1 overflow-y-auto bg-zinc-100 dark:bg-[#070709] p-3 sm:p-8 print:p-0 print:bg-white">
-          {/* Modern Site-Designed Portfolio Document */}
-          <div className="max-w-4xl mx-auto space-y-12 print:space-y-0 text-zinc-900 dark:text-zinc-100">
-            {/* ==================== PAGE 1: COVER & PROFILE ==================== */}
-            <article className="print-page bg-white dark:bg-[#101014] p-8 sm:p-16 rounded-2xl border border-black/[0.08] dark:border-white/[0.08] shadow-xl space-y-12">
-              <div className="flex items-center justify-between border-b border-black/[0.08] dark:border-white/[0.08] pb-8">
-                <div className="flex items-center gap-3">
-                  <div className="w-12 h-12 rounded-lg bg-zinc-950 dark:bg-white text-white dark:text-black flex items-center justify-center font-bold text-lg tracking-wider">
-                    BTK
-                  </div>
-                  <div>
-                    <h1 className="text-xl sm:text-2xl font-light tracking-tight text-zinc-950 dark:text-white uppercase">
-                      Brenton T. Kandhai
-                    </h1>
-                    <p className="text-xs font-light text-zinc-400 tracking-widest uppercase">
-                      Full Stack Developer &bull; 15+ Years Experience
-                    </p>
-                  </div>
-                </div>
+        <div ref={documentRef} className="max-w-[210mm] mx-auto space-y-8 print:space-y-0 text-zinc-900 dark:text-zinc-100">
 
-                <div className="text-right text-[12.4px] font-mono text-zinc-400">
-                  <div>OFFICIAL PORTFOLIO</div>
-                  <div>2026 EDITION</div>
-                </div>
-              </div>
-
-              {/* Cover Hero Statement */}
-              <div className="space-y-4 py-6">
-                <div className="inline-flex items-center gap-2 text-[12.4px] tracking-[0.25em] uppercase font-light text-zinc-400">
-                  <span className="w-1.5 h-1.5 rounded-full bg-zinc-950 dark:bg-white" />
-                  <span>EXECUTIVE OVERVIEW</span>
-                </div>
-                <h2 className="text-3xl sm:text-5xl font-extralight tracking-tight text-zinc-950 dark:text-white leading-[1.15]">
-                  Engineering High-Performance Web Applications &amp; Scalable Digital Platforms.
-                </h2>
-                <p className="text-sm font-light text-zinc-600 dark:text-zinc-400 leading-relaxed max-w-2xl pt-2">
-                  15+ years of verified expertise architecting enterprise web systems, custom WordPress and Shopify e-commerce ecosystems, and high-conversion UI/UX workflows. Supported by strong secondary specializations in Google Ads, technical SEO audits, and 3D architectural brand activations.
-                </p>
-              </div>
-
-              {/* KPI Strip */}
-              <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 pt-4 border-t border-b border-black/[0.06] dark:border-white/[0.06] py-6">
-                <div>
-                  <span className="text-[12.4px] uppercase font-mono text-zinc-400 block">Experience</span>
-                  <span className="text-2xl sm:text-3xl font-light text-zinc-950 dark:text-white">15+ Yrs</span>
+          {/* ==================== PAGE 1: COVER & EXECUTIVE OVERVIEW ==================== */}
+          <article className="print-page bg-white dark:bg-[#101014] p-8 sm:p-14 rounded-2xl border border-black/[0.08] dark:border-white/[0.08] shadow-xl space-y-8 print:p-0 print:border-none print:shadow-none print:bg-white">
+            <div className="flex items-center justify-between border-b border-black/[0.08] dark:border-white/[0.08] pb-6">
+              <div className="flex items-center gap-3">
+                <div className="w-12 h-12 rounded-lg bg-zinc-950 dark:bg-white text-white dark:text-black flex items-center justify-center font-bold text-lg tracking-wider">
+                  BTK
                 </div>
                 <div>
-                  <span className="text-[12.4px] uppercase font-mono text-zinc-400 block">Web Platforms</span>
-                  <span className="text-2xl sm:text-3xl font-light text-zinc-950 dark:text-white">35+ Live</span>
-                </div>
-                <div>
-                  <span className="text-[12.4px] uppercase font-mono text-zinc-400 block">Site Health</span>
-                  <span className="text-2xl sm:text-3xl font-light text-zinc-950 dark:text-white">90%+</span>
-                </div>
-                <div>
-                  <span className="text-[12.4px] uppercase font-mono text-zinc-400 block">National Brands</span>
-                  <span className="text-2xl sm:text-3xl font-light text-zinc-950 dark:text-white">Skyworth, Wits</span>
-                </div>
-              </div>
-
-              {/* Direct Contact Details */}
-              <div className="flex flex-wrap items-center justify-between gap-4 text-xs font-light text-zinc-500 pt-2">
-                <span>Johannesburg, South Africa</span>
-                <span>+27 73 726 1025 &bull; +27 62 659 7658</span>
-                <span className="text-zinc-900 dark:text-zinc-200">brenton.travino@gmail.com</span>
-              </div>
-            </article>
-
-            {/* ==================== PAGE 2: CORE DISCIPLINES & ARCHITECTURE ==================== */}
-            <article className="print-page bg-white dark:bg-[#101014] p-8 sm:p-16 rounded-2xl border border-black/[0.08] dark:border-white/[0.08] shadow-xl space-y-10">
-              <div className="border-b border-black/[0.08] dark:border-white/[0.08] pb-4">
-                <span className="text-[12.4px] tracking-[0.25em] uppercase font-light text-zinc-400">
-                  DISCIPLINES &bull; 01
-                </span>
-                <h3 className="text-2xl sm:text-3xl font-extralight tracking-tight text-zinc-950 dark:text-white mt-1">
-                  Technical Architecture &amp; Specializations
-                </h3>
-              </div>
-
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div className="p-6 rounded-xl bg-zinc-50 dark:bg-zinc-900/50 border border-black/[0.06] dark:border-white/[0.06] space-y-3">
-                  <div className="flex items-center gap-2">
-                    <Globe className="w-4 h-4 text-zinc-950 dark:text-white" />
-                    <h4 className="text-sm font-normal text-zinc-950 dark:text-white">
-                      Full Stack Web &amp; E-Commerce (Primary)
-                    </h4>
-                  </div>
-                  <p className="text-xs font-light text-zinc-600 dark:text-zinc-400 leading-relaxed">
-                    Custom web application development, React, Next.js, modern JavaScript/TypeScript, PHP/MySQL, custom WordPress &amp; WooCommerce themes, Shopify Liquid, payment gateway integrations, and REST API architectures.
-                  </p>
-                </div>
-
-                <div className="p-6 rounded-xl bg-zinc-50 dark:bg-zinc-900/50 border border-black/[0.06] dark:border-white/[0.06] space-y-3">
-                  <div className="flex items-center gap-2">
-                    <Bot className="w-4 h-4 text-zinc-950 dark:text-white" />
-                    <h4 className="text-sm font-normal text-zinc-950 dark:text-white">
-                      CRM, AI Tools &amp; Automation
-                    </h4>
-                  </div>
-                  <p className="text-xs font-light text-zinc-600 dark:text-zinc-400 leading-relaxed">
-                    HubSpot inbound CRM workflows, Mailchimp automation journeys, Zendesk &amp; TeamDesk tier-3 technical ticketing systems, and generative AI prompt engineering (Copilot Studio, ChatGPT, Google Gemini).
-                  </p>
-                </div>
-
-                <div className="p-6 rounded-xl bg-zinc-50 dark:bg-zinc-900/50 border border-black/[0.06] dark:border-white/[0.06] space-y-3">
-                  <div className="flex items-center gap-2">
-                    <BarChart3 className="w-4 h-4 text-zinc-950 dark:text-white" />
-                    <h4 className="text-sm font-normal text-zinc-950 dark:text-white">
-                      Performance Marketing &amp; SEO (Secondary)
-                    </h4>
-                  </div>
-                  <p className="text-xs font-light text-zinc-600 dark:text-zinc-400 leading-relaxed">
-                    Google Ads PPC management (Search, Display, Performance Max), Google Looker Studio client reporting, Meta Ads Manager, and Semrush-certified technical SEO audits lifting site health scores to 90%+.
-                  </p>
-                </div>
-
-                <div className="p-6 rounded-xl bg-zinc-50 dark:bg-zinc-900/50 border border-black/[0.06] dark:border-white/[0.06] space-y-3">
-                  <div className="flex items-center gap-2">
-                    <Palette className="w-4 h-4 text-zinc-950 dark:text-white" />
-                    <h4 className="text-sm font-normal text-zinc-950 dark:text-white">
-                      UI/UX, 3D &amp; Digital Publishing (Secondary)
-                    </h4>
-                  </div>
-                  <p className="text-xs font-light text-zinc-600 dark:text-zinc-400 leading-relaxed">
-                    Figma &amp; Adobe Creative Cloud mastery (Photoshop, Illustrator, InDesign), commercial e-book cover art, 3D exhibition booth modeling (Comic Con, Decorex SA), and custom dye-sublimation athletic apparel manufacturing.
+                  <h1 className="text-xl sm:text-2xl font-light tracking-tight text-zinc-950 dark:text-white uppercase">
+                    {PERSONAL_INFO.name}
+                  </h1>
+                  <p className="text-xs font-light text-zinc-400 tracking-widest uppercase mt-0.5">
+                    {PERSONAL_INFO.title} &bull; 15+ Years Verified Experience
                   </p>
                 </div>
               </div>
-            </article>
 
-            {/* ==================== PAGE 2B: TECHNICAL ARCHITECTURE & SYSTEMS ENGINEERING ==================== */}
-            <article className="print-page bg-white dark:bg-[#101014] p-8 sm:p-16 rounded-2xl border border-black/[0.08] dark:border-white/[0.08] shadow-xl space-y-10">
-              <div className="border-b border-black/[0.08] dark:border-white/[0.08] pb-4">
-                <span className="text-[12.4px] tracking-[0.25em] uppercase font-light text-zinc-400">
-                  SYSTEMS ENGINEERING &bull; 02
-                </span>
-                <h3 className="text-2xl sm:text-3xl font-extralight tracking-tight text-zinc-950 dark:text-white mt-1">
-                  Technical Architecture &amp; Enterprise Platforms
-                </h3>
-                <p className="text-xs font-light text-zinc-500 mt-1">
-                  High-scale system design: event-driven workflow engines, AI ERP platforms, distributed AI topologies &amp; collaborative workspaces
-                </p>
+              <div className="text-right text-[12px] font-mono text-zinc-400">
+                <div className="text-zinc-900 dark:text-white font-medium">OFFICIAL PORTFOLIO</div>
+                <div>OFFICIAL EDITION &bull; 2026</div>
               </div>
+            </div>
 
-              {/* System 1: Flow Ops Nexus */}
-              <div className="p-6 rounded-xl bg-zinc-50 dark:bg-zinc-900/40 border border-black/[0.06] dark:border-white/[0.06] space-y-4">
-                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-black/[0.06] dark:border-white/[0.06] pb-3">
-                  <div>
-                    <span className="text-[12.4px] font-mono uppercase text-zinc-400 block">Workflow Orchestration Engine</span>
-                    <h4 className="text-base font-normal text-zinc-950 dark:text-white">
-                      Flow Ops (Optimal Nexus Pro)
-                    </h4>
-                  </div>
-                  <span className="text-xs font-mono text-zinc-400">flow-optimal-nexus-pro.base44.app</span>
-                </div>
-
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                  <div className="rounded-lg overflow-hidden border border-black/[0.08] dark:border-white/[0.08] bg-zinc-950 aspect-[16/10]">
-                    <img
-                      src="/works/technical-architecture/flow-ops/flow-ops-dashboard.png"
-                      alt="Flow Ops Dashboard"
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
-                  <div className="rounded-lg overflow-hidden border border-black/[0.08] dark:border-white/[0.08] bg-zinc-950 aspect-[16/10]">
-                    <img
-                      src="/works/technical-architecture/flow-ops/flow-ops-builder.png"
-                      alt="Workflow Builder Canvas"
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
-                  <div className="rounded-lg overflow-hidden border border-black/[0.08] dark:border-white/[0.08] bg-zinc-950 aspect-[16/10]">
-                    <img
-                      src="/works/technical-architecture/flow-ops/flow-ops-integrations.png"
-                      alt="Multi-Service Integrations"
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
-                </div>
-
-                <p className="text-xs font-light text-zinc-600 dark:text-zinc-400 leading-relaxed">
-                  <strong className="font-normal text-zinc-950 dark:text-white">Architectural Scope:</strong> Visual node-based workflow builder with triggers and conditional branching, multi-service webhook connectors, live telemetry execution runs, error recovery policies, and RBAC team collaboration.
-                </p>
+            {/* Cover Hero Statement */}
+            <div className="space-y-3 py-2">
+              <div className="inline-flex items-center gap-2 text-[11px] tracking-[0.25em] uppercase font-light text-zinc-400">
+                <span className="w-1.5 h-1.5 rounded-full bg-zinc-950 dark:bg-white" />
+                <span>EXECUTIVE OVERVIEW</span>
               </div>
+              <h2 className="text-2xl sm:text-3xl font-extralight tracking-tight text-zinc-950 dark:text-white leading-[1.2]">
+                Engineering High-Performance Web Applications, Scalable Backend Systems &amp; Modern Applications.
+              </h2>
+              <p className="text-xs sm:text-sm font-light text-zinc-600 dark:text-zinc-400 leading-relaxed">
+                15+ years of verified expertise architecting enterprise web systems, custom full stack applications across Node.js, Python, C++, TypeScript, React, and PHP, scalable WooCommerce &amp; Shopify e-commerce engines, and high-conversion UI/UX workflows. Complemented by secondary specializations in Google Ads, technical SEO audits, and 3D architectural brand activations.
+              </p>
+            </div>
 
-              {/* System 2: BTV BOS */}
-              <div className="p-6 rounded-xl bg-zinc-50 dark:bg-zinc-900/40 border border-black/[0.06] dark:border-white/[0.06] space-y-4">
-                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-black/[0.06] dark:border-white/[0.06] pb-3">
-                  <div>
-                    <span className="text-[12.4px] font-mono uppercase text-zinc-400 block">Enterprise AI Operating System</span>
-                    <h4 className="text-base font-normal text-zinc-950 dark:text-white">
-                      BTV BOS - Complete Enterprise ERP
-                    </h4>
-                  </div>
-                  <span className="text-xs font-mono text-zinc-400">btv-bos.base44.app</span>
-                </div>
-
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                  <div className="rounded-lg overflow-hidden border border-black/[0.08] dark:border-white/[0.08] bg-zinc-950 aspect-[16/10]">
-                    <img
-                      src="/works/technical-architecture/ai-business-operating-system/btv-bos-dashboard.png"
-                      alt="BTV BOS Dashboard"
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
-                  <div className="rounded-lg overflow-hidden border border-black/[0.08] dark:border-white/[0.08] bg-zinc-950 aspect-[16/10]">
-                    <img
-                      src="/works/technical-architecture/ai-business-operating-system/btv-bos-projects.png"
-                      alt="Project Timelines"
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
-                  <div className="rounded-lg overflow-hidden border border-black/[0.08] dark:border-white/[0.08] bg-zinc-950 aspect-[16/10]">
-                    <img
-                      src="/works/technical-architecture/ai-business-operating-system/btv-bos-devices.png"
-                      alt="IoT Device Fleet"
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
-                </div>
-
-                <p className="text-xs font-light text-zinc-600 dark:text-zinc-400 leading-relaxed">
-                  <strong className="font-normal text-zinc-950 dark:text-white">Architectural Scope:</strong> Consolidating 7 core operational subsystems including CRM deal pipeline, project sprint milestones, Kanban task operations, double-entry financial accounting, IoT hardware device monitoring, and an autonomous AI Copilot.
-                </p>
+            {/* KPI Strip */}
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 border-y border-black/[0.06] dark:border-white/[0.06] py-4">
+              <div>
+                <span className="text-[11px] uppercase font-mono text-zinc-400 block">Experience</span>
+                <span className="text-xl sm:text-2xl font-light text-zinc-950 dark:text-white">15+ Yrs</span>
               </div>
-
-              {/* System 3: AI BOS Blueprints & Atrium Hub */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div className="p-5 rounded-xl bg-zinc-50 dark:bg-zinc-900/40 border border-black/[0.06] dark:border-white/[0.06] space-y-3">
-                  <span className="text-[12.4px] font-mono uppercase text-zinc-400 block">Distributed AI Topology</span>
-                  <h4 className="text-sm font-normal text-zinc-950 dark:text-white">AI BOS Architecture Blueprints</h4>
-                  <div className="rounded-lg overflow-hidden border border-black/[0.08] dark:border-white/[0.08] bg-zinc-950 h-36">
-                    <img
-                      src="/works/technical-architecture/ai-bos/AI-BOS-1.png"
-                      alt="AI BOS Architecture Blueprint"
-                      className="w-full h-full object-contain"
-                    />
-                  </div>
-                  <p className="text-[12.4px] font-light text-zinc-500 leading-relaxed">
-                    4-part architectural blueprint series detailing multi-agent coordination, vector caching, and zero-downtime microservices clusters.
-                  </p>
-                </div>
-
-                <div className="p-5 rounded-xl bg-zinc-50 dark:bg-zinc-900/40 border border-black/[0.06] dark:border-white/[0.06] space-y-3">
-                  <span className="text-[12.4px] font-mono uppercase text-zinc-400 block">Collaborative Operations</span>
-                  <h4 className="text-sm font-normal text-zinc-950 dark:text-white">Atrium Operations &amp; Knowledge Hub</h4>
-                  <div className="rounded-lg overflow-hidden border border-black/[0.08] dark:border-white/[0.08] bg-zinc-950 h-36">
-                    <img
-                      src="/works/technical-architecture/atrium/atrium-1.png"
-                      alt="Atrium Operations Canvas"
-                      className="w-full h-full object-contain"
-                    />
-                  </div>
-                  <p className="text-[12.4px] font-light text-zinc-500 leading-relaxed">
-                    Real-time workspace canvas with fluid node-based content linking, collaborative permissions, and team active presence.
-                  </p>
-                </div>
+              <div>
+                <span className="text-[11px] uppercase font-mono text-zinc-400 block">Web Platforms</span>
+                <span className="text-xl sm:text-2xl font-light text-zinc-950 dark:text-white">35+ Live</span>
               </div>
-            </article>
-
-            {/* ==================== PAGE 3: BRAND IDENTITY & MEDTECH DESIGN ==================== */}
-            <article className="print-page bg-white dark:bg-[#101014] p-8 sm:p-16 rounded-2xl border border-black/[0.08] dark:border-white/[0.08] shadow-xl space-y-8">
-              <div className="border-b border-black/[0.08] dark:border-white/[0.08] pb-4">
-                <span className="text-[12.4px] tracking-[0.25em] uppercase font-light text-zinc-400">
-                  DESIGN &amp; CAMPAIGNS &bull; 02
-                </span>
-                <h3 className="text-2xl sm:text-3xl font-extralight tracking-tight text-zinc-950 dark:text-white mt-1">
-                  Chronos Medical - Surgical Innovation Campaign
-                </h3>
-                <p className="text-xs font-light text-zinc-500 mt-1">
-                  Surgical implant technology branding, DuraFrame system social series &amp; Instagram asset suite
-                </p>
+              <div>
+                <span className="text-[11px] uppercase font-mono text-zinc-400 block">Site Health</span>
+                <span className="text-xl sm:text-2xl font-light text-zinc-950 dark:text-white">90%+ Avg</span>
               </div>
-
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                <div className="space-y-2">
-                  <div className="rounded-lg overflow-hidden border border-black/[0.08] dark:border-white/[0.08] bg-zinc-900 flex items-center justify-center h-64">
-                    <img
-                      src="/works/graphic design/Chronos_IG_Brand_1080.png"
-                      alt="Chronos Medical Brand Identity"
-                      className="max-h-full max-w-full object-contain"
-                    />
-                  </div>
-                  <p className="text-[12.4px] font-mono text-zinc-400 text-center">01. Master Brand Identity (1080x1080)</p>
-                </div>
-
-                <div className="space-y-2">
-                  <div className="rounded-lg overflow-hidden border border-black/[0.08] dark:border-white/[0.08] bg-zinc-900 flex items-center justify-center h-64">
-                    <img
-                      src="/works/graphic design/Chronos_IG_DuraFrame_1080.png"
-                      alt="Chronos DuraFrame System"
-                      className="max-h-full max-w-full object-contain"
-                    />
-                  </div>
-                  <p className="text-[12.4px] font-mono text-zinc-400 text-center">02. DuraFrame Titanium System (1080x1080)</p>
-                </div>
-
-                <div className="space-y-2">
-                  <div className="rounded-lg overflow-hidden border border-black/[0.08] dark:border-white/[0.08] bg-zinc-900 flex items-center justify-center h-64">
-                    <img
-                      src="/works/graphic design/Chronos_IG_Story_1080x1920.png"
-                      alt="Chronos Instagram Story"
-                      className="max-h-full max-w-full object-contain"
-                    />
-                  </div>
-                  <p className="text-[12.4px] font-mono text-zinc-400 text-center">03. Interactive Story (1080x1920)</p>
-                </div>
+              <div>
+                <span className="text-[11px] uppercase font-mono text-zinc-400 block">National Brands</span>
+                <span className="text-xl sm:text-2xl font-light text-zinc-950 dark:text-white">Skyworth, Wits</span>
               </div>
+            </div>
 
-              <div className="p-4 rounded-lg bg-zinc-50 dark:bg-zinc-900/40 border border-black/[0.06] dark:border-white/[0.06] text-xs font-light text-zinc-600 dark:text-zinc-400 leading-relaxed">
-                <strong className="font-normal text-zinc-950 dark:text-white">Design Scope:</strong> Crafted high-precision clinical marketing visuals communicating ergonomic titanium surgical systems. Integrated 3D instrument renderings, strict typography hierarchy, and interactive engagement slides for healthcare procurement leads.
-              </div>
-            </article>
-
-            {/* ==================== PAGE 4: WITS UNIVERSITY OPEN DAY 2025 SHOWCASE ==================== */}
-            <article className="print-page bg-white dark:bg-[#101014] p-8 sm:p-16 rounded-2xl border border-black/[0.08] dark:border-white/[0.08] shadow-xl space-y-8">
-              <div className="border-b border-black/[0.08] dark:border-white/[0.08] pb-4">
-                <span className="text-[12.4px] tracking-[0.25em] uppercase font-light text-zinc-400">
-                  MOBILE STORIES &bull; 03
-                </span>
-                <h3 className="text-2xl sm:text-3xl font-extralight tracking-tight text-zinc-950 dark:text-white mt-1">
-                  Wits University Open Day 2025 - Research Showcase
-                </h3>
-                <p className="text-xs font-light text-zinc-500 mt-1">
-                  Mobile story series &amp; corporate partner acquisition campaign (&ldquo;Where a century of discovery meets the next century of partners&rdquo;)
-                </p>
-              </div>
-
-              <div className="grid grid-cols-2 sm:grid-cols-5 gap-3">
-                {[
-                  { title: 'Intro & Welcome', file: '/works/graphic design/wits-story-01.png' },
-                  { title: 'Four Ways to Partner', file: '/works/graphic design/wits-story-03.png' },
-                  { title: 'Century of Firsts', file: '/works/graphic design/wits-story-04.png' },
-                  { title: 'Innovation Centre', file: '/works/graphic design/wits-story-05.png' },
-                  { title: 'Open Day Call to Action', file: '/works/graphic design/wits-story-06.png' },
-                ].map((story, i) => (
-                  <div key={i} className="space-y-1.5">
-                    <div className="rounded-lg overflow-hidden border border-black/[0.08] dark:border-white/[0.08] bg-[#001e3d] flex items-center justify-center aspect-[9/16]">
-                      <img
-                        src={story.file}
-                        alt={story.title}
-                        className="w-full h-full object-cover"
-                      />
-                    </div>
-                    <p className="text-[12.4px] font-mono text-zinc-400 text-center truncate">{story.title}</p>
-                  </div>
-                ))}
-              </div>
-
-              <div className="p-4 rounded-lg bg-zinc-50 dark:bg-zinc-900/40 border border-black/[0.06] dark:border-white/[0.06] text-xs font-light text-zinc-600 dark:text-zinc-400 leading-relaxed">
-                <strong className="font-normal text-zinc-950 dark:text-white">Institutional Impact:</strong> Designed official mobile storytelling assets highlighting Wits milestones (First nuclear accelerator, first computer, first plastic cornea graft, first African university with quantum computer access) and structured the corporate collaboration funnel for the Wits Innovation Centre.
-              </div>
-            </article>
-
-            {/* ==================== PAGE 5: DIGITAL PUBLISHING & E-BOOK COLLECTION ==================== */}
-            <article className="print-page bg-white dark:bg-[#101014] p-8 sm:p-16 rounded-2xl border border-black/[0.08] dark:border-white/[0.08] shadow-xl space-y-8">
-              <div className="border-b border-black/[0.08] dark:border-white/[0.08] pb-4">
-                <span className="text-[12.4px] tracking-[0.25em] uppercase font-light text-zinc-400">
-                  DIGITAL PUBLISHING &bull; 04
-                </span>
-                <h3 className="text-2xl sm:text-3xl font-extralight tracking-tight text-zinc-950 dark:text-white mt-1">
-                  Commercial E-Book &amp; Editorial Cover Collection
-                </h3>
-                <p className="text-xs font-light text-zinc-500 mt-1">
-                  11 commercially produced publication covers across Artificial Intelligence, Cybersecurity, Marketing &amp; Lifestyle
-                </p>
-              </div>
-
-              <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
-                {ebookCovers.map((book, idx) => (
-                  <div key={idx} className="group space-y-2">
-                    <div className="rounded-lg overflow-hidden border border-black/[0.08] dark:border-white/[0.08] bg-zinc-950 shadow-md aspect-[3/4]">
-                      <img
-                        src={book.path}
-                        alt={book.title}
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                      />
-                    </div>
-                    <div>
-                      <span className="text-[10.2px] uppercase font-mono text-zinc-400 block">{book.tag}</span>
-                      <h4 className="text-xs font-normal text-zinc-950 dark:text-white leading-tight line-clamp-1">
-                        {book.title}
-                      </h4>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </article>
-
-            {/* ==================== PAGE 6: FLAGSHIP WEB PLATFORMS & E-COMMERCE ==================== */}
-            <article className="print-page bg-white dark:bg-[#101014] p-8 sm:p-16 rounded-2xl border border-black/[0.08] dark:border-white/[0.08] shadow-xl space-y-8">
-              <div className="border-b border-black/[0.08] dark:border-white/[0.08] pb-4">
-                <span className="text-[12.4px] tracking-[0.25em] uppercase font-light text-zinc-400">
-                  WEB PLATFORMS &bull; 05
-                </span>
-                <h3 className="text-2xl sm:text-3xl font-extralight tracking-tight text-zinc-950 dark:text-white mt-1">
-                  Selected Full Stack Web Platforms
-                </h3>
-                <p className="text-xs font-light text-zinc-500 mt-1">
-                  Enterprise corporate portals, high-traffic electronics catalogs &amp; global scientific web systems
-                </p>
-              </div>
-
-              <div className="space-y-6">
-                {[
-                  {
-                    name: 'Skyworth South Africa Official Portal',
-                    url: 'skyworth.co.za',
-                    sector: 'Flagship Consumer Electronics & Android TV',
-                    role: 'Full Stack Engineering, Theme Development & Server Administration',
-                    image: '/works/graphic design/skw1.jpg',
-                  },
-                  {
-                    name: 'Sinotec Consumer Electronics',
-                    url: 'sinotec.co.za',
-                    sector: 'National Consumer Electronics & Warranty System',
-                    role: 'Catalog Management, Performance Optimization & Retailer Locator',
-                    image: '/works/graphic design/sinotec1.jpg',
-                  },
-                ].map((proj, idx) => (
+            {/* Core Ecosystem Banner */}
+            <div className="space-y-2.5">
+              <span className="text-[11px] tracking-[0.25em] uppercase font-light text-zinc-400 block">
+                CORE ECOSYSTEM &bull; INDUSTRY-STANDARD PLATFORMS &amp; MARKETING SUITES
+              </span>
+              <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-2">
+                {ECOSYSTEM_BADGES.map((b) => (
                   <div
-                    key={idx}
-                    className="p-5 rounded-xl bg-zinc-50 dark:bg-zinc-900/40 border border-black/[0.06] dark:border-white/[0.06] flex flex-col sm:flex-row items-center gap-6"
+                    key={b.title}
+                    className="flex items-center gap-2 p-2 rounded-lg bg-zinc-50 dark:bg-zinc-900/40 border border-black/[0.06] dark:border-white/[0.08]"
                   >
-                    <div className="w-full sm:w-48 h-28 rounded-lg overflow-hidden border border-black/[0.06] dark:border-white/[0.08] shrink-0 bg-zinc-900">
-                      <img
-                        src={proj.image}
-                        alt={proj.name}
-                        className="w-full h-full object-cover"
-                      />
-                    </div>
-                    <div className="flex-1 space-y-1.5 w-full">
-                      <div className="flex items-center justify-between text-[12.4px] font-mono text-zinc-400">
-                        <span className="uppercase">{proj.sector}</span>
-                        <span className="text-zinc-900 dark:text-white font-normal">{proj.url}</span>
-                      </div>
-                      <h4 className="text-base font-normal text-zinc-950 dark:text-white">
-                        {proj.name}
-                      </h4>
-                      <p className="text-xs font-light text-zinc-500 dark:text-zinc-400">
-                        {proj.role}
-                      </p>
+                    <img src={b.icon} alt="" className="w-4 h-4 object-contain shrink-0" />
+                    <div className="truncate">
+                      <span className="text-[11px] font-medium text-zinc-950 dark:text-white block truncate leading-tight">
+                        {b.title}
+                      </span>
+                      <span className="text-[9.5px] font-mono text-zinc-400 uppercase block truncate leading-tight">
+                        {b.category}
+                      </span>
                     </div>
                   </div>
                 ))}
               </div>
-            </article>
+            </div>
 
-            {/* ==================== PAGE 7: 3D EXHIBITION, SIGNAGE & EVENTS ==================== */}
-            <article className="print-page bg-white dark:bg-[#101014] p-8 sm:p-16 rounded-2xl border border-black/[0.08] dark:border-white/[0.08] shadow-xl space-y-8">
-              <div className="border-b border-black/[0.08] dark:border-white/[0.08] pb-4">
-                <span className="text-[12.4px] tracking-[0.25em] uppercase font-light text-zinc-400">
-                  EXHIBITIONS &bull; 06
-                </span>
-                <h3 className="text-2xl sm:text-3xl font-extralight tracking-tight text-zinc-950 dark:text-white mt-1">
-                  3D Exhibition Stands, Signage &amp; Events
-                </h3>
-              </div>
+            {/* Contact Details */}
+            <div className="flex flex-wrap items-center justify-between gap-4 text-xs font-light text-zinc-500 pt-2 border-t border-black/[0.06] dark:border-white/[0.06]">
+              <span>{PERSONAL_INFO.location}</span>
+              <span>{PERSONAL_INFO.phones.join(' &bull; ')}</span>
+              <span className="text-zinc-900 dark:text-zinc-200 font-normal">{PERSONAL_INFO.email}</span>
+            </div>
+          </article>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                <div className="rounded-xl bg-zinc-50 dark:bg-zinc-900/50 border border-black/[0.06] dark:border-white/[0.06] overflow-hidden">
-                  <div className="grid grid-cols-3 gap-0">
-                    {[
-                      '/works/graphic design/scomic con-sk1.jpg',
-                      '/works/graphic design/scomic con-sk2.jpg',
-                      '/works/graphic design/scomic con-sk3.jpg',
-                    ].map((src) => (
-                      <img
-                        key={src}
-                        src={src}
-                        alt="Skyworth @ Comic Con Africa booth build"
-                        className="w-full h-28 object-cover"
-                      />
-                    ))}
-                  </div>
-                  <div className="p-6 space-y-2">
-                    <span className="text-[12.4px] font-mono text-zinc-400 uppercase">Kyalami Convention Centre &bull; 50,000+ Visitors</span>
-                    <h4 className="text-base font-normal text-zinc-950 dark:text-white">Skyworth @ Comic Con Africa</h4>
-                    <p className="text-xs font-light text-zinc-600 dark:text-zinc-400 leading-relaxed">
-                      Spearheaded 3D booth structure modeling in AutoCAD, architectural pylon signage, high-density digital gaming displays, and real-time social event broadcasting.
-                    </p>
-                  </div>
-                </div>
+          {/* ==================== PAGE 2: TECHNICAL ARCHITECTURE & SYSTEMS ENGINEERING ==================== */}
+          <article className="print-page bg-white dark:bg-[#101014] p-8 sm:p-14 rounded-2xl border border-black/[0.08] dark:border-white/[0.08] shadow-xl space-y-6 print:p-0 print:border-none print:shadow-none print:bg-white">
+            <div className="border-b border-black/[0.08] dark:border-white/[0.08] pb-4">
+              <span className="text-[11px] tracking-[0.25em] uppercase font-light text-zinc-400">
+                SYSTEMS ARCHITECTURE &bull; 01
+              </span>
+              <h3 className="text-xl sm:text-2xl font-extralight tracking-tight text-zinc-950 dark:text-white mt-1">
+                Technical Architecture &amp; Distributed Platforms
+              </h3>
+              <p className="text-xs font-light text-zinc-500 mt-0.5">
+                Event-driven workflow engines, enterprise ERP platforms, AI topology blueprints &amp; collaborative workspaces
+              </p>
+            </div>
 
-                <div className="rounded-xl bg-zinc-50 dark:bg-zinc-900/50 border border-black/[0.06] dark:border-white/[0.06] overflow-hidden">
-                  <div className="w-full">
-                    <img
-                      src="/works/graphic design/decorex-sk4.jpg"
-                      alt="Skyworth @ Decorex SA Expo booth design"
-                      className="w-full h-28 object-cover"
-                    />
-                  </div>
-                  <div className="p-6 space-y-2">
-                    <span className="text-[12.4px] font-mono text-zinc-400 uppercase">Gallagher Convention Centre &bull; Luxury Interior Expo</span>
-                    <h4 className="text-base font-normal text-zinc-950 dark:text-white">Skyworth @ Decorex SA Expo</h4>
-                    <p className="text-xs font-light text-zinc-600 dark:text-zinc-400 leading-relaxed">
-                      Designed illuminated curved brand arches, 3D exhibition booth layouts, large-format graphics, and the high-conversion &ldquo;Win a 49-inch TV&rdquo; visitor campaign.
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </article>
-
-            {/* ==================== PAGE 8: PERFORMANCE MARKETING & VERIFIED HISTORY ==================== */}
-            <article className="print-page bg-white dark:bg-[#101014] p-8 sm:p-16 rounded-2xl border border-black/[0.08] dark:border-white/[0.08] shadow-xl space-y-8">
-              <div className="border-b border-black/[0.08] dark:border-white/[0.08] pb-4">
-                <span className="text-[12.4px] tracking-[0.25em] uppercase font-light text-zinc-400">
-                  VERIFIED HISTORY &bull; 07
-                </span>
-                <h3 className="text-2xl sm:text-3xl font-extralight tracking-tight text-zinc-950 dark:text-white mt-1">
-                  Professional Experience &amp; Official Credentials
-                </h3>
-              </div>
-
-              <div className="space-y-4">
-                {EXPERIENCES.map((exp, idx) => (
-                  <div
-                    key={idx}
-                    className="p-4 rounded-xl bg-zinc-50 dark:bg-zinc-900/30 border border-black/[0.04] dark:border-white/[0.04] flex flex-col sm:flex-row justify-between gap-2"
-                  >
-                    <div>
-                      <h4 className="text-sm font-normal text-zinc-950 dark:text-white">
-                        {exp.company} &mdash; <span className="font-light text-zinc-500">{exp.role}</span>
-                      </h4>
-                      <p className="text-xs font-light text-zinc-500">{exp.focus}</p>
-                    </div>
-                    <span className="font-mono text-xs text-zinc-400 shrink-0">{exp.period}</span>
-                  </div>
-                ))}
-              </div>
-
-              {/* Certifications and Closing */}
-              <div className="pt-4 border-t border-black/[0.06] dark:border-white/[0.06] flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-light text-zinc-500">
+            {/* System 1: Flow Ops Nexus */}
+            <div className="p-4 rounded-xl bg-zinc-50 dark:bg-zinc-900/40 border border-black/[0.06] dark:border-white/[0.06] space-y-3 print-avoid-break">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1 border-b border-black/[0.06] dark:border-white/[0.06] pb-2">
                 <div>
-                  <strong className="font-normal text-zinc-950 dark:text-white">Verified Certifications:</strong> Semrush Academy SEO/SEM Specialist &bull; Google Digital Training &bull; Senior High Certificate
+                  <span className="text-[10px] font-mono uppercase text-zinc-400 block">Workflow Orchestration Engine</span>
+                  <h4 className="text-sm font-normal text-zinc-950 dark:text-white">
+                    Flow Ops (Optimal Nexus Pro)
+                  </h4>
                 </div>
-                <div className="font-mono text-[12.4px] text-zinc-400">
-                  DOCUMENT CERTIFIED &bull; BRENTON T. KANDHAI
+                <span className="text-xs font-mono text-zinc-400">flow-optimal-nexus-pro.base44.app</span>
+              </div>
+
+              <div className="grid grid-cols-3 gap-2">
+                <div className="rounded-md overflow-hidden border border-black/[0.08] dark:border-white/[0.08] bg-zinc-950 aspect-[16/10]">
+                  <img src="/works/technical-architecture/flow-ops/flow-ops-dashboard.png" alt="Dashboard" className="w-full h-full object-cover" />
+                </div>
+                <div className="rounded-md overflow-hidden border border-black/[0.08] dark:border-white/[0.08] bg-zinc-950 aspect-[16/10]">
+                  <img src="/works/technical-architecture/flow-ops/flow-ops-builder.png" alt="Builder" className="w-full h-full object-cover" />
+                </div>
+                <div className="rounded-md overflow-hidden border border-black/[0.08] dark:border-white/[0.08] bg-zinc-950 aspect-[16/10]">
+                  <img src="/works/technical-architecture/flow-ops/flow-ops-integrations.png" alt="Integrations" className="w-full h-full object-cover" />
                 </div>
               </div>
-            </article>
-          </div>
+
+              <p className="text-[11.5px] font-light text-zinc-600 dark:text-zinc-400 leading-relaxed">
+                <strong className="font-normal text-zinc-950 dark:text-white">Scope:</strong> Node-based workflow builder with automated triggers, multi-service webhook connectors, live telemetry execution runs, error recovery policies, and RBAC team collaboration.
+              </p>
+            </div>
+
+            {/* System 2: BTV BOS */}
+            <div className="p-4 rounded-xl bg-zinc-50 dark:bg-zinc-900/40 border border-black/[0.06] dark:border-white/[0.06] space-y-3 print-avoid-break">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1 border-b border-black/[0.06] dark:border-white/[0.06] pb-2">
+                <div>
+                  <span className="text-[10px] font-mono uppercase text-zinc-400 block">Enterprise AI Operating System</span>
+                  <h4 className="text-sm font-normal text-zinc-950 dark:text-white">
+                    BTV BOS - Complete Enterprise ERP
+                  </h4>
+                </div>
+                <span className="text-xs font-mono text-zinc-400">btv-bos.base44.app</span>
+              </div>
+
+              <div className="grid grid-cols-3 gap-2">
+                <div className="rounded-md overflow-hidden border border-black/[0.08] dark:border-white/[0.08] bg-zinc-950 aspect-[16/10]">
+                  <img src="/works/technical-architecture/ai-business-operating-system/btv-bos-dashboard.png" alt="BOS Dashboard" className="w-full h-full object-cover" />
+                </div>
+                <div className="rounded-md overflow-hidden border border-black/[0.08] dark:border-white/[0.08] bg-zinc-950 aspect-[16/10]">
+                  <img src="/works/technical-architecture/ai-business-operating-system/btv-bos-projects.png" alt="Sprints" className="w-full h-full object-cover" />
+                </div>
+                <div className="rounded-md overflow-hidden border border-black/[0.08] dark:border-white/[0.08] bg-zinc-950 aspect-[16/10]">
+                  <img src="/works/technical-architecture/ai-business-operating-system/btv-bos-devices.png" alt="Devices" className="w-full h-full object-cover" />
+                </div>
+              </div>
+
+              <p className="text-[11.5px] font-light text-zinc-600 dark:text-zinc-400 leading-relaxed">
+                <strong className="font-normal text-zinc-950 dark:text-white">Scope:</strong> 7 core operational subsystems including CRM pipeline, sprint milestones, double-entry financial accounting, IoT device fleet monitoring, and autonomous AI Copilot.
+              </p>
+            </div>
+
+            {/* System 3: AI BOS Blueprints & Atrium Hub */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 print-avoid-break">
+              <div className="p-3.5 rounded-xl bg-zinc-50 dark:bg-zinc-900/40 border border-black/[0.06] dark:border-white/[0.06] space-y-2">
+                <span className="text-[10px] font-mono uppercase text-zinc-400 block">Distributed AI Topology</span>
+                <h4 className="text-xs font-normal text-zinc-950 dark:text-white">AI BOS Architecture Blueprints</h4>
+                <div className="rounded-md overflow-hidden border border-black/[0.08] dark:border-white/[0.08] bg-zinc-950 h-28">
+                  <img src="/works/technical-architecture/ai-bos/AI-BOS-1.png" alt="Blueprint" className="w-full h-full object-contain" />
+                </div>
+                <p className="text-[11px] font-light text-zinc-500 leading-relaxed">
+                  4-part architectural blueprint series detailing multi-agent coordination, vector caching, and zero-downtime microservices.
+                </p>
+              </div>
+
+              <div className="p-3.5 rounded-xl bg-zinc-50 dark:bg-zinc-900/40 border border-black/[0.06] dark:border-white/[0.06] space-y-2">
+                <span className="text-[10px] font-mono uppercase text-zinc-400 block">Collaborative Operations</span>
+                <h4 className="text-xs font-normal text-zinc-950 dark:text-white">Atrium Operations &amp; Knowledge Hub</h4>
+                <div className="rounded-md overflow-hidden border border-black/[0.08] dark:border-white/[0.08] bg-zinc-950 h-28">
+                  <img src="/works/technical-architecture/atrium/atrium-1.png" alt="Atrium Canvas" className="w-full h-full object-contain" />
+                </div>
+                <p className="text-[11px] font-light text-zinc-500 leading-relaxed">
+                  Real-time workspace canvas with fluid node-based content linking, collaborative permissions, and team presence.
+                </p>
+              </div>
+            </div>
+          </article>
+
+          {/* ==================== PAGE 3: PRODUCTION CLIENT WEB PLATFORMS (PART 1) ==================== */}
+          <article className="print-page bg-white dark:bg-[#101014] p-8 sm:p-14 rounded-2xl border border-black/[0.08] dark:border-white/[0.08] shadow-xl space-y-5 print:p-0 print:border-none print:shadow-none print:bg-white">
+            <div className="border-b border-black/[0.08] dark:border-white/[0.08] pb-3">
+              <span className="text-[11px] tracking-[0.25em] uppercase font-light text-zinc-400">
+                LIVE CLIENT WEB SYSTEMS &bull; 02A
+              </span>
+              <h3 className="text-xl sm:text-2xl font-extralight tracking-tight text-zinc-950 dark:text-white mt-1">
+                Production Web Platforms &amp; Client Portals
+              </h3>
+              <p className="text-xs font-light text-zinc-500 mt-0.5">
+                Flagship client web platforms, high-tech showcases &amp; specialized booking systems
+              </p>
+            </div>
+
+            <div className="space-y-3.5">
+              {[
+                {
+                  name: 'Hologram Monkey',
+                  url: 'hologrammonkey.co.uk',
+                  sector: 'Advanced Holographic Tech & 3D Displays (UK)',
+                  role: 'Full Stack Engineering, Dark-Mode Web Showcase & Interactive Demo Booking Funnel',
+                  tools: ['React', 'TypeScript', 'Node.js', 'Tailwind', 'Motion UI'],
+                  image: '/assets/aistudio/Hologram_Monkey_540b115b.png',
+                },
+                {
+                  name: 'Sauer Attorneys & Conveyancers',
+                  url: 'sauerattorneys.co.za',
+                  sector: 'Property Law & Conveyancing Specialists',
+                  role: 'Corporate Practice Portal, Conveyancing Walkthrough & Case Consultation Intake',
+                  tools: ['WordPress', 'PHP', 'MySQL', 'Legal Intake Forms', 'SEO Architecture'],
+                  image: '/assets/aistudio/SAUER_ATTORNEYS_f3ddef7c.png',
+                },
+                {
+                  name: 'Chronos Medical',
+                  url: 'chronosmedical.co.za',
+                  sector: 'Surgical Systems & Clinical MedTech',
+                  role: 'Neurosurgery/Urology/ENT Clinical Equipment Portal & SAHPRA-Aligned Quote Flow',
+                  tools: ['WordPress Theme Dev', 'WooCommerce Catalog', 'PHP', 'Speed Optimization'],
+                  image: '/assets/aistudio/Chronos_Medical_bc05507e.png',
+                },
+                {
+                  name: 'Lulu J Boutique',
+                  url: 'lulujboutique.co.za',
+                  sector: 'Curated Italian & European Fashion',
+                  role: 'Luxury Fashion Web Storefront, Visual Merchandising & WhatsApp VIP Styling Concierge',
+                  tools: ['WooCommerce', 'WordPress', 'Payment Gateway Integration', 'Mobile UI'],
+                  image: '/assets/aistudio/lulu-j-boutique_c946a8d5.png',
+                },
+              ].map((proj, idx) => (
+                <div
+                  key={idx}
+                  className="p-3.5 rounded-xl bg-zinc-50 dark:bg-zinc-900/40 border border-black/[0.06] dark:border-white/[0.06] flex items-center gap-4 print-avoid-break"
+                >
+                  <div className="w-36 h-20 rounded-lg overflow-hidden border border-black/[0.06] dark:border-white/[0.08] shrink-0 bg-zinc-950">
+                    <img src={proj.image} alt={proj.name} className="w-full h-full object-cover" />
+                  </div>
+                  <div className="flex-1 space-y-1">
+                    <div className="flex items-center justify-between text-[11px] font-mono text-zinc-400">
+                      <span className="uppercase">{proj.sector}</span>
+                      <span className="text-zinc-900 dark:text-white font-medium">{proj.url}</span>
+                    </div>
+                    <h4 className="text-xs sm:text-sm font-normal text-zinc-950 dark:text-white">
+                      {proj.name}
+                    </h4>
+                    <p className="text-[11.5px] font-light text-zinc-500 dark:text-zinc-400 line-clamp-1">
+                      {proj.role}
+                    </p>
+                    <div className="flex flex-wrap gap-1 pt-0.5">
+                      {proj.tools.map((t) => (
+                        <span key={t} className="text-[10px] px-1.5 py-0.2 rounded bg-zinc-100 dark:bg-zinc-800 text-zinc-500">
+                          {t}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </article>
+
+          {/* ==================== PAGE 4: PRODUCTION CLIENT WEB PLATFORMS (PART 2) ==================== */}
+          <article className="print-page bg-white dark:bg-[#101014] p-8 sm:p-14 rounded-2xl border border-black/[0.08] dark:border-white/[0.08] shadow-xl space-y-5 print:p-0 print:border-none print:shadow-none print:bg-white">
+            <div className="border-b border-black/[0.08] dark:border-white/[0.08] pb-3">
+              <span className="text-[11px] tracking-[0.25em] uppercase font-light text-zinc-400">
+                LIVE CLIENT WEB SYSTEMS &bull; 02B
+              </span>
+              <h3 className="text-xl sm:text-2xl font-extralight tracking-tight text-zinc-950 dark:text-white mt-1">
+                Enterprise Portals, Publishing &amp; National Brands
+              </h3>
+            </div>
+
+            <div className="space-y-3.5">
+              {[
+                {
+                  name: 'SilvaShaw Technologies',
+                  url: 'silvashaw.co.za',
+                  sector: 'Enterprise Telecom & Managed IT Services',
+                  role: 'VoIP, Cloud Hosted Services, Free IT Assessment Lead Engine & Reseller Portal',
+                  tools: ['WordPress', 'Lead Funnels', 'Technical SEO', 'Analytics'],
+                  image: '/assets/aistudio/SilvaShaw_e7977dd2.png',
+                },
+                {
+                  name: 'AgriAbout Magazine',
+                  url: 'agriabout.com',
+                  sector: 'Sustainable Agriculture Digital Publishing',
+                  role: 'Monthly Digital Edition Reader, Editorial CMS, Media Kit & Newsletter Integration',
+                  tools: ['WordPress CMS', 'Digital Flipbook', 'Mailchimp API', 'AdSense'],
+                  image: '/assets/aistudio/agriabout_18aedaac.png',
+                },
+                {
+                  name: 'Spina Vita Chiropractic',
+                  url: 'spinavita.co.za',
+                  sector: 'Healthcare & Clinical Practice (Dual Clinics)',
+                  role: 'Real-Time Patient Appointment Booking Engine, Medical Aid Advisory & Condition Guides',
+                  tools: ['WordPress', 'Booking Calendar Engine', 'Local SEO', 'WhatsApp API'],
+                  image: '/assets/aistudio/spina-vita_d82bfd1c.png',
+                },
+                {
+                  name: 'Corporate AV Integration',
+                  url: 'corporateav.co.za',
+                  sector: 'Commercial Boardroom & Audiovisual Engineering',
+                  role: 'B2B Solutions Architecture, Unified Communications Explorer & Quote Calculator',
+                  tools: ['Custom Web App', 'Interactive Quote Builder', 'B2B UX Design'],
+                  image: '/assets/aistudio/corporate-av_eb231fd0.png',
+                },
+                {
+                  name: 'Skyworth South Africa Official Portal',
+                  url: 'skyworth.co.za',
+                  sector: 'Flagship Consumer Electronics & Android TV',
+                  role: 'Full Stack Engineering, Custom Theme Architecture & Server Administration',
+                  tools: ['PHP', 'MySQL', 'Linux Server', 'Theme Engineering', 'CDN'],
+                  image: '/works/graphic design/skw1.jpg',
+                },
+                {
+                  name: 'Sinotec Consumer Electronics',
+                  url: 'sinotec.co.za',
+                  sector: 'National Consumer Electronics & Warranty System',
+                  role: 'Catalog Management, Performance Optimization & Retailer Locator',
+                  tools: ['WordPress', 'WooCommerce', 'Speed Tuning', 'Retailer Maps'],
+                  image: '/works/graphic design/sinotec1.jpg',
+                },
+              ].map((proj, idx) => (
+                <div
+                  key={idx}
+                  className="p-3 rounded-xl bg-zinc-50 dark:bg-zinc-900/40 border border-black/[0.06] dark:border-white/[0.06] flex items-center gap-4 print-avoid-break"
+                >
+                  <div className="w-32 h-18 rounded-lg overflow-hidden border border-black/[0.06] dark:border-white/[0.08] shrink-0 bg-zinc-950">
+                    <img src={proj.image} alt={proj.name} className="w-full h-full object-cover" />
+                  </div>
+                  <div className="flex-1 space-y-0.5">
+                    <div className="flex items-center justify-between text-[11px] font-mono text-zinc-400">
+                      <span className="uppercase">{proj.sector}</span>
+                      <span className="text-zinc-900 dark:text-white font-medium">{proj.url}</span>
+                    </div>
+                    <h4 className="text-xs sm:text-sm font-normal text-zinc-950 dark:text-white">
+                      {proj.name}
+                    </h4>
+                    <p className="text-[11px] font-light text-zinc-500 dark:text-zinc-400 line-clamp-1">
+                      {proj.role}
+                    </p>
+                    <div className="flex flex-wrap gap-1 pt-0.5">
+                      {proj.tools.map((t) => (
+                        <span key={t} className="text-[9.5px] px-1.5 py-0.2 rounded bg-zinc-100 dark:bg-zinc-800 text-zinc-500">
+                          {t}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </article>
+
+          {/* ==================== PAGE 5: BRAND IDENTITY & MEDTECH DESIGN ==================== */}
+          <article className="print-page bg-white dark:bg-[#101014] p-8 sm:p-14 rounded-2xl border border-black/[0.08] dark:border-white/[0.08] shadow-xl space-y-6 print:p-0 print:border-none print:shadow-none print:bg-white">
+            <div className="border-b border-black/[0.08] dark:border-white/[0.08] pb-4">
+              <span className="text-[11px] tracking-[0.25em] uppercase font-light text-zinc-400">
+                MEDTECH BRANDING &bull; 03
+              </span>
+              <h3 className="text-xl sm:text-2xl font-extralight tracking-tight text-zinc-950 dark:text-white mt-1">
+                Chronos Medical &bull; Surgical Innovation Campaign
+              </h3>
+              <p className="text-xs font-light text-zinc-500 mt-0.5">
+                Titanium surgical system branding, DuraFrame feature series &amp; Instagram asset suite
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-3 print-avoid-break">
+              <div className="space-y-1.5">
+                <div className="rounded-lg overflow-hidden border border-black/[0.08] dark:border-white/[0.08] bg-zinc-900 flex items-center justify-center h-48">
+                  <img src="/works/graphic design/Chronos_IG_Brand_1080.png" alt="Brand Identity" className="max-h-full max-w-full object-contain" />
+                </div>
+                <p className="text-[11px] font-mono text-zinc-400 text-center">01. Master Brand Identity (1080x1080)</p>
+              </div>
+
+              <div className="space-y-1.5">
+                <div className="rounded-lg overflow-hidden border border-black/[0.08] dark:border-white/[0.08] bg-zinc-900 flex items-center justify-center h-48">
+                  <img src="/works/graphic design/Chronos_IG_DuraFrame_1080.png" alt="DuraFrame" className="max-h-full max-w-full object-contain" />
+                </div>
+                <p className="text-[11px] font-mono text-zinc-400 text-center">02. DuraFrame Titanium System (1080x1080)</p>
+              </div>
+
+              <div className="space-y-1.5">
+                <div className="rounded-lg overflow-hidden border border-black/[0.08] dark:border-white/[0.08] bg-zinc-900 flex items-center justify-center h-48">
+                  <img src="/works/graphic design/Chronos_IG_Story_1080x1920.png" alt="Story" className="max-h-full max-w-full object-contain" />
+                </div>
+                <p className="text-[11px] font-mono text-zinc-400 text-center">03. Interactive Story (1080x1920)</p>
+              </div>
+            </div>
+
+            <div className="p-3.5 rounded-lg bg-zinc-50 dark:bg-zinc-900/40 border border-black/[0.06] dark:border-white/[0.06] text-xs font-light text-zinc-600 dark:text-zinc-400 leading-relaxed">
+              <strong className="font-normal text-zinc-950 dark:text-white">Scope &amp; Impact:</strong> Crafted clinical marketing visuals communicating ergonomic titanium surgical systems. Integrated 3D instrument renderings, strict typography hierarchy, and interactive engagement slides for healthcare procurement leads.
+            </div>
+          </article>
+
+          {/* ==================== PAGE 6: MOBILE CAMPAIGNS & 11 COMMERCIAL E-BOOKS ==================== */}
+          <article className="print-page bg-white dark:bg-[#101014] p-8 sm:p-14 rounded-2xl border border-black/[0.08] dark:border-white/[0.08] shadow-xl space-y-6 print:p-0 print:border-none print:shadow-none print:bg-white">
+            <div className="border-b border-black/[0.08] dark:border-white/[0.08] pb-4">
+              <span className="text-[11px] tracking-[0.25em] uppercase font-light text-zinc-400">
+                CAMPAIGNS &amp; PUBLISHING &bull; 04
+              </span>
+              <h3 className="text-xl sm:text-2xl font-extralight tracking-tight text-zinc-950 dark:text-white mt-1">
+                Wits University Mobile Stories &amp; Commercial Publications
+              </h3>
+            </div>
+
+            {/* Wits University Stories */}
+            <div className="space-y-2 print-avoid-break">
+              <span className="text-[10px] font-mono uppercase text-zinc-400 block">Wits University Open Day 2025 - 5-Part Story Series</span>
+              <div className="grid grid-cols-5 gap-2">
+                {[
+                  '/works/graphic design/wits-story-01.png',
+                  '/works/graphic design/wits-story-03.png',
+                  '/works/graphic design/wits-story-04.png',
+                  '/works/graphic design/wits-story-05.png',
+                  '/works/graphic design/wits-story-06.png',
+                ].map((src, i) => (
+                  <div key={i} className="rounded-md overflow-hidden bg-[#001e3d] aspect-[9/16]">
+                    <img src={src} alt="Wits Story" className="w-full h-full object-cover" />
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* 11 Commercial E-Books */}
+            <div className="space-y-2 pt-2 border-t border-black/[0.06] dark:border-white/[0.06] print-avoid-break">
+              <span className="text-[10px] font-mono uppercase text-zinc-400 block">11 Commercial Publication Covers</span>
+              <div className="grid grid-cols-4 sm:grid-cols-6 gap-2">
+                {ebookCovers.slice(0, 6).map((book, idx) => (
+                  <div key={idx} className="space-y-1">
+                    <div className="rounded-md overflow-hidden border border-black/[0.08] dark:border-white/[0.08] bg-zinc-950 aspect-[3/4]">
+                      <img src={book.path} alt={book.title} className="w-full h-full object-cover" />
+                    </div>
+                    <span className="text-[9.5px] font-mono text-zinc-400 block truncate">{book.tag}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </article>
+
+          {/* ==================== PAGE 7: 3D EXHIBITIONS & NATIONAL EVENTS ==================== */}
+          <article className="print-page bg-white dark:bg-[#101014] p-8 sm:p-14 rounded-2xl border border-black/[0.08] dark:border-white/[0.08] shadow-xl space-y-6 print:p-0 print:border-none print:shadow-none print:bg-white">
+            <div className="border-b border-black/[0.08] dark:border-white/[0.08] pb-4">
+              <span className="text-[11px] tracking-[0.25em] uppercase font-light text-zinc-400">
+                EXHIBITION ARCHITECTURE &bull; 05
+              </span>
+              <h3 className="text-xl sm:text-2xl font-extralight tracking-tight text-zinc-950 dark:text-white mt-1">
+                3D Exhibition Stands, Pylon Signage &amp; Events
+              </h3>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 print-avoid-break">
+              <div className="rounded-xl bg-zinc-50 dark:bg-zinc-900/50 border border-black/[0.06] dark:border-white/[0.06] overflow-hidden">
+                <div className="grid grid-cols-3 gap-0">
+                  {[
+                    '/works/graphic design/scomic con-sk1.jpg',
+                    '/works/graphic design/scomic con-sk2.jpg',
+                    '/works/graphic design/scomic con-sk3.jpg',
+                  ].map((src) => (
+                    <img key={src} src={src} alt="Comic Con" className="w-full h-24 object-cover" />
+                  ))}
+                </div>
+                <div className="p-4 space-y-1.5">
+                  <span className="text-[10px] font-mono text-zinc-400 uppercase">Kyalami Convention Centre &bull; 50,000+ Visitors</span>
+                  <h4 className="text-xs sm:text-sm font-normal text-zinc-950 dark:text-white">Skyworth @ Comic Con Africa</h4>
+                  <p className="text-[11px] font-light text-zinc-600 dark:text-zinc-400 leading-relaxed">
+                    Spearheaded 3D booth structure modeling in AutoCAD, architectural pylon signage, high-density gaming arena displays, and live social event broadcasting.
+                  </p>
+                </div>
+              </div>
+
+              <div className="rounded-xl bg-zinc-50 dark:bg-zinc-900/50 border border-black/[0.06] dark:border-white/[0.06] overflow-hidden">
+                <div className="w-full">
+                  <img src="/works/graphic design/decorex-sk4.jpg" alt="Decorex" className="w-full h-24 object-cover" />
+                </div>
+                <div className="p-4 space-y-1.5">
+                  <span className="text-[10px] font-mono text-zinc-400 uppercase">Gallagher Convention Centre &bull; Luxury Interior Expo</span>
+                  <h4 className="text-xs sm:text-sm font-normal text-zinc-950 dark:text-white">Skyworth @ Decorex SA Expo</h4>
+                  <p className="text-[11px] font-light text-zinc-600 dark:text-zinc-400 leading-relaxed">
+                    Designed illuminated curved brand arches, 3D exhibition booth layouts, large-format graphics, and the high-conversion &ldquo;Win a 49-inch TV&rdquo; visitor campaign.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          {/* ==================== PAGE 8: VERIFIED HISTORY & CREDENTIALS ==================== */}
+          <article className="print-page bg-white dark:bg-[#101014] p-8 sm:p-14 rounded-2xl border border-black/[0.08] dark:border-white/[0.08] shadow-xl space-y-6 print:p-0 print:border-none print:shadow-none print:bg-white">
+            <div className="border-b border-black/[0.08] dark:border-white/[0.08] pb-4">
+              <span className="text-[11px] tracking-[0.25em] uppercase font-light text-zinc-400">
+                VERIFIED CREDENTIALS &bull; 06
+              </span>
+              <h3 className="text-xl sm:text-2xl font-extralight tracking-tight text-zinc-950 dark:text-white mt-1">
+                Career History, Credentials &amp; Contact
+              </h3>
+            </div>
+
+            <div className="space-y-3">
+              {EXPERIENCES.map((exp, idx) => (
+                <div
+                  key={idx}
+                  className="p-3.5 rounded-xl bg-zinc-50 dark:bg-zinc-900/30 border border-black/[0.04] dark:border-white/[0.04] flex flex-col sm:flex-row justify-between gap-1 print-avoid-break"
+                >
+                  <div>
+                    <h4 className="text-xs sm:text-sm font-normal text-zinc-950 dark:text-white">
+                      {exp.company} &mdash; <span className="font-light text-zinc-500">{exp.role}</span>
+                    </h4>
+                    <p className="text-[11px] font-light text-zinc-500">{exp.focus}</p>
+                  </div>
+                  <span className="font-mono text-xs text-zinc-400 shrink-0">{exp.period}</span>
+                </div>
+              ))}
+            </div>
+
+            {/* Verified Certifications */}
+            <div className="pt-3 border-t border-black/[0.06] dark:border-white/[0.06] flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-light text-zinc-500">
+              <div>
+                <strong className="font-normal text-zinc-950 dark:text-white">Verified Certifications:</strong> Semrush Academy SEO/SEM Specialist &bull; Google Digital Training &bull; Senior High Certificate
+              </div>
+              <div className="font-mono text-[11px] text-zinc-400">
+                OFFICIAL PORTFOLIO &bull; BRENTON T. KANDHAI
+              </div>
+            </div>
+          </article>
+        </div>
       </div>
     </div>
   );

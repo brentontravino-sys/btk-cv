@@ -134,18 +134,46 @@
   background: rgba(255, 255, 255, 0.3);
 }
 
-/* Print & PDF Generation rules */
+/* Infinite horizontal marquee ticker */
+@keyframes marquee-scroll {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+.animate-marquee-scroll {
+  display: flex;
+  width: max-content;
+  will-change: transform;
+  animation: marquee-scroll 40s linear infinite;
+}
+
+.animate-marquee-scroll:hover {
+  animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-marquee-scroll {
+    animation-duration: 120s;
+  }
+}
+
+/* Print & PDF Generation rules (A4 Standard: 210mm x 297mm) */
 @media print {
   @page {
     size: A4 portrait;
-    margin: 14mm 12mm;
+    size: 210mm 297mm portrait;
+    margin: 10mm 12mm;
   }
 
   body, html {
     background: #ffffff !important;
     color: #09090b !important;
-    -webkit-print-color-adjust: exact;
-    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
   }
 
   /* Hide navigation, fixed buttons, close controls, and interactive toolbars in print */
@@ -154,34 +182,86 @@
   footer,
   .print-hide,
   button,
-  .fixed,
+  .fixed:not(.print-doc),
   .back-to-top {
     display: none !important;
   }
 
   .print-page {
-    break-after: page;
-    page-break-after: always;
-    padding-bottom: 2rem;
-  }
-
-  .print-doc .print-page:last-child,
-  .print-doc article:last-child {
+    /* Chromium adds a blank sheet after a `break-after: page` box that already
+       ends exactly on the page boundary, leaving 2 blank pages in a 4-sheet CV.
+       Starting each sheet on a fresh page keeps one printed page per sheet. */
+    break-before: page !important;
+    page-break-before: always !important;
     break-after: auto !important;
     page-break-after: auto !important;
+    /* The sheet padding now comes from the @page margin. Keeping it here too
+       pushed tall pages past the printable area and added a blank sheet. */
+    padding: 0 !important;
+    margin: 0 !important;
+    background: #ffffff !important;
+    border: none !important;
+    box-shadow: none !important;
+    /* Ensure proper width for A4 */
+    width: 100% !important;
+    max-width: 210mm !important;
+    min-height: auto !important;
+  }
+
+  /* The first sheet must not be preceded by a page break. */
+  .print-page:first-child {
+    break-before: auto !important;
+    page-break-before: auto !important;
   }
 
   .print-avoid-break {
-    break-inside: avoid;
-    page-break-inside: avoid;
+    break-inside: avoid !important;
+    page-break-inside: avoid !important;
   }
 
-  /* While the CV document viewer is open, print only the CV document — not the surrounding site */
-  body.print-cv-active > #root > div > *:not(.print-doc) {
+  /*
+   * Document printing. printDocument() clones the open CV / portfolio into
+   * #btk-print-root, so when that exists only it is printed. These rules no longer
+   * rely on :not() to guess which part of the site should be hidden, which failed
+   * whenever the viewer lived inside another fixed/stacking container.
+   */
+  body.printing-document > *:not(#btk-print-host) {
     display: none !important;
   }
 
-  /* Un-hide the portfolio document modal and flatten it into flowing A4 pages when exporting */
+  #btk-print-host,
+  #btk-print-root {
+    display: block !important;
+    position: static !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    background: #ffffff !important;
+  }
+
+  #btk-print-host {
+    color: #09090b !important;
+    color-scheme: light;
+    font-size: 13px !important;
+  }
+
+  #btk-print-root *,
+  #btk-print-host * {
+    color: #09090b !important;
+  }
+
+  #btk-print-root .print-page {
+    padding: 0 !important;
+  }
+
+  /* Fallback when printDocument() was not used: hide everything but the open viewer */
+  body.print-cv-active > #root > div > *:not(.print-doc),
+  body.print-doc-active > #root > div > *:not(.print-doc) {
+    display: none !important;
+  }
+
+  /* Flatten document modal into flowing A4 pages when printing / saving as PDF */
   .print-doc {
     display: block !important;
     position: static !important;
@@ -189,18 +269,28 @@
     overflow: visible !important;
     background: #ffffff !important;
     backdrop-filter: none !important;
+    width: 100% !important;
+    max-width: 100% !important;
   }
 
   .print-doc .print-scroll {
     height: auto !important;
     overflow: visible !important;
     background: #ffffff !important;
+    padding: 0 !important;
+    max-width: 100% !important;
+  }
+
+  /* Ensure the document container doesn't constrain print page width */
+  .print-doc .print-scroll > div {
+    max-width: 100% !important;
+    width: 100% !important;
   }
 
   .print-doc article {
     background: #ffffff !important;
     border-radius: 0 !important;
-    border-color: #d4d4d8 !important;
+    border: none !important;
     box-shadow: none !important;
   }
 
@@ -211,6 +301,7 @@
   .print-doc img {
     break-inside: avoid;
     page-break-inside: avoid;
+    max-width: 100%;
   }
 }
 
