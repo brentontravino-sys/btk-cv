@@ -89,6 +89,18 @@ export const TechEcosystemBanner: React.FC<TechEcosystemBannerProps> = ({
       aria-label="Scrolling Technology and Marketing Ecosystem Banner"
       className={`w-screen max-w-none ml-[calc(50%-50vw)] bg-black text-white border-y border-white/[0.12] py-3.5 sm:py-4.5 overflow-hidden relative select-none z-20 print:hidden ${className}`}
     >
+      {/* Optional Top Kicker Line - moved above edge gradients (higher z-index) */}
+      {showKicker && (
+        <div className="flex items-center justify-between px-6 sm:px-10 pb-2.5 max-w-7xl mx-auto relative z-20">
+          <div className="flex items-center gap-2">
+            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 shadow-[0_0_8px_rgba(52,211,153,0.8)]" />
+            <span className="text-[10.5px] sm:text-[11px] font-mono uppercase tracking-[0.24em] text-zinc-400">
+              CORE ECOSYSTEM &bull; INDUSTRY-STANDARD PLATFORMS & MARKETING SUITES
+            </span>
+          </div>
+        </div>
+      )}
+
       {/* Edge gradient masks for smooth cinematic fade */}
       <div
         className="pointer-events-none absolute inset-y-0 left-0 w-16 sm:w-32 bg-gradient-to-r from-black via-black/80 to-transparent z-10"
@@ -98,18 +110,6 @@ export const TechEcosystemBanner: React.FC<TechEcosystemBannerProps> = ({
         className="pointer-events-none absolute inset-y-0 right-0 w-16 sm:w-32 bg-gradient-to-l from-black via-black/80 to-transparent z-10"
         aria-hidden="true"
       />
-
-      {/* Optional Top Kicker Line */}
-      {showKicker && (
-        <div className="flex items-center justify-between px-6 sm:px-10 pb-2.5 max-w-7xl mx-auto">
-          <div className="flex items-center gap-2">
-            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 shadow-[0_0_8px_rgba(52,211,153,0.8)]" />
-            <span className="text-[10.5px] sm:text-[11px] font-mono uppercase tracking-[0.24em] text-zinc-400">
-              CORE ECOSYSTEM &bull; INDUSTRY-STANDARD PLATFORMS &amp; MARKETING SUITES
-            </span>
-          </div>
-                  </div>
-      )}
 
       {/* Infinite Horizontal Scrolling Track */}
       <div className="overflow-hidden w-full flex">
