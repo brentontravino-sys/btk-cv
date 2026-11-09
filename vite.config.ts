@@ -9,7 +9,13 @@ export default defineConfig(() => {
     resolve: {
       alias: {
         '@': path.resolve(__dirname, '.'),
+        // Force pdf-lib to use ESM build for Rolldown compatibility
+        'pdf-lib': path.resolve(__dirname, './node_modules/pdf-lib/dist/pdf-lib.esm.js'),
       },
+    },
+    optimizeDeps: {
+      // Don't pre-bundle pdf-lib, use it directly
+      exclude: ['pdf-lib'],
     },
     server: {
       host: '0.0.0.0',
