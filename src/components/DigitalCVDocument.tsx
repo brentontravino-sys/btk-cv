@@ -27,6 +27,14 @@ const CATEGORY_ICONS: Record<string, React.ReactNode> = {
 };
 
 export const DigitalCVDocument: React.FC<DigitalCVDocumentProps> = ({ onClose }) => {
+  // Mark the body while the CV viewer is open so print output contains only this document
+  React.useEffect(() => {
+    document.body.classList.add('print-cv-active');
+    return () => {
+      document.body.classList.remove('print-cv-active');
+    };
+  }, []);
+
   const handlePrint = () => {
     window.print();
   };

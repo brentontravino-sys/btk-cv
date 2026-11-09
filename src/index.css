@@ -176,6 +176,11 @@
     page-break-inside: avoid;
   }
 
+  /* While the CV document viewer is open, print only the CV document — not the surrounding site */
+  body.print-cv-active > #root > div > *:not(.print-doc) {
+    display: none !important;
+  }
+
   /* Un-hide the portfolio document modal and flatten it into flowing A4 pages when exporting */
   .print-doc {
     display: block !important;

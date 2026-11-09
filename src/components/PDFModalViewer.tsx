@@ -8,6 +8,15 @@ interface PDFModalViewerProps {
 }
 
 export const PDFModalViewer: React.FC<PDFModalViewerProps> = ({ type, onClose }) => {
+  React.useEffect(() => {
+    if (type === 'cv') {
+      document.body.classList.add('print-cv-active');
+    }
+    return () => {
+      document.body.classList.remove('print-cv-active');
+    };
+  }, [type]);
+
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Escape') onClose();
