@@ -22,6 +22,15 @@ export default function App() {
 
   const [selectedProject, setSelectedProject] = useState<ProjectItem | null>(null);
   const [activePdfModal, setActivePdfModal] = useState<'cv' | 'portfolio' | null>(null);
+  const [pdfAction, setPdfAction] = useState<'view' | 'download' | 'print'>('view');
+
+  const handleOpenPdf = (
+    type: 'cv' | 'portfolio',
+    action: 'view' | 'download' | 'print' = 'view'
+  ) => {
+    setPdfAction(action);
+    setActivePdfModal(type);
+  };
 
   useEffect(() => {
     if (isDark) {
@@ -45,7 +54,7 @@ export default function App() {
         setActiveTab={setActiveTab}
         isDark={isDark}
         toggleDark={toggleDark}
-        onOpenPdf={(type) => setActivePdfModal(type)}
+        onOpenPdf={handleOpenPdf}
       />
 
       {/* Main Multipage Content Area with Smooth Motion Transitions */}
@@ -66,7 +75,7 @@ export default function App() {
             >
               <HomePage
                 setActiveTab={setActiveTab}
-                onOpenPdf={(type) => setActivePdfModal(type)}
+                onOpenPdf={handleOpenPdf}
                 onSelectProject={(project) => setSelectedProject(project)}
                 isDark={isDark}
               />
@@ -83,7 +92,7 @@ export default function App() {
             >
               <PortfolioPage
                 onSelectProject={(project) => setSelectedProject(project)}
-                onOpenPdf={(type) => setActivePdfModal(type)}
+                onOpenPdf={handleOpenPdf}
               />
             </motion.div>
           )}
@@ -96,7 +105,7 @@ export default function App() {
               exit={{ opacity: 0, y: -12 }}
               transition={{ duration: 0.25, ease: 'easeInOut' }}
             >
-              <ResumePage onOpenPdf={(type) => setActivePdfModal(type)} />
+              <ResumePage onOpenPdf={handleOpenPdf} />
             </motion.div>
           )}
 
@@ -120,7 +129,7 @@ export default function App() {
               exit={{ opacity: 0, y: -12 }}
               transition={{ duration: 0.25, ease: 'easeInOut' }}
             >
-              <ContactPage onOpenPdf={(type) => setActivePdfModal(type)} />
+              <ContactPage onOpenPdf={handleOpenPdf} />
             </motion.div>
           )}
         </AnimatePresence>
@@ -129,7 +138,7 @@ export default function App() {
       {/* Footer with Contact Details & PDF Triggers */}
       <Footer
         setActiveTab={setActiveTab}
-        onOpenPdf={(type) => setActivePdfModal(type)}
+        onOpenPdf={handleOpenPdf}
       />
 
       {/* Case Study Details Modal */}
@@ -142,6 +151,7 @@ export default function App() {
       <PDFModalViewer
         type={activePdfModal}
         onClose={() => setActivePdfModal(null)}
+        action={pdfAction}
       />
 
       {/* Floating Minimalist Back-To-Top Button with Scroll Progress Tracker */}

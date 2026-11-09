@@ -5,15 +5,22 @@ import { DigitalPortfolioDocument } from './DigitalPortfolioDocument';
 interface PDFModalViewerProps {
   type: 'cv' | 'portfolio' | null;
   onClose: () => void;
+  action?: 'view' | 'download' | 'print';
 }
 
-export const PDFModalViewer: React.FC<PDFModalViewerProps> = ({ type, onClose }) => {
+export const PDFModalViewer: React.FC<PDFModalViewerProps> = ({
+  type,
+  onClose,
+  action = 'view',
+}) => {
   React.useEffect(() => {
-    if (type === 'cv') {
+    if (type) {
       document.body.classList.add('print-cv-active');
+      document.body.classList.add('print-doc-active');
     }
     return () => {
       document.body.classList.remove('print-cv-active');
+      document.body.classList.remove('print-doc-active');
     };
   }, [type]);
 
@@ -27,10 +34,12 @@ export const PDFModalViewer: React.FC<PDFModalViewerProps> = ({ type, onClose })
 
   if (!type) return null;
 
+  const initialAction = action === 'view' ? undefined : action;
+
   // Render the modern interactive & printable site-designed documents
   if (type === 'cv') {
-    return <DigitalCVDocument onClose={onClose} />;
+    return <DigitalCVDocument onClose={onClose} initialAction={initialAction} />;
   }
 
-  return <DigitalPortfolioDocument onClose={onClose} />;
+  return <DigitalPortfolioDocument onClose={onClose} initialAction={initialAction} />;
 };

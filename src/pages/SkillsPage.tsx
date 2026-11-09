@@ -12,6 +12,7 @@ import {
   Check,
   Search,
 } from 'lucide-react';
+import { TechEcosystemBanner } from '../components/TechEcosystemBanner';
 
 interface SkillsPageProps {
   isDark: boolean;
@@ -185,6 +186,9 @@ export const SkillsPage: React.FC<SkillsPageProps> = () => {
           ))}
         </AnimatePresence>
       </div>
+
+      {/* Full-width Icon Section on Black Background */}
+      <TechEcosystemBanner />
     </div>
   );
 };

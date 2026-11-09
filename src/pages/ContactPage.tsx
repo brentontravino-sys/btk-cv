@@ -11,7 +11,7 @@ import {
 } from 'lucide-react';
 
 interface ContactPageProps {
-  onOpenPdf: (type: 'cv' | 'portfolio') => void;
+  onOpenPdf: (type: 'cv' | 'portfolio', action?: 'view' | 'download' | 'print') => void;
 }
 
 export const ContactPage: React.FC<ContactPageProps> = ({ onOpenPdf }) => {
@@ -117,7 +117,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onOpenPdf }) => {
             </span>
             <div className="flex flex-col gap-2">
               <button
-                onClick={() => onOpenPdf('cv')}
+                onClick={() => onOpenPdf('cv', 'view')}
                 className="flex items-center justify-between p-3 rounded-lg border border-black/10 dark:border-white/10 hover:border-black/30 dark:hover:border-white/30 text-xs font-light tracking-wider uppercase text-zinc-800 dark:text-zinc-200 cursor-pointer transition-colors"
               >
                 <span>Curriculum Vitae</span>
@@ -125,7 +125,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onOpenPdf }) => {
               </button>
 
               <button
-                onClick={() => onOpenPdf('portfolio')}
+                onClick={() => onOpenPdf('portfolio', 'view')}
                 className="flex items-center justify-between p-3 rounded-lg border border-black/10 dark:border-white/10 hover:border-black/30 dark:hover:border-white/30 text-xs font-light tracking-wider uppercase text-zinc-800 dark:text-zinc-200 cursor-pointer transition-colors"
               >
                 <span>Portfolio</span>

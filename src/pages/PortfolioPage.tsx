@@ -5,17 +5,19 @@ import { PROJECTS, PERSONAL_INFO } from '../data/portfolioData';
 import { WEBSITE_SHOWCASES } from '../data/websiteShowcases';
 import { WebsiteShowcaseCard } from '../components/WebsiteShowcaseCard';
 import { TechnicalArchitectureShowcase } from '../components/TechnicalArchitectureShowcase';
+import { TechEcosystemBanner } from '../components/TechEcosystemBanner';
 import {
   Search,
   ArrowRight,
   Briefcase,
   Download,
+  Printer,
   ArrowUpRight,
 } from 'lucide-react';
 
 interface PortfolioPageProps {
   onSelectProject: (project: ProjectItem) => void;
-  onOpenPdf: (type: 'cv' | 'portfolio') => void;
+  onOpenPdf: (type: 'cv' | 'portfolio', action?: 'view' | 'download' | 'print') => void;
 }
 
 export const PortfolioPage: React.FC<PortfolioPageProps> = ({ onSelectProject, onOpenPdf }) => {
@@ -89,26 +91,39 @@ export const PortfolioPage: React.FC<PortfolioPageProps> = ({ onSelectProject, o
             </p>
           </div>
 
-          {/* PDF Trigger */}
-          <div className="flex items-center gap-2">
+          {/* PDF Triggers */}
+          <div className="flex flex-wrap items-center gap-2">
             <button
-              onClick={() => onOpenPdf('portfolio')}
-              className="flex items-center gap-2 px-4 py-2 rounded-md border border-black/15 dark:border-white/15 hover:border-black/40 dark:hover:border-white/40 text-xs tracking-wider uppercase font-light text-zinc-800 dark:text-zinc-200 transition-colors cursor-pointer"
+              onClick={() => onOpenPdf('portfolio', 'view')}
+              className="flex items-center gap-2 px-4 py-2.5 rounded-md border border-black/15 dark:border-white/15 hover:border-black/40 dark:hover:border-white/40 text-xs tracking-wider uppercase font-light text-zinc-800 dark:text-zinc-200 transition-colors cursor-pointer"
             >
               <Briefcase className="w-3.5 h-3.5 text-zinc-400" />
-              <span>View Portfolio</span>
+              <span>Portfolio</span>
             </button>
 
             <button
-              onClick={() => onOpenPdf('portfolio')}
-              className="p-2 rounded-md border border-black/15 dark:border-white/15 text-zinc-600 dark:text-zinc-400 hover:text-black dark:hover:text-white transition-colors cursor-pointer"
-              title="Portfolio Document"
+              onClick={() => onOpenPdf('portfolio', 'download')}
+              className="flex items-center gap-2 px-4 py-2.5 rounded-md text-xs font-normal tracking-wider uppercase bg-zinc-950 dark:bg-white text-white dark:text-black hover:bg-zinc-800 dark:hover:bg-zinc-200 transition-colors cursor-pointer shadow-sm active:scale-95"
+              title="Download Portfolio as PDF"
             >
               <Download className="w-3.5 h-3.5" />
+              <span>Download Portfolio</span>
+            </button>
+
+            <button
+              onClick={() => onOpenPdf('portfolio', 'print')}
+              className="flex items-center gap-2 px-3.5 py-2.5 rounded-md border border-black/15 dark:border-white/15 text-xs font-light tracking-wider uppercase text-zinc-700 dark:text-zinc-200 hover:border-black/40 dark:hover:border-white/40 transition-colors cursor-pointer"
+              title="Print Portfolio"
+            >
+              <Printer className="w-3.5 h-3.5" />
+              <span>Print</span>
             </button>
           </div>
         </div>
       </motion.div>
+
+      {/* Full Width Scrolling Ecosystem Banner */}
+      <TechEcosystemBanner />
 
       {/* Featured Primary Discipline: Technical Architecture & Systems Engineering */}
       <TechnicalArchitectureShowcase onSelectProject={onSelectProject} />
@@ -117,23 +132,32 @@ export const PortfolioPage: React.FC<PortfolioPageProps> = ({ onSelectProject, o
         <div className="space-y-2">
           <div className="flex items-center gap-2 text-[12.4px] tracking-[0.25em] uppercase font-light text-zinc-400">
             <span className="w-1.5 h-1.5 rounded-full bg-zinc-950 dark:bg-white" />
-            <span>Website Design &bull; Selected Screens</span>
+            <span>Web Platforms &bull; Live Client Systems</span>
           </div>
           <h2
             id="website-showcases-heading"
             className="text-2xl sm:text-3xl font-extralight tracking-tight text-zinc-950 dark:text-white"
           >
-            Website showcases
+            Production web platforms &amp; client portals
           </h2>
           <p className="max-w-2xl text-xs sm:text-sm font-light leading-relaxed text-zinc-500 dark:text-zinc-400">
-            A closer look at five website concepts. Each preview slides through its pages automatically — hover to pause, or use the arrows and page tabs to browse.
+            Interactive viewports of production client web applications, e-commerce storefronts, healthcare portals, and tech platforms. Explore case study specifications or launch live websites.
           </p>
         </div>
 
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {WEBSITE_SHOWCASES.map((showcase) => (
-            <WebsiteShowcaseCard key={showcase.name} showcase={showcase} />
-          ))}
+          {WEBSITE_SHOWCASES.map((showcase) => {
+            const matchingProject = showcase.projectId
+              ? PROJECTS.find((p) => p.id === showcase.projectId)
+              : undefined;
+            return (
+              <WebsiteShowcaseCard
+                key={showcase.name}
+                showcase={showcase}
+                onSelect={matchingProject ? () => onSelectProject(matchingProject) : undefined}
+              />
+            );
+          })}
         </div>
       </section>
 

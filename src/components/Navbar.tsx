@@ -16,7 +16,7 @@ interface NavbarProps {
   setActiveTab: (tab: PageTab) => void;
   isDark: boolean;
   toggleDark: () => void;
-  onOpenPdf: (type: 'cv' | 'portfolio') => void;
+  onOpenPdf: (type: 'cv' | 'portfolio', action?: 'view' | 'download' | 'print') => void;
 }
 
 export const Navbar: React.FC<NavbarProps> = ({
@@ -116,18 +116,18 @@ export const Navbar: React.FC<NavbarProps> = ({
               {/* Quick PDF links in minimalist pills */}
               <div className="hidden lg:flex items-center gap-2">
                 <button
-                  onClick={() => onOpenPdf('cv')}
-                  className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-md border border-black/10 dark:border-white/10 hover:border-black/30 dark:hover:border-white/30 text-[12.4px] tracking-wider uppercase text-zinc-600 dark:text-zinc-400 hover:text-black dark:hover:text-white transition-all cursor-pointer bg-white/40 dark:bg-zinc-900/40 backdrop-blur-sm"
-                  title="View original verified CV"
+                  onClick={() => onOpenPdf('cv', 'view')}
+                  className="flex items-center gap-1.5 px-3 py-1.5 rounded-md border border-black/10 dark:border-white/10 hover:border-black/30 dark:hover:border-white/30 text-[12px] tracking-wider uppercase text-zinc-600 dark:text-zinc-400 hover:text-black dark:hover:text-white transition-all cursor-pointer bg-white/40 dark:bg-zinc-900/40 backdrop-blur-sm"
+                  title="View / Export Curriculum Vitae as PDF"
                 >
-                  <span>CV</span>
+                  <span>Curriculum Vitae</span>
                   <ArrowUpRight className="w-3 h-3 text-zinc-400" />
                 </button>
 
                 <button
-                  onClick={() => onOpenPdf('portfolio')}
-                  className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-md border border-black/10 dark:border-white/10 hover:border-black/30 dark:hover:border-white/30 text-[12.4px] tracking-wider uppercase text-zinc-600 dark:text-zinc-400 hover:text-black dark:hover:text-white transition-all cursor-pointer bg-white/40 dark:bg-zinc-900/40 backdrop-blur-sm"
-                  title="View original Portfolio"
+                  onClick={() => onOpenPdf('portfolio', 'view')}
+                  className="flex items-center gap-1.5 px-3 py-1.5 rounded-md border border-black/10 dark:border-white/10 hover:border-black/30 dark:hover:border-white/30 text-[12px] tracking-wider uppercase text-zinc-600 dark:text-zinc-400 hover:text-black dark:hover:text-white transition-all cursor-pointer bg-white/40 dark:bg-zinc-900/40 backdrop-blur-sm"
+                  title="View / Export Portfolio as PDF"
                 >
                   <span>Portfolio</span>
                   <ArrowUpRight className="w-3 h-3 text-zinc-400" />
@@ -178,7 +178,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             <div className="pt-4 border-t border-black/[0.06] dark:border-white/[0.06] flex flex-col gap-2">
               <button
                 onClick={() => {
-                  onOpenPdf('cv');
+                  onOpenPdf('cv', 'view');
                   setMobileMenuOpen(false);
                 }}
                 className="flex items-center justify-between py-2 text-xs tracking-wider uppercase text-zinc-600 dark:text-zinc-400"
@@ -189,12 +189,12 @@ export const Navbar: React.FC<NavbarProps> = ({
 
               <button
                 onClick={() => {
-                  onOpenPdf('portfolio');
+                  onOpenPdf('portfolio', 'view');
                   setMobileMenuOpen(false);
                 }}
                 className="flex items-center justify-between py-2 text-xs tracking-wider uppercase text-zinc-600 dark:text-zinc-400"
               >
-                <span>Portfolio Document</span>
+                <span>Portfolio</span>
                 <ArrowUpRight className="w-3.5 h-3.5 text-zinc-400" />
               </button>
 

@@ -11,10 +11,9 @@ import {
   Cpu,
   Info,
   BadgeCheck,
-  Loader2,
 } from 'lucide-react';
 import { EXPERIENCES, EDUCATION_AND_CERTS, PERSONAL_INFO, PROJECTS, SKILL_CATEGORIES } from '../data/portfolioData';
-import { exportPortfolioAsPdf, printDocument } from '../utils/pdfExport';
+import { printDocument } from '../utils/pdfExport';
 
 interface DigitalPortfolioDocumentProps {
   onClose: () => void;
@@ -43,83 +42,17 @@ export const DigitalPortfolioDocument: React.FC<DigitalPortfolioDocumentProps> =
   initialAction,
 }) => {
   const [showTip, setShowTip] = useState(false);
-  const [isDownloading, setIsDownloading] = useState(false);
   const [downloadMsg, setDownloadMsg] = useState('');
   const documentRef = useRef<HTMLDivElement>(null);
 
-  const handleDownload = async () => {
-    if (isDownloading) return;
-    try {
-      setIsDownloading(true);
-      setDownloadMsg('Preparing Portfolio document...');
-
-      const systems = PROJECTS.filter((p) => p.category === 'architecture');
-      const clients = PROJECTS.filter((p) => p.category !== 'architecture');
-
-      await exportPortfolioAsPdf(
-        {
-          name: PERSONAL_INFO.name,
-          title: PERSONAL_INFO.title,
-          location: PERSONAL_INFO.location,
-          phones: PERSONAL_INFO.phones,
-          email: PERSONAL_INFO.email,
-          headline:
-            'Engineering High-Performance Web Applications, Scalable Backend Systems & Modern Applications.',
-          summary:
-            '15+ years of verified expertise architecting enterprise web systems, custom full stack applications across Node.js, Python, C++, TypeScript, React, and PHP, scalable WooCommerce & Shopify e-commerce engines, and high-conversion UI/UX workflows. Complemented by secondary specializations in Google Ads, technical SEO audits, and 3D architectural brand activations.',
-          kpis: [
-            { label: 'EXPERIENCE', value: '15+ YRS' },
-            { label: 'WEB PLATFORMS', value: '35+ LIVE' },
-            { label: 'SITE HEALTH', value: '90%+ AVG' },
-            { label: 'CAMPAIGNS', value: '20+ MANAGED' },
-          ],
-          ecosystem: ECOSYSTEM_BADGES.map(({ title, category }) => ({ title, category })),
-          systems: systems.map((p) => ({
-            title: p.title,
-            summary: p.tagline,
-            scope: p.description,
-            tags: p.tools,
-          })),
-          clients: clients.map((p) => ({
-            name: p.title,
-            category: `${p.client} ${BULLET_SIGN} ${p.categoryLabel}`,
-            summary: p.description,
-          })),
-          experiences: EXPERIENCES.map(({ company, role, period, focus, responsibilities, tags }) => ({
-            company,
-            role,
-            period,
-            focus,
-            responsibilities,
-            tags,
-          })),
-          skillCategories: SKILL_CATEGORIES.map(({ title, skills }) => ({ title, skills })),
-          credentials: EDUCATION_AND_CERTS.map(({ title, details, issuer, year }) => ({
-            title,
-            details,
-            issuer,
-            year,
-          })),
-        },
-        'Brenton_Kandhai_Portfolio.pdf',
-        (progress) => {
-          if (progress.status === 'rendering') {
-            setDownloadMsg(`Rendering page ${progress.currentPage} of ${progress.totalPages}...`);
-          } else if (progress.status === 'saving') {
-            setDownloadMsg('Packaging PDF file...');
-          }
-        }
-      );
-    } catch (err) {
-      console.error('PDF generation failed:', err);
-      setDownloadMsg(`PDF failed: ${(err as Error)?.message ?? err}`);
-      // Fall back to print dialog
-      setTimeout(() => {
-        printDocument(documentRef.current, 'Brenton T. Kandhai \u2014 Selected Works Portfolio');
-      }, 500);
-    } finally {
-      setIsDownloading(false);
-      setDownloadMsg('');
+  const handleDownload = () => {
+    // Use browser's native print-to-PDF for perfect visual fidelity
+    // This captures the exact on-screen design including Tailwind styles, icons, images, dark/light theme
+    const ok = printDocument(documentRef.current, 'Brenton T. Kandhai \u2014 Selected Works Portfolio');
+    if (!ok) {
+      // If print is blocked (sandboxed iframe), alert user to use browser's "Print to PDF"
+      setDownloadMsg('Print dialog blocked. Use browser menu (Ctrl+P) \u2192 Save as PDF');
+      setTimeout(() => setDownloadMsg(''), 4000);
     }
   };
 
@@ -182,17 +115,15 @@ export const DigitalPortfolioDocument: React.FC<DigitalPortfolioDocumentProps> =
         <div className="flex items-center gap-2">
           <button
             onClick={handleDownload}
-            disabled={isDownloading}
-            className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-md bg-zinc-950 dark:bg-white text-white dark:text-black text-xs font-normal tracking-wider uppercase hover:bg-zinc-800 dark:hover:bg-zinc-200 transition-colors cursor-pointer shadow-sm active:scale-95 disabled:opacity-60"
-            title="Download Portfolio as PDF"
+            className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-md bg-zinc-950 dark:bg-white text-white dark:text-black text-xs font-normal tracking-wider uppercase hover:bg-zinc-800 dark:hover:bg-zinc-200 transition-colors cursor-pointer shadow-sm active:scale-95"
+            title="Download Portfolio as PDF (opens print dialog → Save as PDF)"
           >
-            {isDownloading ? (
-              <Loader2 className="w-3.5 h-3.5 animate-spin" />
-            ) : (
-              <Download className="w-3.5 h-3.5" />
-            )}
-            <span>{isDownloading ? (downloadMsg || 'Downloading...') : 'Download Portfolio'}</span>
+            <Download className="w-3.5 h-3.5" />
+            <span>Download Portfolio</span>
           </button>
+          {downloadMsg && (
+            <span className="text-[11px] text-zinc-500 dark:text-zinc-400 ml-2">{downloadMsg}</span>
+          )}
 
           <button
             onClick={handlePrint}

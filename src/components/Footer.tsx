@@ -11,7 +11,7 @@ import {
 
 interface FooterProps {
   setActiveTab: (tab: PageTab) => void;
-  onOpenPdf: (type: 'cv' | 'portfolio') => void;
+  onOpenPdf: (type: 'cv' | 'portfolio', action?: 'view' | 'download' | 'print') => void;
 }
 
 export const Footer: React.FC<FooterProps> = ({ setActiveTab, onOpenPdf }) => {
@@ -151,7 +151,7 @@ export const Footer: React.FC<FooterProps> = ({ setActiveTab, onOpenPdf }) => {
             </span>
             <div className="space-y-2 text-xs">
               <button
-                onClick={() => onOpenPdf('cv')}
+                onClick={() => onOpenPdf('cv', 'view')}
                 className="w-full flex items-center justify-between p-2.5 rounded-md border border-black/10 dark:border-white/10 hover:border-black/30 dark:hover:border-white/30 text-zinc-700 dark:text-zinc-300 transition-colors cursor-pointer"
               >
                 <span>Curriculum Vitae</span>
@@ -159,7 +159,7 @@ export const Footer: React.FC<FooterProps> = ({ setActiveTab, onOpenPdf }) => {
               </button>
 
               <button
-                onClick={() => onOpenPdf('portfolio')}
+                onClick={() => onOpenPdf('portfolio', 'view')}
                 className="w-full flex items-center justify-between p-2.5 rounded-md border border-black/10 dark:border-white/10 hover:border-black/30 dark:hover:border-white/30 text-zinc-700 dark:text-zinc-300 transition-colors cursor-pointer"
               >
                 <span>Portfolio</span>

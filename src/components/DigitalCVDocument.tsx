@@ -11,12 +11,9 @@ import {
   Box,
   GraduationCap,
   BadgeCheck,
-  Check,
-  Info,
-  Loader2,
 } from 'lucide-react';
 import { PERSONAL_INFO, EXPERIENCES, SKILL_CATEGORIES, EDUCATION_AND_CERTS } from '../data/portfolioData';
-import { exportCvAsPdf, printDocument } from '../utils/pdfExport';
+import { printDocument } from '../utils/pdfExport';
 
 interface DigitalCVDocumentProps {
   onClose: () => void;
@@ -49,75 +46,17 @@ const ECOSYSTEM_BADGES = [
 
 export const DigitalCVDocument: React.FC<DigitalCVDocumentProps> = ({ onClose, initialAction }) => {
   const [showTip, setShowTip] = useState(false);
-  const [isDownloading, setIsDownloading] = useState(false);
   const [downloadMsg, setDownloadMsg] = useState('');
   const documentRef = useRef<HTMLDivElement>(null);
 
-  const handleDownload = async () => {
-    if (isDownloading) return;
-    try {
-      setIsDownloading(true);
-      setDownloadMsg('Preparing CV document...');
-      await exportCvAsPdf(
-        {
-          ...PERSONAL_INFO,
-          summary:
-            'Full stack developer with 15+ years of experience engineering high-performance web applications, scalable backend microservices, and custom digital platforms across Node.js, Python, C++, TypeScript, React, and PHP. Blends robust system architecture, database optimization, and REST/GraphQL APIs with secondary specializations in digital marketing, technical SEO, and UI/UX design to deliver end-to-end digital solutions that convert.',
-          highlights: [
-            '15+ YRS EXPERIENCE   35+ LIVE WEB PLATFORMS   90%+ AVG SITE HEALTH   20+ CAMPAIGNS MANAGED',
-          ],
-          stacks: [
-            'Full Stack Dev: Node.js, Python (FastAPI/Flask), C++ / C# (.NET), TypeScript, React, Next.js, PHP 8.x, Tailwind.',
-            'Backend & DevOps: Docker, Linux Admin, Nginx, PostgreSQL, MySQL, Supabase, Redis Caching, GitHub CI/CD.',
-            'CMS & E-Commerce: Custom WordPress Themes & Plugins, WooCommerce Architecture, Shopify Liquid, Headless CMS.',
-            'Automation & AI: Python Automation, Zapier Workflows, HubSpot CRM, Copilot Studio, ChatGPT, Google Gemini.',
-            'SEO & Performance: Technical Audits, Indexing, Core Web Vitals, GA4, Semrush Academy Certified.',
-            'Digital Marketing: Google Ads (Search/Display/PMax), Meta Ads Manager, Looker Studio Dashboards.',
-          ],
-          ecosystem: ECOSYSTEM_BADGES.map(({ title, category }) => ({ title, category })),
-          experiences: EXPERIENCES.map(({ company, role, period, focus, responsibilities, tags }) => ({
-            company,
-            role,
-            period,
-            focus,
-            responsibilities,
-            tags,
-          })),
-          skillCategories: SKILL_CATEGORIES.map(({ title, skills }) => ({ title, skills })),
-          credentials: EDUCATION_AND_CERTS.map(({ title, details, issuer, year }) => ({
-            title,
-            details,
-            issuer,
-            year,
-          })),
-          availability:
-            'Available for full-time senior engineering appointments, contract systems architecture, and custom application engineering engagements. Located in Johannesburg and operating with distributed teams across the UK, EU, US, and Southern Africa.',
-        },
-        'Brenton_Kandhai_Curriculum_Vitae.pdf',
-        (progress) => {
-          if (progress.status === 'rendering') {
-            setDownloadMsg(`Rendering page ${progress.currentPage} of ${progress.totalPages}...`);
-          } else if (progress.status === 'saving') {
-            setDownloadMsg('Packaging PDF file...');
-          }
-        }
-      );
-    } catch (err) {
-      const errorMsg = err instanceof Error ? err.message : String(err);
-      console.error('CV PDF generation failed:', err);
-      setDownloadMsg(`PDF generation failed: ${errorMsg}`);
-      
-      // Fall back to print dialog
-      setTimeout(() => {
-        const printOk = printDocument(documentRef.current, 'Brenton T. Kandhai \u2014 Curriculum Vitae');
-        if (!printOk) {
-          setDownloadMsg('Print dialog blocked. Please try again or use browser menu.');
-        }
-      }, 500);
-    } finally {
-      setIsDownloading(false);
-      // Clear message after a delay
-      setTimeout(() => setDownloadMsg(''), 3000);
+  const handleDownload = () => {
+    // Use browser's native print-to-PDF for perfect visual fidelity
+    // This captures the exact on-screen design including Tailwind styles, icons, images, dark/light theme
+    const ok = printDocument(documentRef.current, 'Brenton T. Kandhai \u2014 Curriculum Vitae');
+    if (!ok) {
+      // If print is blocked (sandboxed iframe), alert user to use browser's "Print to PDF"
+      setDownloadMsg('Print dialog blocked. Use browser menu (Ctrl+P) \u2192 Save as PDF');
+      setTimeout(() => setDownloadMsg(''), 4000);
     }
   };
 
@@ -166,17 +105,15 @@ export const DigitalCVDocument: React.FC<DigitalCVDocumentProps> = ({ onClose, i
         <div className="flex items-center gap-2">
           <button
             onClick={handleDownload}
-            disabled={isDownloading}
-            className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-md bg-zinc-950 dark:bg-white text-white dark:text-black text-xs font-normal tracking-wider uppercase hover:bg-zinc-800 dark:hover:bg-zinc-200 transition-colors cursor-pointer shadow-sm active:scale-95 disabled:opacity-60"
-            title="Download Curriculum Vitae as PDF"
+            className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-md bg-zinc-950 dark:bg-white text-white dark:text-black text-xs font-normal tracking-wider uppercase hover:bg-zinc-800 dark:hover:bg-zinc-200 transition-colors cursor-pointer shadow-sm active:scale-95"
+            title="Download Curriculum Vitae as PDF (opens print dialog → Save as PDF)"
           >
-            {isDownloading ? (
-              <Loader2 className="w-3.5 h-3.5 animate-spin" />
-            ) : (
-              <Download className="w-3.5 h-3.5" />
-            )}
-            <span>{isDownloading ? (downloadMsg || 'Downloading...') : 'Download CV'}</span>
+            <Download className="w-3.5 h-3.5" />
+            <span>Download CV</span>
           </button>
+          {downloadMsg && (
+            <span className="text-[11px] text-zinc-500 dark:text-zinc-400 ml-2">{downloadMsg}</span>
+          )}
 
           <button
             onClick={handlePrint}

@@ -3,6 +3,7 @@ import { motion, useScroll, useTransform } from 'motion/react';
 import { PageTab, ProjectItem } from '../types';
 import { PERSONAL_INFO, PROJECTS, EXPERIENCES, SKILL_CATEGORIES } from '../data/portfolioData';
 import { ArcAdaptiveHero } from '../components/ArcAdaptiveHero';
+import { TechEcosystemBanner } from '../components/TechEcosystemBanner';
 import {
   ArrowRight,
   Phone,
@@ -24,7 +25,7 @@ import {
 
 interface HomePageProps {
   setActiveTab: (tab: PageTab) => void;
-  onOpenPdf: (type: 'cv' | 'portfolio') => void;
+  onOpenPdf: (type: 'cv' | 'portfolio', action?: 'view' | 'download' | 'print') => void;
   onSelectProject: (project: ProjectItem) => void;
   isDark: boolean;
 }
@@ -47,14 +48,18 @@ export const HomePage: React.FC<HomePageProps> = ({
 
   return (
     <div ref={containerRef} className="space-y-36 sm:space-y-48 pb-32">
-      {/* SECTION 1: ArcAdaptive Mountain Parallax Hero with Floating Architectural Card */}
-      <section id="hero" className="scroll-mt-28">
-        <ArcAdaptiveHero
-          setActiveTab={setActiveTab}
-          onOpenPdf={onOpenPdf}
-          isDark={isDark}
-        />
-      </section>
+      {/* SECTION 1: Hero & Flush Scrolling Ecosystem Banner */}
+      <div>
+        <section id="hero" className="scroll-mt-28">
+          <ArcAdaptiveHero
+            setActiveTab={setActiveTab}
+            onOpenPdf={onOpenPdf}
+            isDark={isDark}
+          />
+        </section>
+        {/* Full width scrolling banner flush with hero */}
+        <TechEcosystemBanner className="border-t border-black/10 dark:border-white/10" />
+      </div>
 
       {/* SECTION 2: Kinetic Editorial Manifesto (Split-Mask Typography Reveal Effect) */}
       <section id="manifesto" className="max-w-4xl mx-auto px-6 text-center space-y-6">
@@ -220,12 +225,12 @@ export const HomePage: React.FC<HomePageProps> = ({
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {[
             {
-              category: 'Full Stack & Web Engineering',
-              tools: ['React', 'Next.js', 'Vite', 'WordPress', 'Shopify', 'PHP & MySQL', 'Tailwind CSS'],
+              category: 'Full Stack & Software Engineering',
+              tools: ['Node.js', 'Python', 'C++ / C#', 'TypeScript', 'React', 'Next.js', 'PHP & MySQL', 'Tailwind CSS'],
             },
             {
-              category: 'Cloud, APIs & Architecture',
-              tools: ['REST APIs', 'Node.js', 'GitHub', 'Vercel', 'Supabase', 'AWS & Azure', 'Server Admin'],
+              category: 'Cloud, DevOps & Systems Architecture',
+              tools: ['Docker', 'REST & GraphQL', 'PostgreSQL', 'Redis', 'Supabase', 'GitHub CI/CD', 'Linux & Nginx', 'AWS & Azure'],
             },
             {
               category: 'CRM, AI & Automation',
@@ -400,15 +405,15 @@ export const HomePage: React.FC<HomePageProps> = ({
               </button>
 
               <button
-                onClick={() => onOpenPdf('cv')}
+                onClick={() => onOpenPdf('cv', 'view')}
                 className="flex items-center gap-2 px-5 py-3 rounded-md text-xs font-light tracking-wider uppercase border border-white/20 hover:border-white/50 text-white transition-all cursor-pointer"
               >
                 <FileText className="w-3.5 h-3.5 text-zinc-300" />
-                <span>Verified CV</span>
+                <span>Curriculum Vitae</span>
               </button>
 
               <button
-                onClick={() => onOpenPdf('portfolio')}
+                onClick={() => onOpenPdf('portfolio', 'view')}
                 className="flex items-center gap-2 px-5 py-3 rounded-md text-xs font-light tracking-wider uppercase border border-white/20 hover:border-white/50 text-white transition-all cursor-pointer"
               >
                 <Briefcase className="w-3.5 h-3.5 text-zinc-300" />
