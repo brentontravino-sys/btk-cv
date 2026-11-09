@@ -108,10 +108,7 @@ export const TechEcosystemBanner: React.FC<TechEcosystemBannerProps> = ({
               CORE ECOSYSTEM &bull; INDUSTRY-STANDARD PLATFORMS &amp; MARKETING SUITES
             </span>
           </div>
-          <span className="hidden md:inline-block text-[10px] font-mono uppercase tracking-widest text-zinc-400">
-            PAUSE ON HOVER
-          </span>
-        </div>
+                  </div>
       )}
 
       {/* Infinite Horizontal Scrolling Track */}
